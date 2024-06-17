@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">TestTask_TicketsSearch</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+
+    <string name="title_airtickets">Авиабилеты</string>
+    <string name="title_hotels">Отели</string>
+    <string name="title_shorter">Короче</string>
+    <string name="title_subscriptions">Подписки</string>
+    <string name="title_profile">Профиль</string>
+
+    <string name="action_airtickets">Авиабилеты</string>
+    <string name="action_hotels">Отели</string>
+    <string name="action_shorter">Короче</string>
+    <string name="action_subscriptions">Подписки</string>
+    <string name="action_profile">Профиль</string>
 </resources>

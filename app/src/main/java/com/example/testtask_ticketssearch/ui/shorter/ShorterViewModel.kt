@@ -1,13 +1,13 @@
-package com.example.testtask_ticketssearch.ui.home
+package com.example.testtask_ticketssearch.ui.shorter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class ShorterViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "This is shorter Fragment"
     }
     val text: LiveData<String> = _text
 }
