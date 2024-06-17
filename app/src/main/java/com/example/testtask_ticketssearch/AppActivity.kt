@@ -20,6 +20,7 @@ class AppActivity : AppCompatActivity() {
         binding = ActivityAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide() //TODO: correct visible to theme
         setupNavigation()
     }
 
