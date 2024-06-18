@@ -6,10 +6,15 @@
     <string name="title_shorter">Короче</string>
     <string name="title_subscriptions">Подписки</string>
     <string name="title_profile">Профиль</string>
+    <string name="title_search">Поиск дешевых авиабилетов</string>
 
     <string name="action_airtickets">Авиабилеты</string>
     <string name="action_hotels">Отели</string>
     <string name="action_shorter">Короче</string>
     <string name="action_subscriptions">Подписки</string>
     <string name="action_profile">Профиль</string>
+    <string name="action_place_departure">Откуда - Москва</string>
+    <string name="action_place_arrival">Куда - Турция</string>
+
+    <string name="header_offers">Музыкально отлететь</string>
 </resources>
