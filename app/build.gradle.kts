@@ -56,6 +56,14 @@ dependencies {
     kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
 
     /**
+     * DI: Dagger 2
+     */
+    val dagger_version = "2.51.1"
+    implementation("com.google.dagger:dagger:$dagger_version")
+    kapt("com.google.dagger:dagger-compiler:$dagger_version")
+    implementation("javax.inject:javax.inject:1")
+
+    /**
      */
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")

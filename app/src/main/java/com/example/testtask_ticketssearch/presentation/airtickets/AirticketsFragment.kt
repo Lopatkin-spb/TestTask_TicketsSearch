@@ -1,5 +1,6 @@
 package com.example.testtask_ticketssearch.presentation.airtickets
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,20 +9,30 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testtask_ticketssearch.databinding.FragmentAirticketsBinding
+import com.example.testtask_ticketssearch.presentation.AppActivity
+import com.example.testtask_ticketssearch.presentation.ViewModelFactory
+import javax.inject.Inject
 
 class AirticketsFragment : Fragment() {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: AirticketsViewModel
     private var _binding: FragmentAirticketsBinding? = null
     private val binding get() = _binding!!
     private val adapter by lazy { OfferAdapter() }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (activity as AppActivity).appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this).get(AirticketsViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(AirticketsViewModel::class.java)
 
         _binding = FragmentAirticketsBinding.inflate(inflater, container, false)
         val root: View = binding.root

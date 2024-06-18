@@ -8,14 +8,19 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.testtask_ticketssearch.R
+import com.example.testtask_ticketssearch.app.TTTSApp
 import com.example.testtask_ticketssearch.databinding.ActivityAppBinding
+import com.example.testtask_ticketssearch.di.AppComponent
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AppActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAppBinding
+    lateinit var appComponent: AppComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        appComponent = (application as TTTSApp).appComponent
+        appComponent.inject(this)
         super.onCreate(savedInstanceState)
 
         binding = ActivityAppBinding.inflate(layoutInflater)
