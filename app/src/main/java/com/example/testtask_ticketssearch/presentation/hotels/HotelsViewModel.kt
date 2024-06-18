@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.ui.hotels
+package com.example.testtask_ticketssearch.presentation.hotels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -7,31 +7,31 @@
 
     <fragment
             android:id="@+id/navigation_airtickets"
-            android:name="com.example.testtask_ticketssearch.ui.airtickets.AirticketsFragment"
+            android:name="com.example.testtask_ticketssearch.presentation.airtickets.AirticketsFragment"
             android:label="@string/title_airtickets"
             tools:layout="@layout/fragment_airtickets"/>
 
     <fragment
             android:id="@+id/navigation_hotels"
-            android:name="com.example.testtask_ticketssearch.ui.hotels.HotelsFragment"
+            android:name="com.example.testtask_ticketssearch.presentation.hotels.HotelsFragment"
             android:label="@string/title_hotels"
             tools:layout="@layout/fragment_hotels"/>
 
     <fragment
             android:id="@+id/navigation_shorter"
-            android:name="com.example.testtask_ticketssearch.ui.shorter.ShorterFragment"
+            android:name="com.example.testtask_ticketssearch.presentation.shorter.ShorterFragment"
             android:label="@string/title_shorter"
             tools:layout="@layout/fragment_shorter"/>
 
     <fragment
             android:id="@+id/navigation_subscriptions"
-            android:name="com.example.testtask_ticketssearch.ui.subscriptions.SubscriptionsFragment"
+            android:name="com.example.testtask_ticketssearch.presentation.subscriptions.SubscriptionsFragment"
             android:label="@string/title_subscriptions"
             tools:layout="@layout/fragment_subscriptions"/>
 
     <fragment
             android:id="@+id/navigation_profile"
-            android:name="com.example.testtask_ticketssearch.ui.profile.ProfileFragment"
+            android:name="com.example.testtask_ticketssearch.presentation.profile.ProfileFragment"
             android:label="@string/title_profile"
             tools:layout="@layout/fragment_profile"/>
 

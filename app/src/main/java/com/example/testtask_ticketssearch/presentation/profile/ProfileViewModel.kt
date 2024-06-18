@@ -1,13 +1,13 @@
-package com.example.testtask_ticketssearch.ui.subscriptions
+package com.example.testtask_ticketssearch.presentation.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SubscriptionsViewModel : ViewModel() {
+class ProfileViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is subscriptions Fragment"
+        value = "This is profile Fragment"
     }
     val text: LiveData<String> = _text
 }

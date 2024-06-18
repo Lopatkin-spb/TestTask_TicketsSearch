@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.ui.hotels
+package com.example.testtask_ticketssearch.presentation.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.testtask_ticketssearch.databinding.FragmentHotelsBinding
+import com.example.testtask_ticketssearch.databinding.FragmentProfileBinding
 
-class HotelsFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
-    private var _binding: FragmentHotelsBinding? = null
+    private var _binding: FragmentProfileBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,9 +23,9 @@ class HotelsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val viewModel =
-            ViewModelProvider(this).get(HotelsViewModel::class.java)
+            ViewModelProvider(this).get(ProfileViewModel::class.java)
 
-        _binding = FragmentHotelsBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textStub

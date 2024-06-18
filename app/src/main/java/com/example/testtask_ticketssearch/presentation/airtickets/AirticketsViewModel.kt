@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.ui.airtickets
+package com.example.testtask_ticketssearch.presentation.airtickets
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

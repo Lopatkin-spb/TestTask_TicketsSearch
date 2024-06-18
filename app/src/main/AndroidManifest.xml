@@ -12,7 +12,7 @@
             android:theme="@style/Theme.TestTask_TicketsSearch"
             tools:targetApi="31">
         <activity
-                android:name=".AppActivity"
+                android:name=".presentation.AppActivity"
                 android:exported="true"
                 android:label="@string/app_name">
             <intent-filter>
