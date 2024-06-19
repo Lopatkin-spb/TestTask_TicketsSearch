@@ -2,18 +2,31 @@ package com.example.testtask_ticketssearch.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.testtask_ticketssearch.domain.usecase.GetPlaceArrivalByLastSearchUseCase
+import com.example.testtask_ticketssearch.domain.usecase.GetPlaceDepartureByLastSearchUseCase
+import com.example.testtask_ticketssearch.domain.usecase.SavePlaceArrivalByLastSearchUseCase
+import com.example.testtask_ticketssearch.domain.usecase.SavePlaceDepartureByLastSearchUseCase
 import com.example.testtask_ticketssearch.presentation.airtickets.AirticketsViewModel
 import com.example.testtask_ticketssearch.presentation.hotels.HotelsViewModel
 import com.example.testtask_ticketssearch.presentation.profile.ProfileViewModel
-import com.example.testtask_ticketssearch.presentation.shorter.ShorterFragment
 import com.example.testtask_ticketssearch.presentation.shorter.ShorterViewModel
 import com.example.testtask_ticketssearch.presentation.subscriptions.SubscriptionsViewModel
 
-class ViewModelFactory : ViewModelProvider.Factory {
+class ViewModelFactory(
+    private val savePlaceDepartureByLastSearchUseCase: SavePlaceDepartureByLastSearchUseCase,
+    private val getPlaceDepartureByLastSearchUseCase: GetPlaceDepartureByLastSearchUseCase,
+    private val savePlaceArrivalByLastSearchUseCase: SavePlaceArrivalByLastSearchUseCase,
+    private val getPlaceArrivalByLastSearchUseCase: GetPlaceArrivalByLastSearchUseCase,
+) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(AirticketsViewModel::class.java)) {
-            return AirticketsViewModel() as T
+            return AirticketsViewModel(
+                getPlaceDepartureByLastSearchUseCase = getPlaceDepartureByLastSearchUseCase,
+                savePlaceDepartureByLastSearchUseCase = savePlaceDepartureByLastSearchUseCase,
+                getPlaceArrivalByLastSearchUseCase = getPlaceArrivalByLastSearchUseCase,
+                savePlaceArrivalByLastSearchUseCase = savePlaceArrivalByLastSearchUseCase,
+            ) as T
         } else if (modelClass.isAssignableFrom(HotelsViewModel::class.java)) {
             return HotelsViewModel() as T
         } else if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {

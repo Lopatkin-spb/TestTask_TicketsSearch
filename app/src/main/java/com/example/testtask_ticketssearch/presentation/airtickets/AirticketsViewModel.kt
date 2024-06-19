@@ -3,14 +3,46 @@ package com.example.testtask_ticketssearch.presentation.airtickets
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.testtask_ticketssearch.domain.SearchPlace
+import com.example.testtask_ticketssearch.domain.usecase.GetPlaceArrivalByLastSearchUseCase
+import com.example.testtask_ticketssearch.domain.usecase.GetPlaceDepartureByLastSearchUseCase
+import com.example.testtask_ticketssearch.domain.usecase.SavePlaceArrivalByLastSearchUseCase
+import com.example.testtask_ticketssearch.domain.usecase.SavePlaceDepartureByLastSearchUseCase
 
-class AirticketsViewModel : ViewModel() {
+class AirticketsViewModel(
+    private val savePlaceDepartureByLastSearchUseCase: SavePlaceDepartureByLastSearchUseCase,
+    private val getPlaceDepartureByLastSearchUseCase: GetPlaceDepartureByLastSearchUseCase,
+    private val savePlaceArrivalByLastSearchUseCase: SavePlaceArrivalByLastSearchUseCase,
+    private val getPlaceArrivalByLastSearchUseCase: GetPlaceArrivalByLastSearchUseCase,
+) : ViewModel() {
 
     private val _uiState = MutableLiveData(AirticketsUiState())
     val uiState: LiveData<AirticketsUiState> = _uiState
 
     init {
         loadListOffers()
+        getPlaceDeparture()
+        getPlaceArrival()
+    }
+
+    fun savePlaceDeparture(text: String) {
+        savePlaceDepartureByLastSearchUseCase.execute(SearchPlace(text))
+    }
+
+    fun getPlaceDeparture() {
+        val place = getPlaceDepartureByLastSearchUseCase.execute()
+        val newUiState = _uiState.value?.copy(placeDeparture = place)
+        _uiState.value = newUiState
+    }
+
+    fun savePlaceArrival(text: String) {
+        savePlaceArrivalByLastSearchUseCase.execute(SearchPlace(text))
+    }
+
+    fun getPlaceArrival() {
+        val place = getPlaceArrivalByLastSearchUseCase.execute()
+        val newUiState = _uiState.value?.copy(placeArrival = place)
+        _uiState.value = newUiState
     }
 
     fun loadListOffers() {

@@ -47,6 +47,12 @@ class AirticketsFragment : Fragment() {
         uiStateListener()
     }
 
+    override fun onPause() {
+        super.onPause()
+        viewModel.savePlaceDeparture(binding.actionPlaceDeparture.text.toString())
+        viewModel.savePlaceArrival(binding.actionPlaceArrival.text.toString())
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -64,6 +70,12 @@ class AirticketsFragment : Fragment() {
     private fun uiStateListener() {
         viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
             adapter.setList(uiState.offers)
+            uiState.placeDeparture?.let { place ->
+                if (place.name.isNotEmpty()) binding.actionPlaceDeparture.setText(place.name)
+            }
+            uiState.placeArrival?.let { place ->
+                if (place.name.isNotEmpty()) binding.actionPlaceArrival.setText(place.name)
+            }
         }
     }
 
