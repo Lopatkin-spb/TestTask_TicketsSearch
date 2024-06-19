@@ -19,12 +19,6 @@ class AirticketsViewModel(
     private val _uiState = MutableLiveData(AirticketsUiState())
     val uiState: LiveData<AirticketsUiState> = _uiState
 
-    init {
-        loadListOffers()
-        getPlaceDeparture()
-        getPlaceArrival()
-    }
-
     fun savePlaceDeparture(text: String) {
         savePlaceDepartureByLastSearchUseCase.execute(SearchPlace(text))
     }

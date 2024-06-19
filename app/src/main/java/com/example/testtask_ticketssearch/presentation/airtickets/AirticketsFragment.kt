@@ -44,6 +44,9 @@ class AirticketsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        viewModel.loadListOffers()
+        viewModel.getPlaceDeparture()
+        viewModel.getPlaceArrival()
         uiStateListener()
     }
 
