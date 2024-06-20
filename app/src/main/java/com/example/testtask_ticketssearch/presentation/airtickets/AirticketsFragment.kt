@@ -38,6 +38,7 @@ class AirticketsFragment : Fragment() {
         val root: View = binding.root
 
         setupList()
+        setupSearchPlaceArrivalListener()
 
         return root
     }
@@ -70,15 +71,23 @@ class AirticketsFragment : Fragment() {
         binding.recyclerOffers.adapter = adapter
     }
 
+    private fun setupSearchPlaceArrivalListener() {
+        binding.actionPlaceArrival.setOnClickListener {
+            SearchDialog
+                .newInstance(binding.actionPlaceDeparture.text.toString())
+                .show(requireActivity().supportFragmentManager, SearchDialog.TAG)
+        }
+    }
+
     private fun uiStateListener() {
         viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
             adapter.setList(uiState.offers)
             uiState.placeDeparture?.let { place ->
                 if (place.name.isNotEmpty()) binding.actionPlaceDeparture.setText(place.name)
             }
-            uiState.placeArrival?.let { place ->
-                if (place.name.isNotEmpty()) binding.actionPlaceArrival.setText(place.name)
-            }
+//            uiState.placeArrival?.let { place ->
+//                if (place.name.isNotEmpty()) binding.actionPlaceArrival.setText(place.name)
+//            }
         }
     }
 

@@ -78,7 +78,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/image_search_separator"/>
 
-            <EditText
+            <TextView
                     android:id="@+id/action_place_arrival"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

@@ -2,11 +2,17 @@
 <resources>
 
     <color name="white">#FFFFFFFF</color>
+    <color name="gray_2">#242529</color>
     <color name="gray_3">#2F3035</color>
+    <color name="gray_4">#3E3F43</color>
     <color name="gray_5">#5E5F61</color>
     <color name="gray_6">#9F9F9F</color>
     <color name="gray_8">#D9D9D9</color>
+    <color name="transparent">@android:color/transparent</color>
     <color name="blue">#2261BC</color>
+    <color name="dark_blue">#00427D</color>
+    <color name="red">#FF5E5E</color>
+    <color name="light_green">#3A633B</color>
     <color name="black">#0C0C0C</color>
 
     <color name="app_background">@color/black</color>
