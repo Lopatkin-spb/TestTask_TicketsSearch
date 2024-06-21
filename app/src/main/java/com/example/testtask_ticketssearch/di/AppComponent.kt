@@ -3,6 +3,7 @@ package com.example.testtask_ticketssearch.di
 import android.content.Context
 import com.example.testtask_ticketssearch.presentation.AppActivity
 import com.example.testtask_ticketssearch.presentation.airtickets.AirticketsFragment
+import com.example.testtask_ticketssearch.presentation.airtickets.search.SearchDialog
 import com.example.testtask_ticketssearch.presentation.hotels.HotelsFragment
 import com.example.testtask_ticketssearch.presentation.profile.ProfileFragment
 import com.example.testtask_ticketssearch.presentation.shorter.ShorterFragment
@@ -24,6 +25,8 @@ interface AppComponent {
     fun inject(activity: AppActivity)
 
     fun inject(fragment: AirticketsFragment)
+
+    fun inject(dialog: SearchDialog)
 
     fun inject(fragment: HotelsFragment)
 

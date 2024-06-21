@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rectangle_radius_16dp"
+        android:backgroundTint="#1D1E20"
+        android:padding="16dp">
+
+
+    <TextView
+            android:id="@+id/text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Прямые рельсы"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"/>
+
+
+    <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierMargin="8dp"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="text_title"/>
+
+
+    <View
+            android:id="@+id/circle_1"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_circle"
+            android:backgroundTint="@color/red"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/barrier_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"/>
+
+    <TextView
+            android:id="@+id/text_name_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/transparent"
+            android:text="Уральские пельмени"
+            android:lines="1"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/barrier_1"
+            app:layout_constraintEnd_toStartOf="@id/text_price_1"/>
+
+
+    <TextView
+            android:id="@+id/text_price_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="231px"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/transparent"
+            android:text="34.666"
+            android:textColor="@color/blue"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/barrier_1"
+            app:layout_constraintEnd_toStartOf="@id/image_arrow_1"
+            app:layout_constraintHorizontal_bias="1"/>
+
+    <ImageView
+            android:id="@+id/image_arrow_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_arrow_right_16dp"
+            android:backgroundTint="@color/blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/barrier_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"/>
+
+    <TextView
+            android:id="@+id/text_flight_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:backgroundTint="@color/transparent"
+            android:text="07:00 09:10 10:00 11:00 12:00 13:00 12:00"
+            android:lines="1"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_name_1"
+            app:layout_constraintEnd_toStartOf="@id/text_price_1"/>
+
+    <View
+            android:id="@+id/separator_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="56dp"
+            android:background="@drawable/bg_separator"
+            android:backgroundTint="@color/gray_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/barrier_1"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierMargin="8dp"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="separator_1"/>
+
+
+    <View
+            android:id="@+id/circle_2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_circle"
+            android:backgroundTint="@color/blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/barrier_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"/>
+
+    <TextView
+            android:id="@+id/text_name_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/transparent"
+            android:text="Уральские пельмени"
+            android:lines="1"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/barrier_2"
+            app:layout_constraintEnd_toStartOf="@id/text_price_2"/>
+
+
+    <TextView
+            android:id="@+id/text_price_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="231px"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/transparent"
+            android:text="34.666"
+            android:textColor="@color/blue"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/barrier_2"
+            app:layout_constraintEnd_toStartOf="@id/image_arrow_2"
+            app:layout_constraintHorizontal_bias="1"/>
+
+    <ImageView
+            android:id="@+id/image_arrow_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_arrow_right_16dp"
+            android:backgroundTint="@color/blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/barrier_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"/>
+
+    <TextView
+            android:id="@+id/text_flight_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:backgroundTint="@color/transparent"
+            android:text="07:00 09:10 10:00 11:00 12:00 13:00 12:00"
+            android:lines="1"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_name_2"
+            app:layout_constraintEnd_toStartOf="@id/text_price_2"/>
+
+    <View
+            android:id="@+id/separator_2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="56dp"
+            android:background="@drawable/bg_separator"
+            android:backgroundTint="@color/gray_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/barrier_2"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierMargin="8dp"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="separator_2"/>
+
+
+    <View
+            android:id="@+id/circle_3"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_circle"
+            android:backgroundTint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/barrier_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"/>
+
+    <TextView
+            android:id="@+id/text_name_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/transparent"
+            android:text="Уральские пельмени"
+            android:lines="1"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/barrier_3"
+            app:layout_constraintEnd_toStartOf="@id/text_price_3"/>
+
+
+    <TextView
+            android:id="@+id/text_price_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="231px"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/transparent"
+            android:text="34.666"
+            android:textColor="@color/blue"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/barrier_3"
+            app:layout_constraintEnd_toStartOf="@id/image_arrow_3"
+            app:layout_constraintHorizontal_bias="1"/>
+
+    <ImageView
+            android:id="@+id/image_arrow_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_arrow_right_16dp"
+            android:backgroundTint="@color/blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/barrier_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"/>
+
+    <TextView
+            android:id="@+id/text_flight_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:backgroundTint="@color/transparent"
+            android:text="07:00 09:10 10:00 11:00 12:00 13:00 12:00"
+            android:lines="1"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_name_3"
+            app:layout_constraintEnd_toStartOf="@id/text_price_3"/>
+
+    <View
+            android:id="@+id/separator_3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="56dp"
+            android:background="@drawable/bg_separator"
+            android:backgroundTint="@color/gray_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/barrier_3"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

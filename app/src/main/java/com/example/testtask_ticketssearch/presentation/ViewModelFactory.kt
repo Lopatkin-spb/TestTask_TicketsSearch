@@ -7,6 +7,7 @@ import com.example.testtask_ticketssearch.domain.usecase.GetPlaceDepartureByLast
 import com.example.testtask_ticketssearch.domain.usecase.SavePlaceArrivalByLastSearchUseCase
 import com.example.testtask_ticketssearch.domain.usecase.SavePlaceDepartureByLastSearchUseCase
 import com.example.testtask_ticketssearch.presentation.airtickets.AirticketsViewModel
+import com.example.testtask_ticketssearch.presentation.airtickets.search.SearchViewModel
 import com.example.testtask_ticketssearch.presentation.hotels.HotelsViewModel
 import com.example.testtask_ticketssearch.presentation.profile.ProfileViewModel
 import com.example.testtask_ticketssearch.presentation.shorter.ShorterViewModel
@@ -27,6 +28,8 @@ class ViewModelFactory(
                 getPlaceArrivalByLastSearchUseCase = getPlaceArrivalByLastSearchUseCase,
                 savePlaceArrivalByLastSearchUseCase = savePlaceArrivalByLastSearchUseCase,
             ) as T
+        } else if (modelClass.isAssignableFrom(SearchViewModel::class.java)) {
+            return SearchViewModel() as T
         } else if (modelClass.isAssignableFrom(HotelsViewModel::class.java)) {
             return HotelsViewModel() as T
         } else if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
