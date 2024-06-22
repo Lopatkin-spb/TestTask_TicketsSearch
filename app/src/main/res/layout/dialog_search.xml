@@ -166,8 +166,8 @@
             app:layout_constraintVertical_bias="0"/>
 
     <include
-            android:id="@+id/include_recommendation_tickets"
-            layout="@layout/layout_search_recommendation_tickets"
+            android:id="@+id/include_tickets_offers"
+            layout="@layout/layout_search_tickets_offers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="233dp"

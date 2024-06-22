@@ -68,6 +68,7 @@ class SearchDialog : DialogFragment() {
     override fun onResume() {
         super.onResume()
         uiStateListener()
+        viewModel.getTicketsOffers()
     }
 
     override fun onDestroy() {
@@ -156,20 +157,41 @@ class SearchDialog : DialogFragment() {
                 setAlphaVisibility(binding.includeRecommendationPlaces.holderRecommendations, View.GONE)
                 setAlphaVisibility(binding.actionChangeSearchText, View.VISIBLE)
                 setAlphaVisibility(binding.includeChips.holderChips, View.VISIBLE)
-                setAlphaVisibility(binding.includeRecommendationTickets.holder, View.VISIBLE)
+                setAlphaVisibility(binding.includeTicketsOffers.holder, View.VISIBLE)
                 setAlphaVisibility(binding.actionNavigateToShowAllTickets, View.VISIBLE)
                 setAlphaVisibility(binding.actionSubscriptionToPrice, View.VISIBLE)
 
             } else {
                 setAlphaVisibility(binding.actionChangeSearchText, View.GONE)
                 setAlphaVisibility(binding.includeChips.holderChips, View.GONE)
-                setAlphaVisibility(binding.includeRecommendationTickets.holder, View.GONE)
+                setAlphaVisibility(binding.includeTicketsOffers.holder, View.GONE)
                 setAlphaVisibility(binding.actionNavigateToShowAllTickets, View.GONE)
                 setAlphaVisibility(binding.actionSubscriptionToPrice, View.GONE)
                 setAlphaVisibility(binding.includeHints.holderHints, View.VISIBLE)
                 setAlphaVisibility(binding.includeRecommendationPlaces.holderRecommendations, View.VISIBLE)
 
             }
+            if (uiState.ticketsOffers.isNotEmpty()) {
+                fillViews(uiState.ticketsOffers)
+            }
+        }
+    }
+
+    private fun fillViews(ticketOffers: List<TicketOfferUi>) {
+        ticketOffers[0]?.let { offer ->
+            if (offer.title.isNotEmpty()) binding.includeTicketsOffers.textTitle1.text = offer.title
+            if (offer.price.isNotEmpty()) binding.includeTicketsOffers.textPrice1.text = offer.price
+            if (offer.timeFlights.isNotEmpty()) binding.includeTicketsOffers.textTimeFlights1.text = offer.timeFlights
+        }
+        ticketOffers[1]?.let { offer ->
+            if (offer.title.isNotEmpty()) binding.includeTicketsOffers.textTitle2.text = offer.title
+            if (offer.price.isNotEmpty()) binding.includeTicketsOffers.textPrice2.text = offer.price
+            if (offer.timeFlights.isNotEmpty()) binding.includeTicketsOffers.textTimeFlights2.text = offer.timeFlights
+        }
+        ticketOffers[2]?.let { offer ->
+            if (offer.title.isNotEmpty()) binding.includeTicketsOffers.textTitle3.text = offer.title
+            if (offer.price.isNotEmpty()) binding.includeTicketsOffers.textPrice3.text = offer.price
+            if (offer.timeFlights.isNotEmpty()) binding.includeTicketsOffers.textTimeFlights3.text = offer.timeFlights
         }
     }
 

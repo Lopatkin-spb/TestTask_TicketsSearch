@@ -47,13 +47,14 @@
             app:layout_constraintHorizontal_bias="0"/>
 
     <TextView
-            android:id="@+id/text_name_1"
+            android:id="@+id/text_title_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/transparent"
-            android:text="Уральские пельмени"
+            android:text="--"
+            tools:text="Уральские пельмени"
             android:lines="1"
             android:textColor="@color/white"
             android:textSize="14sp"
@@ -69,7 +70,8 @@
             android:layout_marginStart="231px"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/transparent"
-            android:text="34.666"
+            android:text="--"
+            tools:text="34.666"
             android:textColor="@color/blue"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -90,17 +92,18 @@
             app:layout_constraintHorizontal_bias="1"/>
 
     <TextView
-            android:id="@+id/text_flight_1"
+            android:id="@+id/text_time_flights_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:backgroundTint="@color/transparent"
-            android:text="07:00 09:10 10:00 11:00 12:00 13:00 12:00"
+            android:text="--"
+            tools:text="07:00 09:10 10:00 11:00 12:00 13:00 12:00"
             android:lines="1"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_name_1"
+            app:layout_constraintTop_toBottomOf="@id/text_title_1"
             app:layout_constraintEnd_toStartOf="@id/text_price_1"/>
 
     <View
@@ -137,13 +140,14 @@
             app:layout_constraintHorizontal_bias="0"/>
 
     <TextView
-            android:id="@+id/text_name_2"
+            android:id="@+id/text_title_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/transparent"
-            android:text="Уральские пельмени"
+            android:text="--"
+            tools:text="Уральские пельмени"
             android:lines="1"
             android:textColor="@color/white"
             android:textSize="14sp"
@@ -159,7 +163,8 @@
             android:layout_marginStart="231px"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/transparent"
-            android:text="34.666"
+            android:text="--"
+            tools:text="34.666"
             android:textColor="@color/blue"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -180,17 +185,18 @@
             app:layout_constraintHorizontal_bias="1"/>
 
     <TextView
-            android:id="@+id/text_flight_2"
+            android:id="@+id/text_time_flights_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:backgroundTint="@color/transparent"
-            android:text="07:00 09:10 10:00 11:00 12:00 13:00 12:00"
+            android:text="--"
+            tools:text="07:00 09:10 10:00 11:00 12:00 13:00 12:00"
             android:lines="1"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_name_2"
+            app:layout_constraintTop_toBottomOf="@id/text_title_2"
             app:layout_constraintEnd_toStartOf="@id/text_price_2"/>
 
     <View
@@ -226,13 +232,14 @@
             app:layout_constraintHorizontal_bias="0"/>
 
     <TextView
-            android:id="@+id/text_name_3"
+            android:id="@+id/text_title_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/transparent"
-            android:text="Уральские пельмени"
+            android:text="--"
+            tools:text="Уральские пельмени"
             android:lines="1"
             android:textColor="@color/white"
             android:textSize="14sp"
@@ -248,7 +255,8 @@
             android:layout_marginStart="231px"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/transparent"
-            android:text="34.666"
+            android:text="--"
+            tools:text="34.666"
             android:textColor="@color/blue"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -269,17 +277,18 @@
             app:layout_constraintHorizontal_bias="1"/>
 
     <TextView
-            android:id="@+id/text_flight_3"
+            android:id="@+id/text_time_flights_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:backgroundTint="@color/transparent"
-            android:text="07:00 09:10 10:00 11:00 12:00 13:00 12:00"
+            android:text="--"
+            tools:text="07:00 09:10 10:00 11:00 12:00 13:00 12:00"
             android:lines="1"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_name_3"
+            app:layout_constraintTop_toBottomOf="@id/text_title_3"
             app:layout_constraintEnd_toStartOf="@id/text_price_3"/>
 
     <View

@@ -1,10 +1,8 @@
 package com.example.testtask_ticketssearch.di
 
+import com.example.testtask_ticketssearch.domain.OffersRepository
 import com.example.testtask_ticketssearch.domain.SettingsRepository
-import com.example.testtask_ticketssearch.domain.usecase.GetPlaceArrivalByLastSearchUseCase
-import com.example.testtask_ticketssearch.domain.usecase.GetPlaceDepartureByLastSearchUseCase
-import com.example.testtask_ticketssearch.domain.usecase.SavePlaceArrivalByLastSearchUseCase
-import com.example.testtask_ticketssearch.domain.usecase.SavePlaceDepartureByLastSearchUseCase
+import com.example.testtask_ticketssearch.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 
@@ -37,6 +35,13 @@ class DomainModule {
         repository: SettingsRepository
     ): GetPlaceArrivalByLastSearchUseCase {
         return GetPlaceArrivalByLastSearchUseCase(repository = repository)
+    }
+
+    @Provides
+    fun provideGetTicketsOffersUseCase(
+        repository: OffersRepository
+    ): GetTicketsOffersUseCase {
+        return GetTicketsOffersUseCase(repository = repository)
     }
 
 }
