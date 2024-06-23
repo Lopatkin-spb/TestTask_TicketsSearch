@@ -1,13 +1,13 @@
 package com.example.testtask_ticketssearch.presentation.airtickets
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.testtask_ticketssearch.databinding.ItemOfferBinding
+import com.example.testtask_ticketssearch.databinding.ItemEventOfferBinding
 
-class OfferItem(private val binding: ItemOfferBinding) : RecyclerView.ViewHolder(binding.root) {
+class EventOfferItem(private val binding: ItemEventOfferBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    private var data: OfferUi? = null
+    private var data: EventOfferUi? = null
 
-    fun setData(data: OfferUi) {
+    fun setData(data: EventOfferUi) {
         this.data = data
         this.data?.let { updateItem() }
     }

@@ -21,7 +21,7 @@ class AirticketsFragment : Fragment() {
     private lateinit var viewModel: AirticketsViewModel
     private var _binding: FragmentAirticketsBinding? = null
     private val binding get() = _binding!!
-    private val adapter by lazy { OfferAdapter() }
+    private val adapter by lazy { EventOfferAdapter() }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -46,7 +46,7 @@ class AirticketsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.loadListOffers()
+        viewModel.loadEventsOffers()
         viewModel.getPlaceDeparture()
         viewModel.getPlaceArrival()
         uiStateListener()
@@ -82,7 +82,7 @@ class AirticketsFragment : Fragment() {
 
     private fun uiStateListener() {
         viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
-            adapter.setList(uiState.offers)
+            adapter.setList(uiState.eventsOffers)
             uiState.placeDeparture?.let { place ->
                 if (place.name.isNotEmpty()) binding.actionPlaceDeparture.setText(place.name)
             }

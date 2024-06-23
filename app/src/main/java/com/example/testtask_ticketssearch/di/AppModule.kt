@@ -20,6 +20,7 @@ class AppModule {
         savePlaceArrivalByLastSearchUseCase: SavePlaceArrivalByLastSearchUseCase,
         getPlaceArrivalByLastSearchUseCase: GetPlaceArrivalByLastSearchUseCase,
         getTicketsOffersUseCase: GetTicketsOffersUseCase,
+        getEventsOffersUseCase: GetEventsOffersUseCase,
     ): ViewModelFactory {
         return ViewModelFactory(
             dispatchers = dispatchers,
@@ -28,6 +29,7 @@ class AppModule {
             savePlaceArrivalByLastSearchUseCase = savePlaceArrivalByLastSearchUseCase,
             getPlaceArrivalByLastSearchUseCase = getPlaceArrivalByLastSearchUseCase,
             getTicketsOffersUseCase = getTicketsOffersUseCase,
+            getEventsOffersUseCase = getEventsOffersUseCase,
         )
     }
 

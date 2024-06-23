@@ -18,15 +18,18 @@ class ViewModelFactory(
     private val savePlaceArrivalByLastSearchUseCase: SavePlaceArrivalByLastSearchUseCase,
     private val getPlaceArrivalByLastSearchUseCase: GetPlaceArrivalByLastSearchUseCase,
     private val getTicketsOffersUseCase: GetTicketsOffersUseCase,
+    private val getEventsOffersUseCase: GetEventsOffersUseCase,
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(AirticketsViewModel::class.java)) {
             return AirticketsViewModel(
+                dispatchers = dispatchers,
                 getPlaceDepartureByLastSearchUseCase = getPlaceDepartureByLastSearchUseCase,
                 savePlaceDepartureByLastSearchUseCase = savePlaceDepartureByLastSearchUseCase,
                 getPlaceArrivalByLastSearchUseCase = getPlaceArrivalByLastSearchUseCase,
                 savePlaceArrivalByLastSearchUseCase = savePlaceArrivalByLastSearchUseCase,
+                getEventsOffersUseCase = getEventsOffersUseCase,
             ) as T
         } else if (modelClass.isAssignableFrom(SearchViewModel::class.java)) {
             return SearchViewModel(
