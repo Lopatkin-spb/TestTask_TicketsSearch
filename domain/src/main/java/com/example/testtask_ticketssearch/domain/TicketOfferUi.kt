@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.presentation.airtickets.search
+package com.example.testtask_ticketssearch.domain
 
 data class TicketOfferUi(
     val id: Long,

@@ -38,6 +38,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
+    implementation(project(":data"))
 
     /**
      * Core
@@ -62,19 +64,6 @@ dependencies {
     implementation("com.google.dagger:dagger:$dagger_version")
     kapt("com.google.dagger:dagger-compiler:$dagger_version")
     implementation("javax.inject:javax.inject:1")
-
-    /**
-     * Network
-     */
-    // Provider
-    val retrofit2_version = "2.11.0"
-    implementation("com.squareup.retrofit2:retrofit:$retrofit2_version")
-    // For serialization
-    implementation("com.squareup.retrofit2:converter-gson:$retrofit2_version")
-    // For logging
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
-    implementation("com.squareup.okhttp3:okhttp")
-    implementation("com.squareup.okhttp3:logging-interceptor")
 
     /**
      * Multithreading: Coroutines

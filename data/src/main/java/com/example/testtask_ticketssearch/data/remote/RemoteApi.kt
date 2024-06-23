@@ -1,6 +1,6 @@
 package com.example.testtask_ticketssearch.data.remote
 
-import com.example.testtask_ticketssearch.BuildConfig
+//import com.example.testtask_ticketssearch.data.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -44,11 +44,11 @@ private fun getModifiedOkHttpClient(): OkHttpClient {
 private fun getLoggingInterceptor(): HttpLoggingInterceptor {
     val interceptor = HttpLoggingInterceptor()
 
-    if (BuildConfig.DEBUG) {
+//    if (BuildConfig.DEBUG) {
         interceptor.level = HttpLoggingInterceptor.Level.BODY
-    } else {
-        interceptor.level = HttpLoggingInterceptor.Level.NONE
-    }
+//    } else {
+//        interceptor.level = HttpLoggingInterceptor.Level.NONE
+//    }
 
     return interceptor
 }

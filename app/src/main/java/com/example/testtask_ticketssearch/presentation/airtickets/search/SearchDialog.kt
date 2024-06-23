@@ -10,6 +10,7 @@ import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.testtask_ticketssearch.databinding.DialogSearchBinding
+import com.example.testtask_ticketssearch.domain.TicketOfferUi
 import com.example.testtask_ticketssearch.presentation.AppActivity
 import com.example.testtask_ticketssearch.presentation.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar

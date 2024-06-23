@@ -1,7 +1,6 @@
 package com.example.testtask_ticketssearch.data
 
 import com.example.testtask_ticketssearch.data.remote.OffersApi
-import com.example.testtask_ticketssearch.di.AppModule
 import com.example.testtask_ticketssearch.domain.EventOffer
 import com.example.testtask_ticketssearch.domain.OffersRepository
 import com.example.testtask_ticketssearch.domain.TicketOffer
@@ -11,7 +10,7 @@ import kotlinx.coroutines.flow.flowOn
 
 class OffersRepositoryImpl(
     private val api: OffersApi,
-    private val dispatchers: AppModule.CoroutineDispatchers,
+    private val dispatchers: CoroutineDispatchers,
 ) : OffersRepository {
 
     override fun getEventsOffers(): Flow<List<EventOffer>> {

@@ -5,16 +5,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.testtask_ticketssearch.di.AppModule
+import com.example.testtask_ticketssearch.data.CoroutineDispatchers
 import com.example.testtask_ticketssearch.domain.usecase.GetTicketsOffersUseCase
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
-    private val dispatchers: AppModule.CoroutineDispatchers,
+    private val dispatchers: CoroutineDispatchers,
     private val getTicketsOffersUseCase: GetTicketsOffersUseCase,
 ) : ViewModel() {
 

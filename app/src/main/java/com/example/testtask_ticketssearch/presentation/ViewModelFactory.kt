@@ -2,7 +2,7 @@ package com.example.testtask_ticketssearch.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.testtask_ticketssearch.di.AppModule
+import com.example.testtask_ticketssearch.data.CoroutineDispatchers
 import com.example.testtask_ticketssearch.domain.usecase.*
 import com.example.testtask_ticketssearch.presentation.airtickets.AirticketsViewModel
 import com.example.testtask_ticketssearch.presentation.airtickets.search.SearchViewModel
@@ -12,7 +12,7 @@ import com.example.testtask_ticketssearch.presentation.shorter.ShorterViewModel
 import com.example.testtask_ticketssearch.presentation.subscriptions.SubscriptionsViewModel
 
 class ViewModelFactory(
-    private val dispatchers: AppModule.CoroutineDispatchers,
+    private val dispatchers: CoroutineDispatchers,
     private val savePlaceDepartureByLastSearchUseCase: SavePlaceDepartureByLastSearchUseCase,
     private val getPlaceDepartureByLastSearchUseCase: GetPlaceDepartureByLastSearchUseCase,
     private val savePlaceArrivalByLastSearchUseCase: SavePlaceArrivalByLastSearchUseCase,

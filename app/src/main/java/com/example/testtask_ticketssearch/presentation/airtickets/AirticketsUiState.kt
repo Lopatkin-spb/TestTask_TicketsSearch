@@ -1,5 +1,6 @@
 package com.example.testtask_ticketssearch.presentation.airtickets
 
+import com.example.testtask_ticketssearch.domain.EventOfferUi
 import com.example.testtask_ticketssearch.domain.SearchPlace
 
 data class AirticketsUiState(

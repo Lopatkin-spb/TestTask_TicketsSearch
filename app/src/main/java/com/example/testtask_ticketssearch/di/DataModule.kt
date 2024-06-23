@@ -1,6 +1,7 @@
 package com.example.testtask_ticketssearch.di
 
 import android.content.Context
+import com.example.testtask_ticketssearch.data.CoroutineDispatchers
 import com.example.testtask_ticketssearch.data.OffersRepositoryImpl
 import com.example.testtask_ticketssearch.data.SettingsRepositoryImpl
 import com.example.testtask_ticketssearch.data.local.dataSource.SettingsDataSource
@@ -29,7 +30,7 @@ class DataModule {
     @Singleton
     @Provides
     fun provideOffersRepository(
-        dispatchers: AppModule.CoroutineDispatchers,
+        dispatchers: CoroutineDispatchers,
     ): OffersRepository {
         return OffersRepositoryImpl(NetworkProvider.registerApi, dispatchers)
     }
