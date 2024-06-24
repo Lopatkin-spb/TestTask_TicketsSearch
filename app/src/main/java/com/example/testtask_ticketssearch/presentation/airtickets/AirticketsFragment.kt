@@ -54,8 +54,8 @@ class AirticketsFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        viewModel.savePlaceDeparture(binding.actionPlaceDeparture.text.toString())
-        viewModel.savePlaceArrival(binding.actionPlaceArrival.text.toString())
+        viewModel.savePlaceDeparture(binding.includeSearch.actionPlaceDeparture.text.toString())
+        viewModel.savePlaceArrival(binding.includeSearch.actionPlaceArrival.text.toString())
     }
 
     override fun onDestroyView() {
@@ -73,9 +73,9 @@ class AirticketsFragment : Fragment() {
     }
 
     private fun setupSearchPlaceArrivalListener() {
-        binding.actionPlaceArrival.setOnClickListener {
+        binding.includeSearch.actionPlaceArrival.setOnClickListener {
             SearchDialog
-                .newInstance(binding.actionPlaceDeparture.text.toString())
+                .newInstance(binding.includeSearch.actionPlaceDeparture.text.toString())
                 .show(requireActivity().supportFragmentManager, SearchDialog.TAG)
         }
     }
@@ -84,7 +84,7 @@ class AirticketsFragment : Fragment() {
         viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
             adapter.setList(uiState.eventsOffers)
             uiState.placeDeparture?.let { place ->
-                if (place.name.isNotEmpty()) binding.actionPlaceDeparture.setText(place.name)
+                if (place.name.isNotEmpty()) binding.includeSearch.actionPlaceDeparture.setText(place.name)
             }
 //            uiState.placeArrival?.let { place ->
 //                if (place.name.isNotEmpty()) binding.actionPlaceArrival.setText(place.name)

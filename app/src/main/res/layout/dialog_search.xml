@@ -52,6 +52,7 @@
             android:background="@color/transparent"
             android:textSize="16sp"
             android:textColor="@color/white"
+            android:lines="1"
             app:layout_constraintTop_toTopOf="@+id/image_search_background"
             app:layout_constraintStart_toEndOf="@+id/image_plane"
             app:layout_constraintEnd_toEndOf="@id/action_place_arrival"
@@ -107,6 +108,7 @@
             android:textColorHint="@color/text_hint"
             android:textSize="16sp"
             android:textColor="@color/white"
+            android:lines="1"
             app:layout_constraintTop_toTopOf="@+id/image_search_background"
             app:layout_constraintStart_toEndOf="@+id/image_search"
             app:layout_constraintEnd_toStartOf="@id/action_cleaning_place_arrival"/>
