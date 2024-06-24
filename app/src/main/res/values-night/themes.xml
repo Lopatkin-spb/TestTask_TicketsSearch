@@ -1,28 +1,22 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
-    <!-- Base application theme. -->
+    <!-- Base application theme -->
     <style name="Theme.TestTask_TicketsSearch" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
+        <!-- Base colors -->
+        <!-- Primary brand color -->
         <item name="colorPrimary">@color/blue</item>
-        <!-- Background main color. -->
-        <item name="android:background">@color/app_background</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?android:attr/background</item>
-        <!-- Bottom navigation view style. -->
+
+        <!-- Style attributes -->
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
-        <!-- Base text color. -->
-        <item name="android:textColor">@color/item_inactive</item>
-    </style>
+        <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
+        <item name="android:textViewStyle">@style/Widget.App.TextView</item>
 
-    <!-- Widget colors. -->
-    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
-        <item name="itemRippleColor">@null</item>
-    </style>
+        <!-- Params -->
+        <!-- Background main color -->
+        <item name="android:colorBackground">@color/black</item>
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">?android:attr/colorBackground</item>
 
-    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
-        <item name="colorPrimary">@color/item_active</item>
-        <item name="colorOnSurface">@color/item_inactive</item>
     </style>
 
 </resources>

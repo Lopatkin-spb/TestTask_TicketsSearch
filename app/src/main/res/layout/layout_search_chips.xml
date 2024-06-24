@@ -20,7 +20,6 @@
             android:gravity="center"
             android:text="обратно"
             android:textSize="14sp"
-            android:textColor="@color/white"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -36,7 +35,6 @@
             android:gravity="center"
             android:text="24 фев, сб"
             android:textSize="14sp"
-            android:textColor="@color/white"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/action_back"
             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -54,7 +52,6 @@
             android:gravity="center"
             android:text="1,эконом"
             android:textSize="14sp"
-            android:textColor="@color/white"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/action_departure"
             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -72,7 +69,6 @@
             android:gravity="center"
             android:text="фильтр"
             android:textSize="14sp"
-            android:textColor="@color/white"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/action_passenger_class"
             app:layout_constraintBottom_toBottomOf="parent"/>

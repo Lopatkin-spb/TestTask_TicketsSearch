@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.testtask_ticketssearch.R
 import com.example.testtask_ticketssearch.databinding.DialogSearchBinding
 import com.example.testtask_ticketssearch.domain.model.TicketOfferUi
 import com.example.testtask_ticketssearch.presentation.AppActivity
@@ -64,6 +65,9 @@ class SearchDialog : DialogFragment() {
     override fun onStart() {
         super.onStart()
         dialog?.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT)
+
+        // Set bg programmatically for fix bug draw - white corners
+        dialog?.window?.setBackgroundDrawableResource(R.drawable.bg_rectangle_radius_16dp)
     }
 
     override fun onResume() {
