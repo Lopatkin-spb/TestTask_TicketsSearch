@@ -1,8 +1,8 @@
 package com.example.testtask_ticketssearch.data
 
 import com.example.testtask_ticketssearch.data.local.dataSource.SettingsDataSource
-import com.example.testtask_ticketssearch.domain.SearchPlace
-import com.example.testtask_ticketssearch.domain.SettingsRepository
+import com.example.testtask_ticketssearch.domain.model.SearchPlace
+import com.example.testtask_ticketssearch.domain.repository.SettingsRepository
 
 class SettingsRepositoryImpl(
     private val settingsDataSource: SettingsDataSource,

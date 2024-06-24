@@ -1,9 +1,9 @@
 package com.example.testtask_ticketssearch.data
 
 import com.example.testtask_ticketssearch.data.remote.OffersApi
-import com.example.testtask_ticketssearch.domain.EventOffer
-import com.example.testtask_ticketssearch.domain.OffersRepository
-import com.example.testtask_ticketssearch.domain.TicketOffer
+import com.example.testtask_ticketssearch.domain.model.EventOffer
+import com.example.testtask_ticketssearch.domain.repository.OffersRepository
+import com.example.testtask_ticketssearch.domain.model.TicketOffer
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn

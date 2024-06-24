@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testtask_ticketssearch.databinding.ItemEventOfferBinding
-import com.example.testtask_ticketssearch.domain.EventOfferUi
+import com.example.testtask_ticketssearch.domain.model.EventOfferUi
 
 class EventOfferAdapter : RecyclerView.Adapter<EventOfferItem>() {
 

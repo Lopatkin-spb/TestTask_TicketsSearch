@@ -7,8 +7,8 @@ import com.example.testtask_ticketssearch.data.SettingsRepositoryImpl
 import com.example.testtask_ticketssearch.data.local.dataSource.SettingsDataSource
 import com.example.testtask_ticketssearch.data.local.settings.SettingsLocalDataSource
 import com.example.testtask_ticketssearch.data.remote.NetworkProvider
-import com.example.testtask_ticketssearch.domain.OffersRepository
-import com.example.testtask_ticketssearch.domain.SettingsRepository
+import com.example.testtask_ticketssearch.domain.repository.OffersRepository
+import com.example.testtask_ticketssearch.domain.repository.SettingsRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

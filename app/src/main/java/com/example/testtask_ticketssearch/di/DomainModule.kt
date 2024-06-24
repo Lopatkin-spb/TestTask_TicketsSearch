@@ -1,7 +1,7 @@
 package com.example.testtask_ticketssearch.di
 
-import com.example.testtask_ticketssearch.domain.OffersRepository
-import com.example.testtask_ticketssearch.domain.SettingsRepository
+import com.example.testtask_ticketssearch.domain.repository.OffersRepository
+import com.example.testtask_ticketssearch.domain.repository.SettingsRepository
 import com.example.testtask_ticketssearch.domain.usecase.*
 import dagger.Module
 import dagger.Provides

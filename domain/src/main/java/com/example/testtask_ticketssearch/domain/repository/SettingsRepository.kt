@@ -1,4 +1,6 @@
-package com.example.testtask_ticketssearch.domain
+package com.example.testtask_ticketssearch.domain.repository
+
+import com.example.testtask_ticketssearch.domain.model.SearchPlace
 
 interface SettingsRepository {
 

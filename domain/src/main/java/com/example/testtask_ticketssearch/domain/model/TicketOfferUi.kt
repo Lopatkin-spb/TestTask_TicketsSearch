@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.domain
+package com.example.testtask_ticketssearch.domain.model
 
 data class TicketOfferUi(
     val id: Long,

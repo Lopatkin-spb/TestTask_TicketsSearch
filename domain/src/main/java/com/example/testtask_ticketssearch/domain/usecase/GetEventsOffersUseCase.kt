@@ -1,7 +1,7 @@
 package com.example.testtask_ticketssearch.domain.usecase
 
-import com.example.testtask_ticketssearch.domain.EventOfferUi
-import com.example.testtask_ticketssearch.domain.OffersRepository
+import com.example.testtask_ticketssearch.domain.model.EventOfferUi
+import com.example.testtask_ticketssearch.domain.repository.OffersRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

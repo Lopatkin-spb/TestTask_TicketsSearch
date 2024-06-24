@@ -1,6 +1,6 @@
 package com.example.testtask_ticketssearch.data.local.dataSource
 
-import com.example.testtask_ticketssearch.domain.SearchPlace
+import com.example.testtask_ticketssearch.domain.model.SearchPlace
 
 interface SettingsDataSource {
 

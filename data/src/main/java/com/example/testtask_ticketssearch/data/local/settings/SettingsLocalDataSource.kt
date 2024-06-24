@@ -3,7 +3,7 @@ package com.example.testtask_ticketssearch.data.local.settings
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.testtask_ticketssearch.data.local.dataSource.SettingsDataSource
-import com.example.testtask_ticketssearch.domain.SearchPlace
+import com.example.testtask_ticketssearch.domain.model.SearchPlace
 
 class SettingsLocalDataSource(
     private val context: Context,
