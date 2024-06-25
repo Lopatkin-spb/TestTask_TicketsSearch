@@ -10,6 +10,7 @@
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
         <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
         <item name="android:textViewStyle">@style/Widget.App.TextView</item>
+        <item name="editTextStyle">@style/Widget.App.EditText</item>
 
         <!-- Params -->
         <!-- Background main color -->

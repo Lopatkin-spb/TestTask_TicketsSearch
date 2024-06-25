@@ -50,7 +50,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginStart="8dp"
             android:textSize="16sp"
-            android:lines="1"
+            android:maxLines="1"
             app:layout_constraintTop_toTopOf="@+id/image_search_background"
             app:layout_constraintStart_toEndOf="@+id/image_plane"
             app:layout_constraintEnd_toEndOf="@id/action_place_arrival"
@@ -71,17 +71,17 @@
             app:layout_constraintTop_toTopOf="@id/image_search_background"
             app:layout_constraintEnd_toEndOf="@id/image_search_background"/>
 
-    <ImageView
+    <View
             android:id="@+id/image_search_separator"
             android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginVertical="48dp"
+            android:layout_height="0dp"
             android:layout_marginHorizontal="16dp"
-            android:background="@drawable/bg_separator"
+            android:background="@drawable/bg_divider_1dp"
             android:backgroundTint="@color/gray_4"
             app:layout_constraintTop_toTopOf="@+id/image_search_background"
             app:layout_constraintStart_toStartOf="@+id/image_search_background"
-            app:layout_constraintEnd_toEndOf="@+id/image_search_background"/>
+            app:layout_constraintEnd_toEndOf="@+id/image_search_background"
+            app:layout_constraintBottom_toBottomOf="@id/image_search_background"/>
 
     <ImageView
             android:id="@+id/image_search"
@@ -95,18 +95,14 @@
             app:layout_constraintStart_toStartOf="@+id/image_search_background"
             app:layout_constraintEnd_toStartOf="@id/action_place_arrival"/>
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/action_place_arrival"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="56dp"
             android:layout_marginStart="8dp"
-            android:background="@color/transparent"
             android:hint="@string/action_place_arrival"
-            android:textColorHint="@color/text_hint"
             android:textSize="16sp"
-            android:textColor="@color/white"
-            android:lines="1"
             app:layout_constraintTop_toTopOf="@+id/image_search_background"
             app:layout_constraintStart_toEndOf="@+id/image_search"
             app:layout_constraintEnd_toStartOf="@id/action_cleaning_place_arrival"/>
