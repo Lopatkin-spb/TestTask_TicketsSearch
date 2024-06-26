@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="ThemeOverlay.App.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.App.BottomSheetDialog.Modal</item>
+    </style>
+
+    <style name="Widget.App.BottomSheetDialog.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="backgroundTint">@color/gray_2</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.BottomSheetDialog.Modal</item>
+        <item name="behavior_draggable">true</item>
+        <item name="shouldRemoveExpandedCorners">false</item>
+    </style>
+
+    <style name="ShapeAppearance.App.BottomSheetDialog.Modal"
+           parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
     <style name="Widget.App.TextView" parent="Widget.MaterialComponents.TextView">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.TextView</item>
     </style>

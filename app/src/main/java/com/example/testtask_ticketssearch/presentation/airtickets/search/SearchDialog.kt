@@ -6,18 +6,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import androidx.fragment.app.DialogFragment
+import android.widget.FrameLayout
 import androidx.lifecycle.ViewModelProvider
-import com.example.testtask_ticketssearch.R
 import com.example.testtask_ticketssearch.databinding.DialogSearchBinding
 import com.example.testtask_ticketssearch.domain.model.TicketOfferUi
 import com.example.testtask_ticketssearch.presentation.AppActivity
 import com.example.testtask_ticketssearch.presentation.ViewModelFactory
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
-class SearchDialog : DialogFragment() {
+class SearchDialog : BottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "com.example.testtask_ticketssearch.SearchDialog"
@@ -62,12 +62,23 @@ class SearchDialog : DialogFragment() {
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        dialog?.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        // Set bg programmatically for fix bug draw - white corners
-        dialog?.window?.setBackgroundDrawableResource(R.drawable.bg_rectangle_radius_16dp)
+        // This all shit - setup full screen
+        val defaultBottomSheetLayout: FrameLayout? =
+            dialog?.findViewById(com.google.android.material.R.id.design_bottom_sheet)
+
+        defaultBottomSheetLayout?.let { layout ->
+            layout.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
+
+            val bottomSheetBehavior = BottomSheetBehavior.from(layout)
+            bottomSheetBehavior.also { behavior ->
+                behavior.peekHeight = resources.displayMetrics.heightPixels
+                behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+        }
+
     }
 
     override fun onResume() {

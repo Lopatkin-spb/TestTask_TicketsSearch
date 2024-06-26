@@ -6,6 +6,9 @@
         <!-- Primary brand color -->
         <item name="colorPrimary">@color/blue</item>
 
+        <!-- Theme attributes -->
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.App.BottomSheetDialog</item>
+
         <!-- Style attributes -->
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
         <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
