@@ -46,4 +46,10 @@ class DataModule {
         return SettingsLocalDataSource(context)
     }
 
+    @Singleton
+    @Provides
+    fun provideDispatchers(): CoroutineDispatchers {
+        return CoroutineDispatchers()
+    }
+
 }

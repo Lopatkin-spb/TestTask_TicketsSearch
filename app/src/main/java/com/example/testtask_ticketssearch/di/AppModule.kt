@@ -32,10 +32,4 @@ class AppModule {
         )
     }
 
-    @Singleton
-    @Provides
-    fun provideDispatchers(): CoroutineDispatchers {
-        return CoroutineDispatchers()
-    }
-
 }

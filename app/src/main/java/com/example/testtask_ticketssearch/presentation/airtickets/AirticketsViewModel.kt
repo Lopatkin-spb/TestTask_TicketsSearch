@@ -69,9 +69,9 @@ class AirticketsViewModel(
 
     private fun handleThrowable(cause: Throwable) {
         when (cause) {
-            is Exception -> Log.w("TAG", "SearchViewModel getTicketOffers: ${cause.message}", cause)
+            is Exception -> Log.w("TAG", "AirticketsViewModel loadEventsOffers: ${cause.message}", cause)
             else -> {
-                Log.e("TAG", "SearchViewModel getTicketOffers: ${cause.message}", cause)
+                Log.e("TAG", "AirticketsViewModel loadEventsOffers: ${cause.message}", cause)
                 throw cause
             }
         }
