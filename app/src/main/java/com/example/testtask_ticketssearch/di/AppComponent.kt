@@ -1,13 +1,6 @@
 package com.example.testtask_ticketssearch.di
 
 import android.content.Context
-import com.example.testtask_ticketssearch.presentation.AppActivity
-import com.example.testtask_ticketssearch.presentation.airtickets.AirticketsFragment
-import com.example.testtask_ticketssearch.presentation.airtickets.search.SearchDialog
-import com.example.testtask_ticketssearch.presentation.hotels.HotelsFragment
-import com.example.testtask_ticketssearch.presentation.profile.ProfileFragment
-import com.example.testtask_ticketssearch.presentation.shorter.ShorterFragment
-import com.example.testtask_ticketssearch.presentation.subscriptions.SubscriptionsFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -18,23 +11,12 @@ import javax.inject.Singleton
         AppModule::class,
         DataModule::class,
         DomainModule::class,
+        PresentationModule::class,
     ]
 )
 interface AppComponent {
 
-    fun inject(activity: AppActivity)
-
-    fun inject(fragment: AirticketsFragment)
-
-    fun inject(dialog: SearchDialog)
-
-    fun inject(fragment: HotelsFragment)
-
-    fun inject(fragment: ProfileFragment)
-
-    fun inject(fragment: ShorterFragment)
-
-    fun inject(fragment: SubscriptionsFragment)
+    fun presentationComponent(): PresentationComponent.Factory
 
     @Component.Builder
     interface Builder {

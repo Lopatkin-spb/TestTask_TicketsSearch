@@ -16,3 +16,4 @@ rootProject.name = "TestTask_TicketsSearch"
 include(":app")
 include(":domain")
 include(":data")
+include(":presentation")
