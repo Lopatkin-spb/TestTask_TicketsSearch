@@ -1,4 +1,4 @@
-package com.example.feature_v1
+package com.example.testtask_ticketssearch
 
 import org.junit.Test
 

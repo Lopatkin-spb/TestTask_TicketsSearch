@@ -31,10 +31,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildFeatures {
-        viewBinding = true
+        viewBinding = false
         dataBinding = false
     }
+
 }
 
 dependencies {
@@ -47,8 +49,6 @@ dependencies {
      */
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.12.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     /**
      * Android Jetpack: ViewModel & Lifecycle
@@ -59,24 +59,18 @@ dependencies {
     kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
 
     /**
+     */
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+
+    /**
      * DI: Dagger 2
      */
     val dagger_version = "2.51.1"
     implementation("com.google.dagger:dagger:$dagger_version")
     kapt("com.google.dagger:dagger-compiler:$dagger_version")
     implementation("javax.inject:javax.inject:1")
-
-    /**
-     * Multithreading: Coroutines
-     */
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
-
-    /**
-     */
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
-
+    
     /**
      * Tests
      */

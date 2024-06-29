@@ -1,4 +1,4 @@
-package com.example.feature_v1
+package com.example.testtask_ticketssearch
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
