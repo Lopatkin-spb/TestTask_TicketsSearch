@@ -1,6 +1,6 @@
 package com.example.testtask_ticketssearch.di
 
-import com.example.testtask_ticketssearch.presentation.CoroutineDispatchers
+import com.example.testtask_ticketssearch._interface.CoroutineDispatchers
 import com.example.testtask_ticketssearch.presentation.ViewModelFactory
 import com.example.testtask_ticketssearch.domain.usecase.*
 import dagger.Module
@@ -31,12 +31,6 @@ class PresentationModule {
             getTicketsOffersUseCase = getTicketsOffersUseCase,
             getEventsOffersUseCase = getEventsOffersUseCase,
         )
-    }
-
-    @Singleton
-    @Provides
-    fun provideDispatchers(): CoroutineDispatchers {
-        return CoroutineDispatchers()
     }
 
 }

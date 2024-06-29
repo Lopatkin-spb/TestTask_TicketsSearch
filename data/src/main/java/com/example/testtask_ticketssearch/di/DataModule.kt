@@ -1,7 +1,7 @@
 package com.example.testtask_ticketssearch.di
 
 import android.content.Context
-import com.example.testtask_ticketssearch.data.CoroutineDispatchers
+import com.example.testtask_ticketssearch._interface.CoroutineDispatchers
 import com.example.testtask_ticketssearch.data.OffersRepositoryImpl
 import com.example.testtask_ticketssearch.data.SettingsRepositoryImpl
 import com.example.testtask_ticketssearch.data.local.dataSource.SettingsDataSource
@@ -44,12 +44,6 @@ class DataModule {
         context: Context,
     ): SettingsDataSource {
         return SettingsLocalDataSource(context)
-    }
-
-    @Singleton
-    @Provides
-    fun provideDispatchers(): CoroutineDispatchers {
-        return CoroutineDispatchers()
     }
 
 }

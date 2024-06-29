@@ -12,6 +12,7 @@ import javax.inject.Singleton
         DataModule::class,
         DomainModule::class,
         PresentationModule::class,
+        InterfaceModule::class,
     ]
 )
 interface AppComponent {

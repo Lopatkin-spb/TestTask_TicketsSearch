@@ -1,5 +1,6 @@
 package com.example.testtask_ticketssearch.data
 
+import com.example.testtask_ticketssearch._interface.CoroutineDispatchers
 import com.example.testtask_ticketssearch.data.remote.OffersApi
 import com.example.testtask_ticketssearch.domain.model.EventOffer
 import com.example.testtask_ticketssearch.domain.repository.OffersRepository

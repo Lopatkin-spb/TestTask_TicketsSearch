@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.testtask_ticketssearch.data"
+    namespace = "com.example.testtask_ticketssearch._interface"
     compileSdk = 34
 
     defaultConfig {
@@ -29,15 +29,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
-    buildFeatures {
-        buildConfig = true
-    }
 }
 
 dependencies {
-    implementation(project(":domain"))
-    implementation(project(":interface"))
 
     /**
      * DI: Dagger 2
@@ -48,28 +42,14 @@ dependencies {
     implementation("javax.inject:javax.inject:1")
 
     /**
-     * Network
-     */
-    // Provider
-    val retrofit2_version = "2.11.0"
-    implementation("com.squareup.retrofit2:retrofit:$retrofit2_version")
-    // For serialization
-    implementation("com.squareup.retrofit2:converter-gson:$retrofit2_version")
-    // For logging
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
-    implementation("com.squareup.okhttp3:okhttp")
-    implementation("com.squareup.okhttp3:logging-interceptor")
-
-    /**
      * Multithreading: Coroutines
      */
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
 
     /**
      * Tests
      */
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 }

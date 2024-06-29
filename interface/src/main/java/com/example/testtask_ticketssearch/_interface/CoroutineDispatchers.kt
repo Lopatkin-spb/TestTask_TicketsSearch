@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.data
+package com.example.testtask_ticketssearch._interface
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
