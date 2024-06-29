@@ -4,7 +4,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.testtask_ticketssearch.databinding.ItemEventOfferBinding
 import com.example.testtask_ticketssearch.domain.model.EventOfferUi
 
-class EventOfferItem(private val binding: ItemEventOfferBinding) : RecyclerView.ViewHolder(binding.root) {
+internal class EventOfferItem(
+    private val binding: ItemEventOfferBinding,
+) : RecyclerView.ViewHolder(binding.root) {
 
     private var data: EventOfferUi? = null
 

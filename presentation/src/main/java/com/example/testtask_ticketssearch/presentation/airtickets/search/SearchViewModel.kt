@@ -12,7 +12,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class SearchViewModel(
+internal class SearchViewModel(
     private val dispatchers: CoroutineDispatchers,
     private val getTicketsOffersUseCase: GetTicketsOffersUseCase,
 ) : ViewModel() {

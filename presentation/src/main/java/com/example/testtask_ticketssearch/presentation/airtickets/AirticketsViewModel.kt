@@ -13,7 +13,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class AirticketsViewModel(
+internal class AirticketsViewModel(
     private val dispatchers: CoroutineDispatchers,
     private val savePlaceDepartureByLastSearchUseCase: SavePlaceDepartureByLastSearchUseCase,
     private val getPlaceDepartureByLastSearchUseCase: GetPlaceDepartureByLastSearchUseCase,

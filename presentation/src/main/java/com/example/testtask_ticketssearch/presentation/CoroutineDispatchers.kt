@@ -4,10 +4,10 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
 class CoroutineDispatchers(
-    val main: CoroutineDispatcher = Dispatchers.Main,
-    val default: CoroutineDispatcher = Dispatchers.Default,
-    val io: CoroutineDispatcher = Dispatchers.IO,
-    val unconfined: CoroutineDispatcher = Dispatchers.Unconfined,
+    private val main: CoroutineDispatcher = Dispatchers.Main,
+    private val default: CoroutineDispatcher = Dispatchers.Default,
+    private val io: CoroutineDispatcher = Dispatchers.IO,
+    private val unconfined: CoroutineDispatcher = Dispatchers.Unconfined,
 ) {
     fun main(): CoroutineDispatcher {
         return main

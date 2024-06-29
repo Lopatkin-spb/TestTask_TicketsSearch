@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.example.testtask_ticketssearch.data.local.dataSource.SettingsDataSource
 import com.example.testtask_ticketssearch.domain.model.SearchPlace
 
-class SettingsLocalDataSource(
+internal class SettingsLocalDataSource(
     private val context: Context,
 ) : SettingsDataSource {
 

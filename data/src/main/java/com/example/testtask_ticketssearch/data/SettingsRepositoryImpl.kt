@@ -4,7 +4,7 @@ import com.example.testtask_ticketssearch.data.local.dataSource.SettingsDataSour
 import com.example.testtask_ticketssearch.domain.model.SearchPlace
 import com.example.testtask_ticketssearch.domain.repository.SettingsRepository
 
-class SettingsRepositoryImpl(
+internal class SettingsRepositoryImpl(
     private val settingsDataSource: SettingsDataSource,
 ) : SettingsRepository {
 

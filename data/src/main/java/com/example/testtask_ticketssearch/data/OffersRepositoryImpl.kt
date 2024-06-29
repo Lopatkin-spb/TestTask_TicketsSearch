@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class OffersRepositoryImpl(
+internal class OffersRepositoryImpl(
     private val api: OffersApi,
     private val dispatchers: CoroutineDispatchers,
 ) : OffersRepository {

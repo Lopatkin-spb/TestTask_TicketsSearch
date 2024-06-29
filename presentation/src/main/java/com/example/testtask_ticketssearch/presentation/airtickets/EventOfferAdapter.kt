@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.testtask_ticketssearch.databinding.ItemEventOfferBinding
 import com.example.testtask_ticketssearch.domain.model.EventOfferUi
 
-class EventOfferAdapter : RecyclerView.Adapter<EventOfferItem>() {
+internal class EventOfferAdapter : RecyclerView.Adapter<EventOfferItem>() {
 
     private var currentList: List<EventOfferUi> = emptyList()
 

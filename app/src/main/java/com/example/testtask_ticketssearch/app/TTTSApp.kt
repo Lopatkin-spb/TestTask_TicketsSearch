@@ -6,7 +6,7 @@ import com.example.testtask_ticketssearch.di.PresentationComponentProvider
 import com.example.testtask_ticketssearch.di.AppComponent
 import com.example.testtask_ticketssearch.di.DaggerAppComponent
 
-class TTTSApp : Application(), PresentationComponentProvider {
+internal class TTTSApp : Application(), PresentationComponentProvider {
 
     lateinit var appComponent: AppComponent
 
