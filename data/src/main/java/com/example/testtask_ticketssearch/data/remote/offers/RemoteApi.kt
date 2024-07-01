@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.data.remote
+package com.example.testtask_ticketssearch.data.remote.offers
 
 import com.example.testtask_ticketssearch.data.BuildConfig
 import okhttp3.OkHttpClient

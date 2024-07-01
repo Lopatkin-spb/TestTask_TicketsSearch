@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("org.jetbrains.kotlin.plugin.serialization") // For kotlin serializations
 }
 
 android {
@@ -53,8 +54,10 @@ dependencies {
     // Provider
     val retrofit2_version = "2.11.0"
     implementation("com.squareup.retrofit2:retrofit:$retrofit2_version")
-    // For serialization
+    // For retrofit2 serialization (delete after check work kotlin serialization)
     implementation("com.squareup.retrofit2:converter-gson:$retrofit2_version")
+    // For kotlin serializations
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     // For logging
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
     implementation("com.squareup.okhttp3:okhttp")

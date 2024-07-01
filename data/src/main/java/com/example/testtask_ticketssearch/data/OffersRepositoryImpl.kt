@@ -1,49 +1,42 @@
 package com.example.testtask_ticketssearch.data
 
-import com.example.testtask_ticketssearch._interface.CoroutineDispatchers
-import com.example.testtask_ticketssearch.data.remote.OffersApi
+import android.util.Log
+import com.example.testtask_ticketssearch.data.local.dataSource.OffersLocalDataSource
+import com.example.testtask_ticketssearch.data.remote.dataSource.OffersRemoteDataSource
 import com.example.testtask_ticketssearch.domain.model.EventOffer
-import com.example.testtask_ticketssearch.domain.repository.OffersRepository
 import com.example.testtask_ticketssearch.domain.model.TicketOffer
+import com.example.testtask_ticketssearch.domain.repository.OffersRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
 
 internal class OffersRepositoryImpl(
-    private val api: OffersApi,
-    private val dispatchers: CoroutineDispatchers,
+    private val offersRemoteDataSource: OffersRemoteDataSource,
+    private val offersLocalDataSource: OffersLocalDataSource,
 ) : OffersRepository {
 
     override fun getEventsOffers(): Flow<List<EventOffer>> {
-        return flow {
-
-            val list = api.getEventsOffers().eventsOffers
-                .map { dto ->
-                    EventOffer(
-                        id = dto.id,
-                        title = dto.title,
-                        town = dto.town,
-                        price = dto.price.value,
-                    )
+        return offersRemoteDataSource.getEventsOffers()
+            .catch { cause ->
+                if (cause is Exception) {
+                    Log.w("TAG", "OffersRepositoryImpl getEventsOffers: ${cause.message}", cause)
+                    emit(offersLocalDataSource.getEventsOffers().first())
+                } else {
+                    throw cause
                 }
-            emit(list)
-        }.flowOn(dispatchers.io())
+            }
     }
 
     override fun getTicketsOffers(): Flow<List<TicketOffer>> {
-        return flow {
-
-            val list = api.getTicketsOffers().ticketsOffers
-                .map { dto ->
-                    TicketOffer(
-                        id = dto.id,
-                        title = dto.title,
-                        timeFlights = dto.timeRange,
-                        price = dto.price.value,
-                    )
+        return offersRemoteDataSource.getTicketsOffers()
+            .catch { cause ->
+                if (cause is Exception) {
+                    Log.w("TAG", "OffersRepositoryImpl getTicketsOffers: ${cause.message}", cause)
+                    emit(offersLocalDataSource.getTicketsOffers().first())
+                } else {
+                    throw cause
                 }
-            emit(list)
-        }.flowOn(dispatchers.io())
+            }
     }
 
 }
