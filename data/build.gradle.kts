@@ -51,13 +51,13 @@ dependencies {
     /**
      * Network
      */
-    // Provider
     val retrofit2_version = "2.11.0"
+    // Provider
     implementation("com.squareup.retrofit2:retrofit:$retrofit2_version")
-    // For retrofit2 serialization (delete after check work kotlin serialization)
-    implementation("com.squareup.retrofit2:converter-gson:$retrofit2_version")
     // For kotlin serializations
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    // Converter between provider and kotlin serialization
+    implementation("com.squareup.retrofit2:converter-kotlinx-serialization:$retrofit2_version")
     // For logging
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
     implementation("com.squareup.okhttp3:okhttp")

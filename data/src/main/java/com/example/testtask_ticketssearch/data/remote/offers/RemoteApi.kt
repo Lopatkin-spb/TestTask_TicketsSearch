@@ -1,10 +1,13 @@
 package com.example.testtask_ticketssearch.data.remote.offers
 
 import com.example.testtask_ticketssearch.data.BuildConfig
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import retrofit2.http.GET
 
 
@@ -32,7 +35,7 @@ private fun getRetrofit(): Retrofit {
     return Retrofit.Builder()
         .baseUrl(URL)
         .client(getModifiedOkHttpClient())
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(getModifiedJsonConverterFactory())
         .build()
 }
 
@@ -52,6 +55,11 @@ private fun getLoggingInterceptor(): HttpLoggingInterceptor {
     }
 
     return interceptor
+}
+
+private fun getModifiedJsonConverterFactory(): Converter.Factory {
+    val jsonModified = Json { ignoreUnknownKeys = true }
+    return jsonModified.asConverterFactory("application/json; charset=UTF8".toMediaType())
 }
 
 object NetworkProvider {
