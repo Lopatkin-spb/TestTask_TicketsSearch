@@ -3,8 +3,7 @@ package com.example.testtask_ticketssearch.data.local.offers
 import android.content.Context
 import com.example.testtask_ticketssearch._interface.CoroutineDispatchers
 import com.example.testtask_ticketssearch.data.local.dataSource.OffersLocalDataSource
-import com.example.testtask_ticketssearch.domain.model.EventOffer
-import com.example.testtask_ticketssearch.domain.model.TicketOffer
+import com.example.testtask_ticketssearch.domain.model.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -26,7 +25,7 @@ internal class OffersStubDataSource(
             emit(response)
         }
             .map { response -> response.eventsOffers }
-            .map { dtos ->
+            .map { dtos -> //TODO: correct names
                 dtos.map { dto ->
                     EventOffer(
                         id = dto.id,
@@ -47,13 +46,52 @@ internal class OffersStubDataSource(
             emit(response)
         }
             .map { response -> response.ticketsOffers }
-            .map { dtos ->
+            .map { dtos -> //TODO: correct names
                 dtos.map { dto ->
                     TicketOffer(
                         id = dto.id,
                         title = dto.title,
                         timeFlights = dto.timeRange,
                         price = dto.price.value,
+                    )
+                }
+            }
+            .flowOn(dispatchers.io())
+    }
+
+    @OptIn(ExperimentalSerializationApi::class)
+    override fun getTickets(): Flow<List<Ticket>> {
+        return flow {
+            val stream = context.assets.open("c0464573-5a13-45c9-89f8-717436748b69.json")
+            val jsonModified = Json { ignoreUnknownKeys = true }
+            val response = jsonModified.decodeFromStream<ResponseDbo>(stream)
+            emit(response)
+        }
+            .map { response -> response.tickets }
+            .map { dbos ->
+                dbos.map { dbo ->
+
+                    val departure = dbo.departure?.let {
+                        Departure(
+                            town = it.town,
+                            date = it.date,
+                            airport = it.airport,
+                        )
+                    }
+                    val arrival = dbo.arrival?.let {
+                        Arrival(
+                            town = it.town,
+                            date = it.date,
+                            airport = it.airport,
+                        )
+                    }
+                    Ticket(
+                        id = dbo.id,
+                        badge = dbo.badge,
+                        price = dbo.price?.value,
+                        departure = departure,
+                        arrival = arrival,
+                        hasTransfer = dbo.hasTransfer,
                     )
                 }
             }

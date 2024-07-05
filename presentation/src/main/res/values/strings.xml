@@ -7,6 +7,7 @@
     <string name="title_subscriptions">Подписки</string>
     <string name="title_profile">Профиль</string>
     <string name="title_search">Поиск дешевых авиабилетов</string>
+    <string name="title_ticket_list">Просмотр билетов</string>
 
     <string name="action_airtickets">Авиабилеты</string>
     <string name="action_hotels">Отели</string>
@@ -17,4 +18,11 @@
     <string name="action_place_arrival">Куда - Турция</string>
 
     <string name="header_offers">Музыкально отлететь</string>
+
+    <string name="text_stub">--</string>
+    <string name="text_ticket_price">%s ₽</string>
+    <string name="text_travel_time">0.00ч в пути</string>
+    <string name="text_travel_time_without_transfer">0.00ч в пути / Без пересадок</string>
+    <string name="text_bottom_stub">Фильтр          График цен</string>
+
 </resources>

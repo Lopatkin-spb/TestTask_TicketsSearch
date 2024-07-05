@@ -51,4 +51,11 @@ class DomainModule {
         return GetEventsOffersUseCase(repository = repository)
     }
 
+    @Provides
+    fun provideGetTicketListBySearchPlacesUseCase(
+        repository: OffersRepository
+    ): GetTicketListBySearchPlacesUseCase {
+        return GetTicketListBySearchPlacesUseCase(repository = repository)
+    }
+
 }

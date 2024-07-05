@@ -21,6 +21,7 @@ class PresentationModule {
         getPlaceArrivalByLastSearchUseCase: GetPlaceArrivalByLastSearchUseCase,
         getTicketsOffersUseCase: GetTicketsOffersUseCase,
         getEventsOffersUseCase: GetEventsOffersUseCase,
+        getTicketListBySearchPlacesUseCase: GetTicketListBySearchPlacesUseCase,
     ): ViewModelFactory {
         return ViewModelFactory(
             dispatchers = dispatchers,
@@ -30,6 +31,7 @@ class PresentationModule {
             getPlaceArrivalByLastSearchUseCase = getPlaceArrivalByLastSearchUseCase,
             getTicketsOffersUseCase = getTicketsOffersUseCase,
             getEventsOffersUseCase = getEventsOffersUseCase,
+            getTicketListBySearchPlacesUseCase = getTicketListBySearchPlacesUseCase,
         )
     }
 

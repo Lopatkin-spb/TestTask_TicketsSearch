@@ -6,6 +6,7 @@ import com.example.testtask_ticketssearch._interface.CoroutineDispatchers
 import com.example.testtask_ticketssearch.domain.usecase.*
 import com.example.testtask_ticketssearch.presentation.airtickets.AirticketsViewModel
 import com.example.testtask_ticketssearch.presentation.airtickets.search.SearchViewModel
+import com.example.testtask_ticketssearch.presentation.airtickets.search.ticketList.TicketListViewModel
 import com.example.testtask_ticketssearch.presentation.hotels.HotelsViewModel
 import com.example.testtask_ticketssearch.presentation.profile.ProfileViewModel
 import com.example.testtask_ticketssearch.presentation.shorter.ShorterViewModel
@@ -20,6 +21,7 @@ class ViewModelFactory(
     private val getPlaceArrivalByLastSearchUseCase: GetPlaceArrivalByLastSearchUseCase,
     private val getTicketsOffersUseCase: GetTicketsOffersUseCase,
     private val getEventsOffersUseCase: GetEventsOffersUseCase,
+    private val getTicketListBySearchPlacesUseCase: GetTicketListBySearchPlacesUseCase,
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -36,6 +38,11 @@ class ViewModelFactory(
             return SearchViewModel(
                 dispatchers = dispatchers,
                 getTicketsOffersUseCase = getTicketsOffersUseCase,
+            ) as T
+        } else if (modelClass.isAssignableFrom(TicketListViewModel::class.java)) {
+            return TicketListViewModel(
+                dispatchers = dispatchers,
+                getTicketListBySearchPlacesUseCase = getTicketListBySearchPlacesUseCase,
             ) as T
         } else if (modelClass.isAssignableFrom(HotelsViewModel::class.java)) {
             return HotelsViewModel() as T

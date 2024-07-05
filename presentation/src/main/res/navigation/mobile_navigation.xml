@@ -9,7 +9,10 @@
             android:id="@+id/navigation_airtickets"
             android:name="com.example.testtask_ticketssearch.presentation.airtickets.AirticketsFragment"
             android:label="@string/title_airtickets"
-            tools:layout="@layout/fragment_airtickets"/>
+            tools:layout="@layout/fragment_airtickets">
+        <action android:id="@+id/action_navigate_from_airtickets_to_ticket_list"
+                app:destination="@id/navigation_ticket_list"/>
+    </fragment>
 
     <fragment
             android:id="@+id/navigation_hotels"
@@ -34,5 +37,11 @@
             android:name="com.example.testtask_ticketssearch.presentation.profile.ProfileFragment"
             android:label="@string/title_profile"
             tools:layout="@layout/fragment_profile"/>
+
+    <fragment
+            android:id="@+id/navigation_ticket_list"
+            android:name="com.example.testtask_ticketssearch.presentation.airtickets.search.ticketList.TicketListFragment"
+            android:label="@string/title_ticket_list"
+            tools:layout="@layout/fragment_ticket_list"/>
 
 </navigation>

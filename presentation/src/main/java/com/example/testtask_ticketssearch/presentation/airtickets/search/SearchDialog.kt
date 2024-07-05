@@ -7,11 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.testtask_ticketssearch.R
 import com.example.testtask_ticketssearch.databinding.DialogSearchBinding
 import com.example.testtask_ticketssearch.domain.model.TicketOfferUi
 import com.example.testtask_ticketssearch.presentation.AppActivity
 import com.example.testtask_ticketssearch.presentation.ViewModelFactory
+import com.example.testtask_ticketssearch.presentation.airtickets.search.ticketList.TicketListFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
@@ -141,7 +145,12 @@ class SearchDialog : BottomSheetDialogFragment() {
 
     private fun setBottomListeners() {
         binding.actionNavigateToShowAllTickets.setOnClickListener { view ->
-            showMessage(view, "TODO: navigate to next screen")
+            dismiss()
+            val places = "${binding.textPlaceDeparture.text}-${binding.actionPlaceArrival.text}"
+            findNavController().navigate(
+                R.id.action_navigate_from_airtickets_to_ticket_list,
+                bundleOf(Pair(TicketListFragment.SEARCH_PLACES_KEY, places))
+            )
         }
         binding.actionSubscriptionToPrice.setOnClickListener { view ->
             showMessage(view, "TODO: action with switcher")
