@@ -8,7 +8,16 @@ import com.example.testtask_ticketssearch.domain.model.TicketUi
 
 internal class TicketItem(
     private val binding: ItemTicketBinding,
+    private val onItemClickTest: (position: Int) -> Unit,
+    private val onPriceClickTest: (position: Int) -> Unit,
+    private val onBadgeClickTest: (position: Int) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
+
+    init {
+        itemView.setOnClickListener { onItemClickTest(adapterPosition) }
+        binding.textPrice.setOnClickListener { onPriceClickTest(adapterPosition) }
+        binding.textBadge.setOnClickListener { onBadgeClickTest(adapterPosition) }
+    }
 
     private var data: TicketUi? = null
 

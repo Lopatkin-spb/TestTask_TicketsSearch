@@ -10,8 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testtask_ticketssearch.databinding.FragmentTicketListBinding
+import com.example.testtask_ticketssearch.domain.model.TicketUi
 import com.example.testtask_ticketssearch.presentation.AppActivity
 import com.example.testtask_ticketssearch.presentation.ViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 class TicketListFragment : Fragment() {
@@ -25,7 +27,13 @@ class TicketListFragment : Fragment() {
     private lateinit var viewModel: TicketListViewModel
     private var _binding: FragmentTicketListBinding? = null
     private val binding get() = _binding!!
-    private val adapter by lazy { TicketAdapter() }
+    private val adapter by lazy {
+        TicketAdapter(
+            onPriceClickTest = { model -> onActionTicketPrice(model) },
+            onItemClickTest = { model -> onActionTicketItem(model) },
+            onBadgeClickTest = { model -> onActionTicketBadge(model) },
+        )
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -77,6 +85,30 @@ class TicketListFragment : Fragment() {
         viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
             adapter.setList(uiState.tickets)
         }
+    }
+
+    private fun onActionTicketItem(model: TicketUi) {
+        view?.let { fragment ->
+            showMessage(fragment, "onActionTicketItem ${model.id}")
+        }
+    }
+
+    private fun onActionTicketPrice(model: TicketUi) {
+        view?.let { fragment ->
+            showMessage(fragment, "onActionTicketPrice ${model.price}")
+        }
+    }
+
+    private fun onActionTicketBadge(model: TicketUi) {
+        view?.let { fragment ->
+            showMessage(fragment, "onActionTicketBadge ${model.badgeText}")
+        }
+    }
+
+    private fun showMessage(view: View, text: String) {
+        Snackbar //TODO: correct color themes
+            .make(view, text, Snackbar.LENGTH_SHORT)
+            .show()
     }
 
 }
