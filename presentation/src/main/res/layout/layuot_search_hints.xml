@@ -5,8 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/holder_hints"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/transparent">
+        android:layout_height="wrap_content">
 
     <ImageButton
             android:id="@+id/action_hint_route"
@@ -26,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center_horizontal"
-            android:text="Сложный маршрут"
+            android:text="@string/text_difficult_route"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@id/action_hint_route"
             app:layout_constraintTop_toBottomOf="@id/action_hint_route"
@@ -50,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center_horizontal"
-            android:text="Куда угодно"
+            android:text="@string/text_anywhere"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@id/action_hint_where"
             app:layout_constraintTop_toBottomOf="@id/action_hint_where"
@@ -74,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center_horizontal"
-            android:text="Выходные"
+            android:text="@string/text_weekend"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@id/action_hint_weekend"
             app:layout_constraintTop_toBottomOf="@id/action_hint_weekend"
@@ -98,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center_horizontal"
-            android:text="Горячие билеты"
+            android:text="@string/text_hot_tickets"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@id/action_hint_hot_tickets"
             app:layout_constraintTop_toBottomOf="@id/action_hint_hot_tickets"

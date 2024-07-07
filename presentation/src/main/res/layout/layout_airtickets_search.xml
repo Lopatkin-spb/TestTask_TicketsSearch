@@ -47,7 +47,7 @@
     <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/action_place_departure"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="23dp"
             android:layout_marginTop="16dp"
             android:layout_marginStart="49dp"
             android:hint="@string/action_place_departure"

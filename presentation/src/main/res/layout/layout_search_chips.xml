@@ -5,8 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/holder_chips"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/transparent">
+        android:layout_height="wrap_content">
 
     <TextView
             android:id="@+id/action_back"
@@ -16,13 +15,13 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:background="@drawable/bg_rectangle_radius_50dp"
             android:backgroundTint="@color/gray_3"
-            android:drawableStart="@drawable/ic_plus_16dp"
             android:gravity="center"
-            android:text="обратно"
+            android:text="@string/action_back"
             android:textSize="14sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:drawableStartCompat="@drawable/ic_plus_16dp"/>
 
     <TextView
             android:id="@+id/action_departure"
@@ -33,7 +32,7 @@
             android:background="@drawable/bg_rectangle_radius_50dp"
             android:backgroundTint="@color/gray_3"
             android:gravity="center"
-            android:text="24 фев, сб"
+            android:text="@string/action_departure"
             android:textSize="14sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/action_back"
@@ -48,13 +47,13 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:background="@drawable/bg_rectangle_radius_50dp"
             android:backgroundTint="@color/gray_3"
-            android:drawableStart="@drawable/ic_person_16dp"
             android:gravity="center"
-            android:text="1,эконом"
+            android:text="@string/action_passenger_class"
             android:textSize="14sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/action_departure"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:drawableStartCompat="@drawable/ic_person_16dp"/>
 
     <TextView
             android:id="@+id/action_filter"
@@ -65,12 +64,12 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:background="@drawable/bg_rectangle_radius_50dp"
             android:backgroundTint="@color/gray_3"
-            android:drawableStart="@drawable/ic_filter_16dp"
             android:gravity="center"
-            android:text="фильтр"
+            android:text="@string/action_filter"
             android:textSize="14sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/action_passenger_class"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:drawableStartCompat="@drawable/ic_filter_16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

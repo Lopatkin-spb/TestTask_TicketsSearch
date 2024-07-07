@@ -9,6 +9,9 @@
     <string name="title_search">Поиск дешевых авиабилетов</string>
     <string name="title_ticket_list">Просмотр билетов</string>
 
+    <string name="header_offers">Музыкально отлететь</string>
+    <string name="header_search_tickets_offers">Прямые рельсы</string>
+
     <string name="action_airtickets">Авиабилеты</string>
     <string name="action_hotels">Отели</string>
     <string name="action_shorter">Короче</string>
@@ -16,13 +19,25 @@
     <string name="action_profile">Профиль</string>
     <string name="action_place_departure">Откуда - Москва</string>
     <string name="action_place_arrival">Куда - Турция</string>
-
-    <string name="header_offers">Музыкально отлететь</string>
+    <string name="action_navigate_to_show_all_tickets">Посмотреть все билеты</string>
+    <string name="action_subscription_to_price">Подписка на цену</string>
+    <string name="action_back">обратно</string>
+    <string name="action_departure">24 фев, сб</string>
+    <string name="action_passenger_class">1,эконом</string>
+    <string name="action_filter">фильтр</string>
 
     <string name="text_stub">--</string>
     <string name="text_ticket_price">%s ₽</string>
     <string name="text_travel_time">0.00ч в пути</string>
     <string name="text_travel_time_without_transfer">0.00ч в пути / Без пересадок</string>
     <string name="text_bottom_stub">Фильтр          График цен</string>
+    <string name="text_town_1">Стамбул</string>
+    <string name="text_popular_destination">Популярное направление</string>
+    <string name="text_town_3">Пхукет</string>
+    <string name="text_town_2">Сочи</string>
+    <string name="text_difficult_route">Сложный маршрут</string>
+    <string name="text_anywhere">Куда угодно</string>
+    <string name="text_weekend">Выходные</string>
+    <string name="text_hot_tickets">Горячие билеты</string>
 
 </resources>
