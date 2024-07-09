@@ -10,6 +10,7 @@ import android.widget.FrameLayout
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.testtask_ticketssearch.R
 import com.example.testtask_ticketssearch.databinding.DialogSearchBinding
 import com.example.testtask_ticketssearch.domain.model.TicketOfferUi
@@ -59,7 +60,7 @@ class SearchDialog : BottomSheetDialogFragment() {
         _binding = DialogSearchBinding.inflate(inflater, container, false)
         setSearchPlaceListeners()
         setHintListeners()
-        setRecommendationPlacesListeners()
+        setupRecommendationPlaces()
         setChipsListeners()
         setBottomListeners()
         binding.textPlaceDeparture.text = arguments?.getString(EXTRA_PLACE_DEPARTURE)
@@ -121,7 +122,17 @@ class SearchDialog : BottomSheetDialogFragment() {
         binding.includeHints.actionHintHotTickets.setOnClickListener { view -> showMessageWithAction(view, "Stub") }
     }
 
-    private fun setRecommendationPlacesListeners() {
+    private fun setupRecommendationPlaces() {
+        Glide.with(this)
+            .load("file:///android_asset/town_1.png")
+            .into(binding.includeRecommendationPlaces.image1)
+        Glide.with(this)
+            .load("file:///android_asset/town_2.png")
+            .into(binding.includeRecommendationPlaces.image2)
+        Glide.with(this)
+            .load("file:///android_asset/town_3.png")
+            .into(binding.includeRecommendationPlaces.image3)
+
         binding.includeRecommendationPlaces.actionStub1.setOnClickListener {
             fillPlaceArrival(binding.includeRecommendationPlaces.textTown1.text)
             viewModel.serchFieldCompleted()

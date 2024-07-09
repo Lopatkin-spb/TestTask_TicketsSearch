@@ -26,12 +26,19 @@ internal class OffersStubDataSource(
         }
             .map { response -> response.eventsOffers }
             .map { dtos -> //TODO: correct names
+                var counter = 0
+
                 dtos.map { dto ->
+                    counter++
+                    if (counter > 3) counter = 0
+                    val imageStub = "$counter.png"
+                    val urlStub = "file:///android_asset/$imageStub"
                     EventOffer(
                         id = dto.id,
                         title = dto.title,
                         town = dto.town,
                         price = dto.price.value,
+                        url = urlStub,
                     )
                 }
             }

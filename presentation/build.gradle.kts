@@ -75,6 +75,11 @@ dependencies {
     implementation(libs.navigation.ui.ktx)
 
     /**
+     * Images
+     */
+    implementation(libs.glide)
+
+    /**
      * Tests
      */
     testImplementation(libs.junit)

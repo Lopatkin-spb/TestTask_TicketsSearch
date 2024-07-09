@@ -6,12 +6,15 @@ data class EventOffer(
     val title: String,
     val town: String,
     val price: Long,
+    val url: String? = null,
 )
 
 data class EventOfferUi(
+    val id: Long,
     val title: String,
     val town: String,
     val price: String,
+    val url: String?,
 )
 
 data class TicketOffer(

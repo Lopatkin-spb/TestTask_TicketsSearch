@@ -23,9 +23,11 @@ class GetEventsOffersUseCase(private val repository: OffersRepository) {
                     }
                     val newPrice = priceWithDotsRevers.reversed().substringBeforeLast(" ")
                     EventOfferUi(
+                        id = offer.id,
                         title = offer.title,
                         town = offer.town,
                         price = newPrice,
+                        url = offer.url
                     )
                 }
             }

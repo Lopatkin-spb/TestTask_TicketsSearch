@@ -14,7 +14,7 @@ androidx_junit = "1.1.5"
 espresso_core = "3.5.1"
 navigation = "2.7.7"
 livedata = "2.7.0"
-
+glide = "4.16.0"
 
 
 [libraries]
@@ -48,6 +48,9 @@ lifecycle_compiler = { module = "androidx.lifecycle:lifecycle-compiler", version
 
 navigation_fragment_ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
 navigation_ui_ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+
+
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 
 
 junit = { module = "junit:junit", version.ref = "junit4" }

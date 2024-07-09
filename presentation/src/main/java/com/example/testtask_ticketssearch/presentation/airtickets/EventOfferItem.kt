@@ -1,6 +1,7 @@
 package com.example.testtask_ticketssearch.presentation.airtickets
 
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.testtask_ticketssearch.databinding.ItemEventOfferBinding
 import com.example.testtask_ticketssearch.domain.model.EventOfferUi
 
@@ -21,6 +22,12 @@ internal class EventOfferItem(
 
         val textWithPrice = "от ${data?.price} ₽"
         binding.textPrice.text = textWithPrice
+
+        data?.url?.let { url ->
+            Glide.with(itemView)
+                .load(url)
+                .into(binding.imagePhoto)
+        }
     }
 
 }
