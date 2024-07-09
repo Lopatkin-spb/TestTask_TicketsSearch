@@ -43,43 +43,41 @@ dependencies {
     /**
      * Core
      */
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.12.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(libs.ktx.core)
+    implementation(libs.appcompat)
+    implementation(libs.android.material)
+    implementation(libs.constraintlayout)
 
     /**
      * Android Jetpack: ViewModel & Lifecycle
      */
-    val lifecycle_version = "2.7.0"
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
-    kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    kapt(libs.lifecycle.compiler)
 
     /**
      * DI: Dagger 2
      */
-    val dagger_version = "2.51.1"
-    implementation("com.google.dagger:dagger:$dagger_version")
-    kapt("com.google.dagger:dagger-compiler:$dagger_version")
-    implementation("javax.inject:javax.inject:1")
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
+    implementation(libs.javax.inject)
 
     /**
      * Multithreading: Coroutines
      */
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
+    implementation(libs.kotlinx.coroutines.android)
+    testImplementation(libs.kotlinx.coroutines.test)
 
     /**
      * Navigation
      */
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
 
     /**
      * Tests
      */
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

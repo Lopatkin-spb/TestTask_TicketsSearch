@@ -43,36 +43,34 @@ dependencies {
     /**
      * DI: Dagger 2
      */
-    val dagger_version = "2.51.1"
-    implementation("com.google.dagger:dagger:$dagger_version")
-    kapt("com.google.dagger:dagger-compiler:$dagger_version")
-    implementation("javax.inject:javax.inject:1")
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
+    implementation(libs.javax.inject)
 
     /**
      * Network
      */
-    val retrofit2_version = "2.11.0"
     // Provider
-    implementation("com.squareup.retrofit2:retrofit:$retrofit2_version")
+    implementation(libs.retrofit)
     // For kotlin serializations
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation(libs.kotlinx.serialization.json)
     // Converter between provider and kotlin serialization
-    implementation("com.squareup.retrofit2:converter-kotlinx-serialization:$retrofit2_version")
+    implementation(libs.retrofit.converter.kotlinx.serialization)
     // For logging
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
-    implementation("com.squareup.okhttp3:okhttp")
-    implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation(platform(libs.okhttp3.bom))
+    implementation(libs.okhttp3.okhttp)
+    implementation(libs.okhttp3.logging.interceptor)
 
     /**
      * Multithreading: Coroutines
      */
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
+    implementation(libs.kotlinx.coroutines.android)
+    testImplementation(libs.kotlinx.coroutines.test)
 
     /**
      * Tests
      */
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }
