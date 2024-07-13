@@ -31,9 +31,14 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
+        compose = true
+        viewBinding = true // Disable after migrate to compose
         dataBinding = false
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.0" // Delete (maybe) after migrate to kotlin 2.0
+    }
+
 }
 
 dependencies {
@@ -43,10 +48,30 @@ dependencies {
     /**
      * Core
      */
+    // Check needing after migrate to compose (appcompat, material, constraintlayout)
     implementation(libs.ktx.core)
     implementation(libs.appcompat)
     implementation(libs.android.material)
     implementation(libs.constraintlayout)
+
+    /**
+     * Ui: Compose
+     */
+    val composeBom = platform("androidx.compose:compose-bom:2024.06.00")
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.material:material")
+    // Preview support
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    // Ui tests
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    // Integration
+    implementation("androidx.activity:activity-compose:1.9.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+    implementation("androidx.compose.runtime:runtime-livedata")
 
     /**
      * Android Jetpack: ViewModel & Lifecycle
