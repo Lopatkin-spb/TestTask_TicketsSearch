@@ -72,6 +72,7 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.9.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
     implementation("androidx.compose.runtime:runtime-livedata")
+    implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
 
     /**
      * Android Jetpack: ViewModel & Lifecycle
