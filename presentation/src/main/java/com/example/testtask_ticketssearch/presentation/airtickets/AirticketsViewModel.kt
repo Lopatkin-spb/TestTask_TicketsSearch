@@ -34,6 +34,19 @@ internal class AirticketsViewModel(
         savePlaceDepartureByLastSearchUseCase.execute(SearchPlace(text))
     }
 
+    fun savePlaceDeparture() {
+        _uiState.value?.placeDeparture
+            ?.let { searchPlace ->
+                savePlaceDepartureByLastSearchUseCase.execute(searchPlace)
+            }
+            ?: savePlaceDepartureByLastSearchUseCase.execute(SearchPlace(""))
+    }
+
+    fun setNewPlaceDeparture(text: String) {
+        val newUiState = _uiState.value?.copy(placeDeparture = SearchPlace(text))
+        _uiState.value = newUiState
+    }
+
     fun getPlaceDeparture() {
         val place = getPlaceDepartureByLastSearchUseCase.execute()
         val newUiState = _uiState.value?.copy(placeDeparture = place)
