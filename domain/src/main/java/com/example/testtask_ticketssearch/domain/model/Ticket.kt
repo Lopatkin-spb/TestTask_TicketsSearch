@@ -32,4 +32,5 @@ data class TicketUi(
     val arrivalTime: String,
     val arrivalAirport: String,
     val hasTransfer: Boolean,
+    val transfer: String = "",
 )
