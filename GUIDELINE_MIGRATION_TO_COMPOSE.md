@@ -6,7 +6,8 @@ Plan:
 2) migrate activity
 3) migrate navigation
 4) delete xml layouts
-5) cleaning code
+5) clean code (delete redundant, rename, by to equal, etc)
+6) clean gradle
 
 
 maybe:

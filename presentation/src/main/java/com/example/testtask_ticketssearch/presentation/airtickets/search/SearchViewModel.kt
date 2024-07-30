@@ -25,12 +25,16 @@ internal class SearchViewModel(
     val uiState: LiveData<SearchUiState> = _uiState
     private var jobTicketOffers: Job? = null
 
-    fun serchFieldCompleted() {
-        val newUiState = _uiState.value?.copy(isArrivalCompleted = true)
-        _uiState.value = newUiState
+    private fun searchFieldCompleted() {
+        _uiState.value?.let { state ->
+            if (state.searchArrival.isNotEmpty()) {
+                val newUiState = _uiState.value?.copy(isArrivalCompleted = true)
+                _uiState.value = newUiState
+            }
+        }
     }
 
-    fun serchFieldEmpty() {
+    private fun searchFieldEmpty() {
         val newUiState = _uiState.value?.copy(isArrivalCompleted = false)
         _uiState.value = newUiState
     }
@@ -59,6 +63,71 @@ internal class SearchViewModel(
                 throw cause
             }
         }
+    }
+
+    fun handle(new: SearchUserEvent) {
+        when (new) {
+            is SearchUserEvent.OnSearchDepartureChange -> setSearchDeparture(new.text)
+            is SearchUserEvent.OnSearchArrivalChange -> setSearchArrival(new.text, new.done)
+            is SearchUserEvent.OnSearchPlaceChange -> swapSearchPlaces()
+            is SearchUserEvent.OnSearchDone -> searchFieldCompleted()
+            is SearchUserEvent.CreateSnackbar -> createMessage(new.text, new.action)
+            is SearchUserEvent.MessageShowed -> resetMessage()
+            is SearchUserEvent.NavigateBack -> navigateBack()
+            is SearchUserEvent.NavigationFinished -> resetNavigation()
+            is SearchUserEvent.NavigateTo -> navigateTo()
+        }
+    }
+
+    private fun setSearchArrival(new: String, done: Boolean) {
+        val newUiState = _uiState.value?.copy(searchArrival = new)
+        _uiState.value = newUiState
+        if (done) {
+            searchFieldCompleted()
+        } else {
+            searchFieldEmpty()
+        }
+    }
+
+    private fun setSearchDeparture(text: String?) {
+        if (!text.isNullOrEmpty()) {
+            val newUiState = _uiState.value?.copy(searchDeparture = text)
+            _uiState.value = newUiState
+        }
+    }
+
+    private fun swapSearchPlaces() {
+        val departure = _uiState.value?.searchDeparture
+            ?: ""
+        val arrival = _uiState.value?.searchArrival
+            ?: ""
+        val newUiState = _uiState.value?.copy(searchDeparture = arrival, searchArrival = departure)
+        _uiState.value = newUiState
+    }
+
+    private fun createMessage(text: String, action: String?) {
+        val newUiState = _uiState.value?.copy(message = text, messageAction = action)
+        _uiState.value = newUiState
+    }
+
+    private fun resetMessage() {
+        val newUiState = _uiState.value?.copy(message = null, messageAction = null)
+        _uiState.value = newUiState
+    }
+
+    private fun navigateBack() {
+        val newUiState = _uiState.value?.copy(navigateBack = true)
+        _uiState.value = newUiState
+    }
+
+    private fun navigateTo() {
+        val newUiState = _uiState.value?.copy(navigateTo = true)
+        _uiState.value = newUiState
+    }
+
+    private fun resetNavigation() {
+        val newUiState = _uiState.value?.copy(navigateBack = false, navigateTo = false)
+        _uiState.value = newUiState
     }
 
 }
