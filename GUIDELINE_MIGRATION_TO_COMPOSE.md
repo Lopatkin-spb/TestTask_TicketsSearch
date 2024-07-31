@@ -2,7 +2,7 @@
 
 Plan:
 
-1) migrate fragments
+1) migrate fragments - done
 2) migrate activity
 3) migrate navigation
 4) delete xml layouts
