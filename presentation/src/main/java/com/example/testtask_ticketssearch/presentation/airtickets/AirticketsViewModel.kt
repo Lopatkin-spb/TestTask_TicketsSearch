@@ -28,6 +28,8 @@ internal class AirticketsViewModel(
 
     private val _uiState = MutableLiveData(AirticketsUiState())
     val uiState: LiveData<AirticketsUiState> = _uiState
+    private val _uiNavigation = MutableLiveData(AirticketsUiNavigation())
+    val uiNavigation: LiveData<AirticketsUiNavigation> = _uiNavigation
     private var jobEventsOffers: Job? = null
 
     fun savePlaceDeparture(text: String) {
@@ -88,6 +90,34 @@ internal class AirticketsViewModel(
                 throw cause
             }
         }
+    }
+
+    fun handle(new: AirticketsUserEvent) {
+        when (new) {
+            is AirticketsUserEvent.OnScreenOpen -> {
+                loadEventsOffers()
+                getPlaceDeparture()
+                getPlaceArrival()
+            }
+
+            is AirticketsUserEvent.OnSearchDepartureChange -> setNewPlaceDeparture(new.text)
+            is AirticketsUserEvent.OnNavigationStart -> createNavigation(new.point)
+            is AirticketsUserEvent.OnNavigationFinish -> resetNavigation()
+        }
+    }
+
+    private fun createNavigation(point: Destination) {
+        if (point == Destination.SEARCH_DIALOG) {
+            val text = _uiState.value?.placeDeparture?.name
+                ?: ""
+            val newUiNavigation = _uiNavigation.value?.copy(toSearchDialog = text)
+            _uiNavigation.value = newUiNavigation
+        }
+    }
+
+    private fun resetNavigation() {
+        val newUiNavigation = _uiNavigation.value?.copy(toSearchDialog = null)
+        _uiNavigation.value = newUiNavigation
     }
 
 }
