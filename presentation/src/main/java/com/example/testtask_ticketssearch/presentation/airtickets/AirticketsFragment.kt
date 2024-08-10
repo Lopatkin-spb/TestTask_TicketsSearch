@@ -1,10 +1,7 @@
 package com.example.testtask_ticketssearch.presentation.airtickets
 
 import android.content.Context
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -16,8 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -26,70 +22,104 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.testtask_ticketssearch.R
 import com.example.testtask_ticketssearch.domain.model.EventOfferUi
 import com.example.testtask_ticketssearch.presentation.AppActivity
 import com.example.testtask_ticketssearch.presentation.ViewModelFactory
-import com.example.testtask_ticketssearch.presentation.airtickets.search.SearchDialog
 import javax.inject.Inject
 
-class AirticketsFragment : Fragment() {
+//class AirticketsFragment : Fragment() {
+//
+//    @Inject
+//    lateinit var viewModelFactory: ViewModelFactory
+//    private lateinit var viewModel: AirticketsViewModel
+//
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        (activity as AppActivity).presentationComponent.inject(this)
+//    }
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View {
+//        viewModel = ViewModelProvider(this, viewModelFactory).get(AirticketsViewModel::class.java)
+//        viewModel.handle(AirticketsUserEvent.OnScreenOpen)
+//
+//        return ComposeView(requireContext()).apply {
+//            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+//            setContent {
+//                val uiState by viewModel.uiState.observeAsState()
+//
+//                uiState?.let { state ->
+//                    Screen(
+//                        uiState = state,
+//                        onEvent = { event -> viewModel.handle(event) },
+//                    )
+//                }
+//            }
+//        }
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        navigationListener()
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        viewModel.savePlaceDeparture()
+//    }
+//
+//    private fun navigationListener() {
+//        viewModel.uiNavigation.observe(viewLifecycleOwner) { navigation ->
+//            navigation.toSearchDialog?.let { args ->
+//                SearchDialog
+//                    .newInstance(args)
+//                    .show(requireActivity().supportFragmentManager, SearchDialog.TAG)
+//                viewModel.handle(AirticketsUserEvent.OnNavigationFinish)
+//            }
+//        }
+//    }
+//
+//}
 
+
+@Stable
+class AirticketsDaggerContainer {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var viewModel: AirticketsViewModel
+}
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (activity as AppActivity).presentationComponent.inject(this)
+@Composable
+internal fun AirticketsScreen(
+    context: Context = LocalContext.current,
+    container: AirticketsDaggerContainer = remember {
+        AirticketsDaggerContainer().also { container ->
+            (context as AppActivity).presentationComponent.inject(container)
+        }
+    },
+    viewModel: AirticketsViewModel = viewModel(factory = container.viewModelFactory),
+    navigateToSearchScreen: (String) -> Unit,
+) {
+    viewModel.handle(AirticketsUserEvent.OnScreenOpen)
+    val uiState by viewModel.uiState.observeAsState()
+    val uiNavigation by viewModel.uiNavigation.observeAsState()
+
+    uiState?.let { state ->
+        Screen(
+            uiState = state,
+            onEvent = { event -> viewModel.handle(event) },
+        )
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        viewModel = ViewModelProvider(this, viewModelFactory).get(AirticketsViewModel::class.java)
-        viewModel.handle(AirticketsUserEvent.OnScreenOpen)
-
-        return ComposeView(requireContext()).apply {
-            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent {
-                val uiState by viewModel.uiState.observeAsState()
-
-                uiState?.let { state ->
-                    Screen(
-                        uiState = state,
-                        onEvent = { event -> viewModel.handle(event) },
-                    )
-                }
-            }
+    uiNavigation?.let { navigation ->
+        navigation.toSearchDialog?.let { args ->
+            navigateToSearchScreen(args)
+            viewModel.handle(AirticketsUserEvent.OnNavigationFinish)
         }
     }
-
-    override fun onResume() {
-        super.onResume()
-        navigationListener()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        viewModel.savePlaceDeparture()
-    }
-
-    private fun navigationListener() {
-        viewModel.uiNavigation.observe(viewLifecycleOwner) { navigation ->
-            navigation.toSearchDialog?.let { args ->
-                SearchDialog
-                    .newInstance(args)
-                    .show(requireActivity().supportFragmentManager, SearchDialog.TAG)
-                viewModel.handle(AirticketsUserEvent.OnNavigationFinish)
-            }
-        }
-    }
-
 }
 
 @Composable

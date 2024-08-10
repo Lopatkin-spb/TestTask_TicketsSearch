@@ -1,11 +1,6 @@
 package com.example.testtask_ticketssearch.presentation.airtickets.search
 
 import android.content.Context
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -23,8 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -33,9 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.os.bundleOf
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.testtask_ticketssearch.R
@@ -43,103 +35,143 @@ import com.example.testtask_ticketssearch.domain.model.TicketOfferUi
 import com.example.testtask_ticketssearch.presentation.AppActivity
 import com.example.testtask_ticketssearch.presentation.ViewModelFactory
 import com.example.testtask_ticketssearch.presentation.airtickets.SearchField
-import com.example.testtask_ticketssearch.presentation.airtickets.search.ticketList.TicketListFragment
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class SearchDialog : BottomSheetDialogFragment() {
+//class SearchDialog : BottomSheetDialogFragment() {
+//
+//    companion object {
+//        const val TAG = "com.example.testtask_ticketssearch.SearchDialog"
+//        private const val EXTRA_PLACE_DEPARTURE = "com.example.testtask_ticketssearch.EXTRA_PLACE_DEPARTURE"
+//        fun newInstance(placeDeparture: String? = null): SearchDialog {
+//            val dialog = SearchDialog()
+//            val args = Bundle().apply {
+//                placeDeparture?.let { data -> putString(EXTRA_PLACE_DEPARTURE, data) }
+//            }
+//            dialog.arguments = args
+//            return dialog
+//        }
+//    }
+//
+//    @Inject
+//    lateinit var viewModelFactory: ViewModelFactory
+//    private lateinit var viewModel: SearchViewModel
+//
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        (activity as AppActivity).presentationComponent.inject(this)
+//    }
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        viewModel = ViewModelProvider(this, viewModelFactory).get(SearchViewModel::class.java)
+//
+//        viewModel.handle(SearchUserEvent.OnSearchDepartureChange(arguments?.getString(EXTRA_PLACE_DEPARTURE)))
+//
+//        return ComposeView(requireContext()).apply {
+//            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+//            setContent {
+//                val uiState by viewModel.uiState.observeAsState()
+//
+//                uiState?.let { state ->
+//                    Screen(
+//                        uiState = state,
+//                        onEvent = { event -> viewModel.handle(event) },
+//                    )
+//                }
+//            }
+//        }
+//    }
+//
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        // This all shit - setup full screen
+//        val defaultBottomSheetLayout: FrameLayout? =
+//            dialog?.findViewById(com.google.android.material.R.id.design_bottom_sheet)
+//
+//        defaultBottomSheetLayout?.let { layout ->
+//            layout.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
+//
+//            val bottomSheetBehavior = BottomSheetBehavior.from(layout)
+//            bottomSheetBehavior.also { behavior ->
+//                behavior.peekHeight = resources.displayMetrics.heightPixels
+//                behavior.state = BottomSheetBehavior.STATE_EXPANDED
+//            }
+//        }
+//
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        uiStateListener()
+//        viewModel.getTicketsOffers()
+//    }
+//
+//    private fun uiStateListener() {
+//        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
+//            if (uiState.navigateBack) {
+//                dismiss()
+//                viewModel.handle(SearchUserEvent.NavigationFinished)
+//            } else if (uiState.navigateTo) {
+//                dismiss()
+//                val places = "${uiState.searchDeparture}-${uiState.searchArrival}"
+////                findNavController().navigate(
+////                    R.id.action_navigate_from_airtickets_to_ticket_list,
+////                    bundleOf(Pair(TicketListFragment.SEARCH_PLACES_KEY, places))
+////                )
+//                viewModel.handle(SearchUserEvent.NavigationFinished)
+//            }
+//        }
+//    }
+//
+//}
 
-    companion object {
-        const val TAG = "com.example.testtask_ticketssearch.SearchDialog"
-        private const val EXTRA_PLACE_DEPARTURE = "com.example.testtask_ticketssearch.EXTRA_PLACE_DEPARTURE"
-        fun newInstance(placeDeparture: String? = null): SearchDialog {
-            val dialog = SearchDialog()
-            val args = Bundle().apply {
-                placeDeparture?.let { data -> putString(EXTRA_PLACE_DEPARTURE, data) }
-            }
-            dialog.arguments = args
-            return dialog
-        }
-    }
 
+@Stable
+class SearchDaggerContainer {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var viewModel: SearchViewModel
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (activity as AppActivity).presentationComponent.inject(this)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        viewModel = ViewModelProvider(this, viewModelFactory).get(SearchViewModel::class.java)
-
-        viewModel.handle(SearchUserEvent.OnSearchDepartureChange(arguments?.getString(EXTRA_PLACE_DEPARTURE)))
-
-        return ComposeView(requireContext()).apply {
-            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent {
-                val uiState by viewModel.uiState.observeAsState()
-
-                uiState?.let { state ->
-                    Screen(
-                        uiState = state,
-                        onEvent = { event -> viewModel.handle(event) },
-                    )
-                }
-            }
-        }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        // This all shit - setup full screen
-        val defaultBottomSheetLayout: FrameLayout? =
-            dialog?.findViewById(com.google.android.material.R.id.design_bottom_sheet)
-
-        defaultBottomSheetLayout?.let { layout ->
-            layout.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
-
-            val bottomSheetBehavior = BottomSheetBehavior.from(layout)
-            bottomSheetBehavior.also { behavior ->
-                behavior.peekHeight = resources.displayMetrics.heightPixels
-                behavior.state = BottomSheetBehavior.STATE_EXPANDED
-            }
-        }
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        uiStateListener()
-        viewModel.getTicketsOffers()
-    }
-
-    private fun uiStateListener() {
-        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
-            if (uiState.navigateBack) {
-                dismiss()
-                viewModel.handle(SearchUserEvent.NavigationFinished)
-            } else if (uiState.navigateTo) {
-                dismiss()
-                val places = "${uiState.searchDeparture}-${uiState.searchArrival}"
-                findNavController().navigate(
-                    R.id.action_navigate_from_airtickets_to_ticket_list,
-                    bundleOf(Pair(TicketListFragment.SEARCH_PLACES_KEY, places))
-                )
-                viewModel.handle(SearchUserEvent.NavigationFinished)
-            }
-        }
-    }
-
 }
+
+@Composable
+internal fun SearchScreen(
+    placeDeparture: String? = "",
+    context: Context = LocalContext.current,
+    container: SearchDaggerContainer = remember {
+        SearchDaggerContainer().also { container ->
+            (context as AppActivity).presentationComponent.inject(container)
+        }
+    },
+    viewModel: SearchViewModel = viewModel(factory = container.viewModelFactory),
+    navigateToTicketListScreen: (String) -> Unit,
+    onNavigationBack: () -> Unit,
+) {
+    viewModel.handle(SearchUserEvent.OnSearchDepartureChange(placeDeparture))
+    viewModel.getTicketsOffers()
+    val uiState by viewModel.uiState.observeAsState()
+
+    uiState?.let { state ->
+        Screen(
+            uiState = state,
+            onEvent = { event -> viewModel.handle(event) },
+        )
+        if (state.navigateBack) {
+//                dismiss()
+            onNavigationBack()
+            viewModel.handle(SearchUserEvent.NavigationFinished)
+        } else if (state.navigateTo) {
+//                dismiss()
+            val places = "${state.searchDeparture}-${state.searchArrival}"
+            navigateToTicketListScreen(places)
+            viewModel.handle(SearchUserEvent.NavigationFinished)
+        }
+    }
+}
+
 
 @Composable
 private fun Screen(

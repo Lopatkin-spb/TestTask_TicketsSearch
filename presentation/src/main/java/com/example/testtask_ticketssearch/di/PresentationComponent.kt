@@ -1,13 +1,13 @@
 package com.example.testtask_ticketssearch.di
 
 import com.example.testtask_ticketssearch.presentation.AppActivity
-import com.example.testtask_ticketssearch.presentation.airtickets.AirticketsFragment
-import com.example.testtask_ticketssearch.presentation.airtickets.search.SearchDialog
-import com.example.testtask_ticketssearch.presentation.airtickets.search.ticketList.TicketListFragment
-import com.example.testtask_ticketssearch.presentation.hotels.HotelsFragment
-import com.example.testtask_ticketssearch.presentation.profile.ProfileFragment
-import com.example.testtask_ticketssearch.presentation.shorter.ShorterFragment
-import com.example.testtask_ticketssearch.presentation.subscriptions.SubscriptionsFragment
+import com.example.testtask_ticketssearch.presentation.airtickets.AirticketsDaggerContainer
+import com.example.testtask_ticketssearch.presentation.airtickets.search.SearchDaggerContainer
+import com.example.testtask_ticketssearch.presentation.airtickets.search.ticketList.TicketListDaggerContainer
+import com.example.testtask_ticketssearch.presentation.hotels.HotelsDaggerContainer
+import com.example.testtask_ticketssearch.presentation.profile.ProfileDaggerContainer
+import com.example.testtask_ticketssearch.presentation.shorter.ShorterDaggerContainer
+import com.example.testtask_ticketssearch.presentation.subscriptions.SubscriptionsDaggerContainer
 import dagger.Subcomponent
 
 
@@ -21,18 +21,18 @@ interface PresentationComponent {
 
     fun inject(activity: AppActivity)
 
-    fun inject(fragment: AirticketsFragment)
+    fun inject(container: AirticketsDaggerContainer)
 
-    fun inject(fragment: TicketListFragment)
+    fun inject(container: TicketListDaggerContainer)
 
-    fun inject(dialog: SearchDialog)
+    fun inject(container: SearchDaggerContainer)
 
-    fun inject(fragment: HotelsFragment)
+    fun inject(container: HotelsDaggerContainer)
 
-    fun inject(fragment: ProfileFragment)
+    fun inject(container: ProfileDaggerContainer)
 
-    fun inject(fragment: ShorterFragment)
+    fun inject(container: ShorterDaggerContainer)
 
-    fun inject(fragment: SubscriptionsFragment)
+    fun inject(container: SubscriptionsDaggerContainer)
 
 }
