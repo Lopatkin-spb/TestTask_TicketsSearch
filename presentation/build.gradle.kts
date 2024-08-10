@@ -70,9 +70,10 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     // Integration
     implementation("androidx.activity:activity-compose:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0") //Lifecycle
     implementation("androidx.compose.runtime:runtime-livedata")
-    implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
+    implementation("com.github.bumptech.glide:compose:1.0.0-beta01") //Third-party lib for images
+    implementation("androidx.navigation:navigation-compose:2.7.7") //Navigation must update after next stable release (fix empty args)
 
     /**
      * Android Jetpack: ViewModel & Lifecycle
