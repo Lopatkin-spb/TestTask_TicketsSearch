@@ -923,45 +923,6 @@ private fun ButtonSubscriptionToPrice(
     }
 }
 
-@Composable
-private fun Snackbar(
-    modifier: Modifier = Modifier,
-    text: String?,
-    textAction: String? = null,
-    onShowed: () -> Unit = {},
-    onAction: () -> Unit = {},
-) {
-    val scope = rememberCoroutineScope()
-    val snackbarHostState = remember { SnackbarHostState() }
-
-    SnackbarHost(
-        modifier = modifier,
-        hostState = snackbarHostState,
-    ) { data ->
-        Snackbar(
-            actionColor = colorResource(R.color.blue),
-            snackbarData = data,
-            backgroundColor = colorResource(R.color.black),
-        )
-    }
-
-    text?.let { new ->
-        scope.launch {
-            snackbarHostState.currentSnackbarData?.dismiss()
-            val result = snackbarHostState.showSnackbar(
-                message = new,
-                actionLabel = textAction,
-                duration = SnackbarDuration.Short,
-            )
-            when (result) {
-                SnackbarResult.ActionPerformed -> onAction()
-                SnackbarResult.Dismissed -> {}
-            }
-        }
-        onShowed()
-    }
-}
-
 @Preview(showSystemUi = true)
 @Composable
 private fun ScreenPreview() {

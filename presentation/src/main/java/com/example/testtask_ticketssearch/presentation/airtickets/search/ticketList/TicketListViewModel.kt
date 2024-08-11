@@ -25,7 +25,7 @@ internal class TicketListViewModel(
     val uiState: LiveData<TicketListUiState> = _uiState
     private var jobLoadTicketList: Job? = null
 
-    fun loadTicketList() {
+    private fun loadTicketList() {
         if (jobLoadTicketList != null) return
         jobLoadTicketList = viewModelScope.launch(dispatchers.main() + CoroutineName(LOAD_TICKET_LIST)) {
 
@@ -49,6 +49,35 @@ internal class TicketListViewModel(
                 throw cause
             }
         }
+    }
+
+    fun handle(new: TicketListUserEvent) {
+        when (new) {
+            is TicketListUserEvent.OnScreenOpen -> {
+                loadTicketList()
+            }
+
+            is TicketListUserEvent.OnSearchPlacesChange -> setSearchPlaces(new.text)
+            is TicketListUserEvent.CreateSnackbar -> createMessage(new.text, new.action)
+            is TicketListUserEvent.MessageShowed -> resetMessage()
+        }
+    }
+
+    private fun setSearchPlaces(text: String?) {
+        text?.let { new ->
+            val newUiState = _uiState.value?.copy(searchPlaces = new)
+            _uiState.value = newUiState
+        }
+    }
+
+    private fun createMessage(text: String, action: String?) {
+        val newUiState = _uiState.value?.copy(message = text, messageAction = action)
+        _uiState.value = newUiState
+    }
+
+    private fun resetMessage() {
+        val newUiState = _uiState.value?.copy(message = null, messageAction = null)
+        _uiState.value = newUiState
     }
 
 }

@@ -82,9 +82,14 @@ internal fun BottomNavHost(
             val searchPlaces = currentBackstack.arguments?.getString(TicketList.SEARCH_PLACES_ARG)
             TicketListScreen(
                 searchPlaces = searchPlaces,
-                onNavigationBack = { navController.popBackStack() },
+                onNavigationEvent = { event ->
+                    if (event is NavigationEvent.OnBack) {
+                        navController.popBackStack()
+                    }
+                }
             )
         }
+
     }
 }
 
@@ -109,4 +114,8 @@ internal fun NavHostController.navigateSingleTopTo(route: String) {
 
 internal fun NavHostController.navigateSingleTopTo(route: String, arg: String) {
     this.navigateSingleTopTo("$route/$arg")
+}
+
+internal sealed interface NavigationEvent {
+    data object OnBack : NavigationEvent
 }

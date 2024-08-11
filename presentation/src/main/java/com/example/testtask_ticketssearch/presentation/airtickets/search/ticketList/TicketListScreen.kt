@@ -1,6 +1,5 @@
 package com.example.testtask_ticketssearch.presentation.airtickets.search.ticketList
 
-import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -9,13 +8,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -26,83 +27,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.testtask_ticketssearch.R
 import com.example.testtask_ticketssearch.domain.model.TicketUi
 import com.example.testtask_ticketssearch.presentation.AppActivity
+import com.example.testtask_ticketssearch.presentation.NavigationEvent
 import com.example.testtask_ticketssearch.presentation.ViewModelFactory
+import com.example.testtask_ticketssearch.presentation.airtickets.search.Snackbar
 import javax.inject.Inject
 
-//class TicketListFragment : Fragment() {
-//
-//    companion object {
-//        const val SEARCH_PLACES_KEY = "com.example.testtask_ticketssearch.SEARCH_PLACES_KEY"
-//    }
-//
-//    @Inject
-//    lateinit var viewModelFactory: ViewModelFactory
-//    private lateinit var viewModel: TicketListViewModel
-//
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        (activity as AppActivity).presentationComponent.inject(this)
-//    }
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        viewModel = ViewModelProvider(this, viewModelFactory).get(TicketListViewModel::class.java)
-//
-//        return ComposeView(requireContext()).apply {
-//            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-//            setContent {
-//                val uiState by viewModel.uiState.observeAsState()
-//                uiState?.let { state ->
-//                    Screen(
-//                        uiState = state,
-//                        searchDetails = arguments?.getString(SEARCH_PLACES_KEY),
-//                        onSearchBackClick = { onSearchBackClick() },
-//                        onTicketItemClickTest = { value -> onTicketItemClick(value) },
-//                        onTicketPriceClickTest = { value -> onTicketPriceClick(value) },
-//                        onTicketBadgeClickTest = { value -> onTicketBadgeClick(value) },
-//                    )
-//                }
-//            }
-//        }
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        viewModel.loadTicketList()
-//    }
-//
-//    private fun onSearchBackClick() {
-//        findNavController().popBackStack()
-//    }
-//
-//    private fun onTicketItemClick(model: TicketUi) {
-//        view?.let { fragment ->
-//            showMessage(fragment, "onTicketItemClick -> ${model.id}")
-//        }
-//    }
-//
-//    private fun onTicketPriceClick(model: TicketUi) {
-//        view?.let { fragment ->
-//            showMessage(fragment, "onTicketPriceClick -> ${model.price}")
-//        }
-//    }
-//
-//    private fun onTicketBadgeClick(model: TicketUi) {
-//        view?.let { fragment ->
-//            showMessage(fragment, "onTicketBadgeClick -> ${model.badgeText}")
-//        }
-//    }
-//
-//    private fun showMessage(view: View, text: String) {
-//        Snackbar //TODO: correct color themes
-//            .make(view, text, Snackbar.LENGTH_SHORT)
-//            .show()
-//    }
-//
-//}
 
 @Stable
 class TicketListDaggerContainer {
@@ -120,61 +49,46 @@ internal fun TicketListScreen(
         }
     },
     viewModel: TicketListViewModel = viewModel(factory = container.viewModelFactory),
-    onNavigationBack: () -> Unit,
+    onNavigationEvent: (app: NavigationEvent) -> Unit,
 ) {
-    viewModel.loadTicketList()
     val uiState by viewModel.uiState.observeAsState()
+
+    viewModel.handle(TicketListUserEvent.OnScreenOpen)
+    viewModel.handle(TicketListUserEvent.OnSearchPlacesChange(searchPlaces))
 
     uiState?.let { state ->
         Screen(
             uiState = state,
-            searchDetails = searchPlaces,
-            onSearchBackClick = { onNavigationBack() },
-            onTicketItemClickTest = {
-//                            value -> onTicketItemClick(value)
-            },
-            onTicketPriceClickTest = {
-//                value -> onTicketPriceClick(value)
-            },
-            onTicketBadgeClickTest = {
-//                value -> onTicketBadgeClick(value)
-            },
+            onEvent = { event -> viewModel.handle(event) },
+            onNavigationEvent = onNavigationEvent,
         )
     }
 }
 
-
-@SuppressLint("PrivateResource")
 @Composable
 private fun Screen(
     modifier: Modifier = Modifier,
-    searchDetails: String?,
     uiState: TicketListUiState,
-    onSearchBackClick: () -> Unit,
-    onTicketItemClickTest: (TicketUi) -> Unit,
-    onTicketPriceClickTest: (TicketUi) -> Unit,
-    onTicketBadgeClickTest: (TicketUi) -> Unit,
+    onEvent: (screen: TicketListUserEvent) -> Unit,
+    onNavigationEvent: (app: NavigationEvent) -> Unit,
 ) {
     MaterialTheme {
 
         Box(
             modifier = modifier
-                .padding(bottom = dimensionResource(com.google.android.material.R.dimen.design_bottom_navigation_height))
                 .fillMaxSize(),
         ) {
             SearchDetails(
                 modifier = Modifier
                     .padding(start = 16.dp, top = 16.dp, end = 16.dp),
-                details = searchDetails,
-                onSearchBackClick = onSearchBackClick,
+                uiState = uiState,
+                onNavigationEvent = onNavigationEvent,
             )
             TicketsList(
                 modifier = Modifier
                     .padding(start = 16.dp, top = 106.dp, end = 16.dp),
                 new = uiState.tickets,
-                onTicketItemClick = onTicketItemClickTest,
-                onTicketPriceClick = onTicketPriceClickTest,
-                onTicketBadgeClick = onTicketBadgeClickTest,
+                onEvent = onEvent,
             )
             Box(
                 modifier = Modifier
@@ -195,6 +109,12 @@ private fun Screen(
                     ),
                 )
             }
+            Snackbar(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter),
+                text = uiState.message,
+                onShowed = { onEvent(TicketListUserEvent.MessageShowed) },
+            )
         }
     }
 }
@@ -202,13 +122,13 @@ private fun Screen(
 @Composable
 private fun SearchDetails(
     modifier: Modifier = Modifier,
-    details: String?,
-    onSearchBackClick: () -> Unit,
+    uiState: TicketListUiState,
+    onNavigationEvent: (app: NavigationEvent) -> Unit,
 ) {
     val stubText = stringResource(R.string.text_stub)
-    val detailsText = when (details.isNullOrEmpty()) {
-        false -> details
-        true -> stubText
+    val places = when (uiState.searchPlaces.isNotEmpty()) {
+        true -> uiState.searchPlaces
+        false -> stubText
     }
 
     Box(
@@ -220,7 +140,7 @@ private fun SearchDetails(
         Icon(
             modifier = Modifier
                 .align(Alignment.CenterStart)
-                .clickable(onClick = onSearchBackClick),
+                .clickable(onClick = { onNavigationEvent(NavigationEvent.OnBack) }),
             painter = painterResource(R.drawable.ic_arrow_left_24dp),
             contentDescription = null,
             tint = colorResource(R.color.blue),
@@ -230,7 +150,7 @@ private fun SearchDetails(
                 .padding(start = 32.dp, top = 8.dp, end = 16.dp)
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            text = detailsText,
+            text = places,
             maxLines = 1,
             style = TextStyle(
                 color = colorResource(R.color.white),
@@ -258,12 +178,10 @@ private fun SearchDetails(
 @Composable
 private fun ScreenPreview() {
     Screen(
-        onSearchBackClick = {},
-        onTicketBadgeClickTest = {},
-        onTicketPriceClickTest = {},
-        searchDetails = "",
-        onTicketItemClickTest = {},
+        onEvent = {},
+        onNavigationEvent = {},
         uiState = TicketListUiState(
+            searchPlaces = "Moskow-CPb",
             tickets = listOf(
                 TicketUi(
                     id = 1,

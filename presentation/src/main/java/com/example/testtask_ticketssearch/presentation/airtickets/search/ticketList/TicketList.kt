@@ -23,9 +23,7 @@ import com.example.testtask_ticketssearch.domain.model.TicketUi
 internal fun TicketsList(
     modifier: Modifier = Modifier,
     new: List<TicketUi>,
-    onTicketItemClick: (TicketUi) -> Unit,
-    onTicketPriceClick: (TicketUi) -> Unit,
-    onTicketBadgeClick: (TicketUi) -> Unit,
+    onEvent: (screen: TicketListUserEvent) -> Unit,
 ) {
     val stubText = stringResource(R.string.text_stub)
 
@@ -64,7 +62,7 @@ internal fun TicketsList(
                 false -> stringResource(R.string.text_travel_time)
             }
             TicketItem(
-                new = TicketUi(
+                data = TicketUi(
                     id = ticket.id,
                     price = price,
                     departureTime = departureTime,
@@ -76,9 +74,7 @@ internal fun TicketsList(
                     hasTransfer = ticket.hasTransfer,
                     transfer = transfer,
                 ),
-                onTicketItemClick = onTicketItemClick,
-                onTicketPriceClick = onTicketPriceClick,
-                onTicketBadgeClick = onTicketBadgeClick,
+                onEvent = onEvent,
             )
         }
     }
@@ -87,13 +83,11 @@ internal fun TicketsList(
 @Composable
 private fun TicketItem(
     modifier: Modifier = Modifier,
-    new: TicketUi,
-    onTicketItemClick: (TicketUi) -> Unit,
-    onTicketPriceClick: (TicketUi) -> Unit,
-    onTicketBadgeClick: (TicketUi) -> Unit,
+    data: TicketUi,
+    onEvent: (screen: TicketListUserEvent) -> Unit,
 ) {
     var paddingBackground = 0
-    if (new.isBadgeVisible) paddingBackground = 8
+    if (data.isBadgeVisible) paddingBackground = 8
 
     Box(
         modifier = modifier
@@ -105,14 +99,18 @@ private fun TicketItem(
                 .background(color = colorResource(R.color.gray_unknown_1), shape = RoundedCornerShape(8.dp))
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(bottom = 16.dp)
-                .clickable(onClick = { onTicketItemClick(new) }),
+                .clickable(onClick = {
+                    onEvent(TicketListUserEvent.CreateSnackbar("onTicketItemClick -> ${data.id}"))
+                })
+                .padding(bottom = 16.dp),
         ) {
             Text(
-                text = new.price,
+                text = data.price,
                 modifier = Modifier
                     .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                    .clickable(onClick = { onTicketPriceClick(new) }),
+                    .clickable(onClick = {
+                        onEvent(TicketListUserEvent.CreateSnackbar("onTicketPriceClick -> ${data.price}"))
+                    }),
                 maxLines = 1,
                 style = TextStyle(
                     color = colorResource(R.color.white),
@@ -122,17 +120,17 @@ private fun TicketItem(
             DetailsBoard(
                 modifier = Modifier
                     .padding(start = 16.dp, top = 58.dp),
-                departureTime = new.departureTime,
-                departureAirport = new.departureAirport,
-                arrivalTime = new.arrivalTime,
-                arrivalAirport = new.arrivalAirport,
+                departureTime = data.departureTime,
+                departureAirport = data.departureAirport,
+                arrivalTime = data.arrivalTime,
+                arrivalAirport = data.arrivalAirport,
             )
             Text(
                 modifier = Modifier
                     .padding(start = 153.dp, top = 58.dp, end = 8.dp)
                     .fillMaxWidth()
                     .padding(vertical = 2.dp),
-                text = new.transfer,
+                text = data.transfer,
                 maxLines = 1,
                 style = TextStyle(
                     color = colorResource(R.color.white),
@@ -142,9 +140,11 @@ private fun TicketItem(
         }
         Badge(
             modifier = Modifier
-                .clickable(onClick = { onTicketBadgeClick(new) }),
-            isVisible = new.isBadgeVisible,
-            text = new.badgeText,
+                .clickable(onClick = {
+                    onEvent(TicketListUserEvent.CreateSnackbar("onTicketBadgeClick -> ${data.badgeText}"))
+                }),
+            isVisible = data.isBadgeVisible,
+            text = data.badgeText,
         )
     }
 }
