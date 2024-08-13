@@ -28,15 +28,26 @@ internal class AirticketsViewModel(
 
     private val _uiState = MutableLiveData(AirticketsUiState())
     val uiState: LiveData<AirticketsUiState> = _uiState
-    private val _uiNavigation = MutableLiveData(AirticketsUiNavigation())
-    val uiNavigation: LiveData<AirticketsUiNavigation> = _uiNavigation
     private var jobEventsOffers: Job? = null
 
-    fun savePlaceDeparture(text: String) {
+    fun handle(new: AirticketsUserEvent) {
+        when (new) {
+            is AirticketsUserEvent.OnScreenOpen -> {
+                loadEventsOffers()
+                getPlaceDeparture()
+                getPlaceArrival()
+            }
+
+            is AirticketsUserEvent.OnSearchDepartureChange -> setNewPlaceDeparture(new.text)
+            is AirticketsUserEvent.OnScreenClose -> savePlaceDeparture()
+        }
+    }
+
+    private fun savePlaceDeparture(text: String) {
         savePlaceDepartureByLastSearchUseCase.execute(SearchPlace(text))
     }
 
-    fun savePlaceDeparture() {
+    private fun savePlaceDeparture() {
         _uiState.value?.placeDeparture
             ?.let { searchPlace ->
                 savePlaceDepartureByLastSearchUseCase.execute(searchPlace)
@@ -44,28 +55,28 @@ internal class AirticketsViewModel(
             ?: savePlaceDepartureByLastSearchUseCase.execute(SearchPlace(""))
     }
 
-    fun setNewPlaceDeparture(text: String) {
+    private fun setNewPlaceDeparture(text: String) {
         val newUiState = _uiState.value?.copy(placeDeparture = SearchPlace(text))
         _uiState.value = newUiState
     }
 
-    fun getPlaceDeparture() {
+    private fun getPlaceDeparture() {
         val place = getPlaceDepartureByLastSearchUseCase.execute()
         val newUiState = _uiState.value?.copy(placeDeparture = place)
         _uiState.value = newUiState
     }
 
-    fun savePlaceArrival(text: String) {
+    private fun savePlaceArrival(text: String) {
         savePlaceArrivalByLastSearchUseCase.execute(SearchPlace(text))
     }
 
-    fun getPlaceArrival() {
+    private fun getPlaceArrival() {
         val place = getPlaceArrivalByLastSearchUseCase.execute()
         val newUiState = _uiState.value?.copy(placeArrival = place)
         _uiState.value = newUiState
     }
 
-    fun loadEventsOffers() {
+    private fun loadEventsOffers() {
         if (jobEventsOffers != null) return
         jobEventsOffers =
             viewModelScope.launch(dispatchers.main() + CoroutineName(LOAD_EVENTS_OFFERS)) {
@@ -90,34 +101,6 @@ internal class AirticketsViewModel(
                 throw cause
             }
         }
-    }
-
-    fun handle(new: AirticketsUserEvent) {
-        when (new) {
-            is AirticketsUserEvent.OnScreenOpen -> {
-                loadEventsOffers()
-                getPlaceDeparture()
-                getPlaceArrival()
-            }
-
-            is AirticketsUserEvent.OnSearchDepartureChange -> setNewPlaceDeparture(new.text)
-            is AirticketsUserEvent.OnNavigationStart -> createNavigation(new.point)
-            is AirticketsUserEvent.OnNavigationFinish -> resetNavigation()
-        }
-    }
-
-    private fun createNavigation(point: Destination) {
-        if (point == Destination.SEARCH_DIALOG) {
-            val text = _uiState.value?.placeDeparture?.name
-                ?: ""
-            val newUiNavigation = _uiNavigation.value?.copy(toSearchDialog = text)
-            _uiNavigation.value = newUiNavigation
-        }
-    }
-
-    private fun resetNavigation() {
-        val newUiNavigation = _uiNavigation.value?.copy(toSearchDialog = null)
-        _uiNavigation.value = newUiNavigation
     }
 
 }

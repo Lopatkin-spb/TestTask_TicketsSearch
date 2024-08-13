@@ -9,22 +9,8 @@ internal data class AirticketsUiState(
     val placeArrival: SearchPlace? = null,
 )
 
-internal data class AirticketsUiNavigation(
-    val toSearchDialog: String? = null,
-)
-
 internal sealed interface AirticketsUserEvent {
-
     data object OnScreenOpen : AirticketsUserEvent
-
     data class OnSearchDepartureChange(val text: String) : AirticketsUserEvent
-
-    data class OnNavigationStart(val point: Destination) : AirticketsUserEvent
-
-    data object OnNavigationFinish : AirticketsUserEvent
-
-}
-
-internal enum class Destination {
-    SEARCH_DIALOG
+    data object OnScreenClose : AirticketsUserEvent
 }

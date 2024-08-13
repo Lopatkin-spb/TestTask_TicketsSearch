@@ -27,14 +27,16 @@ internal fun BottomNavHost(
     ) {
         composable(route = Airtickets.uniqueTag) {
             AirticketsScreen(
-                navigateToSearchScreen = { placesDeparture ->
-                    // After updated navigation with fix empty args - join to 1
-                    if (placesDeparture.isNotEmpty()) {
-                        navController.navigateSingleTopTo(Search.uniqueTag, placesDeparture)
-                    } else {
-                        navController.navigateSingleTopTo(Search.uniqueTag)
+                onNavigationEvent = { event ->
+                    if (event is NavigationEvent.ToSearch) {
+                        // After updated navigation with fix empty args - join to 1
+                        if (event.placeDeparture.isNullOrEmpty()) {
+                            navController.navigateSingleTopTo(Search.uniqueTag)
+                        } else {
+                            navController.navigateSingleTopTo(Search.uniqueTag, event.placeDeparture)
+                        }
                     }
-                }
+                },
             )
         }
         composable(route = Hotels.uniqueTag) {
@@ -117,5 +119,6 @@ internal fun NavHostController.navigateSingleTopTo(route: String, arg: String) {
 }
 
 internal sealed interface NavigationEvent {
+    data class ToSearch(val placeDeparture: String?) : NavigationEvent
     data object OnBack : NavigationEvent
 }
