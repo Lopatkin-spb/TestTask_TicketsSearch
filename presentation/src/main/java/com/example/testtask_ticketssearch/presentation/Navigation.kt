@@ -7,7 +7,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.testtask_ticketssearch.presentation.airtickets.AirticketsScreen
-import com.example.testtask_ticketssearch.presentation.airtickets.search.SearchScreen
 import com.example.testtask_ticketssearch.presentation.airtickets.search.ticketList.TicketListScreen
 import com.example.testtask_ticketssearch.presentation.hotels.HotelsScreen
 import com.example.testtask_ticketssearch.presentation.profile.ProfileScreen
@@ -28,13 +27,8 @@ internal fun BottomNavHost(
         composable(route = Airtickets.uniqueTag) {
             AirticketsScreen(
                 onNavigationEvent = { event ->
-                    if (event is NavigationEvent.ToSearch) {
-                        // After updated navigation with fix empty args - join to 1
-                        if (event.placeDeparture.isNullOrEmpty()) {
-                            navController.navigateSingleTopTo(Search.uniqueTag)
-                        } else {
-                            navController.navigateSingleTopTo(Search.uniqueTag, event.placeDeparture)
-                        }
+                    if (event is NavigationEvent.ToTicketList) {
+                        navController.navigateSingleTopTo(TicketList.uniqueTag, event.searchPlaces)
                     }
                 },
             )
@@ -50,32 +44,6 @@ internal fun BottomNavHost(
         }
         composable(route = Profile.uniqueTag) {
             ProfileScreen()
-        }
-        // After updated navigation with fix empty args - join to 1 composable
-        composable(
-            route = Search.uniqueTagWithOptionalArgs,
-            arguments = Search.arguments,
-        ) { currentBackstack ->
-            SearchScreen(
-                placeDeparture = currentBackstack.arguments?.getString(Search.PLACE_DEPARTURE_ARG),
-                navigateToTicketListScreen = { searchPlaces ->
-                    navController.navigateSingleTopTo(TicketList.uniqueTag, searchPlaces)
-                },
-                onNavigationBack = { navController.popBackStack() },
-            )
-        }
-        // After updated navigation with fix empty args - join to 1 composable
-        composable(
-            route = Search.uniqueTagWithArgs,
-            arguments = Search.arguments,
-        ) { currentBackstack ->
-            SearchScreen(
-                placeDeparture = currentBackstack.arguments?.getString(Search.PLACE_DEPARTURE_ARG),
-                navigateToTicketListScreen = { searchPlaces ->
-                    navController.navigateSingleTopTo(TicketList.uniqueTag, searchPlaces)
-                },
-                onNavigationBack = { navController.popBackStack() },
-            )
         }
         composable(
             route = TicketList.uniqueTagWithArgs,
@@ -119,6 +87,6 @@ internal fun NavHostController.navigateSingleTopTo(route: String, arg: String) {
 }
 
 internal sealed interface NavigationEvent {
-    data class ToSearch(val placeDeparture: String?) : NavigationEvent
+    data class ToTicketList(val searchPlaces: String) : NavigationEvent
     data object OnBack : NavigationEvent
 }

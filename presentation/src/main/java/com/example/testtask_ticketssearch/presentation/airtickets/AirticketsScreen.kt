@@ -1,18 +1,14 @@
 package com.example.testtask_ticketssearch.presentation.airtickets
 
 import android.content.Context
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
-import androidx.compose.runtime.getValue
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -27,23 +23,12 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.testtask_ticketssearch.R
 import com.example.testtask_ticketssearch.domain.model.EventOfferUi
-import com.example.testtask_ticketssearch.presentation.AppActivity
+import com.example.testtask_ticketssearch.presentation.*
 import com.example.testtask_ticketssearch.presentation.NavigationEvent
 import com.example.testtask_ticketssearch.presentation.OnLifecycleScreen
-import com.example.testtask_ticketssearch.presentation.ViewModelFactory
+import com.example.testtask_ticketssearch.presentation.airtickets.search.SearchSheet
+import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-
-//    private fun navigationListener() {
-//        viewModel.uiNavigation.observe(viewLifecycleOwner) { navigation ->
-//            navigation.toSearchDialog?.let { args ->
-//                SearchDialog
-//                    .newInstance(args)
-//                    .show(requireActivity().supportFragmentManager, SearchDialog.TAG)
-//                viewModel.handle(AirticketsUserEvent.OnNavigationFinish)
-//            }
-//        }
-//    }
 
 
 @Stable
@@ -128,6 +113,19 @@ private fun Screen(
                     .padding(start = 16.dp, top = 350.dp, end = 16.dp),
                 new = uiState.eventsOffers,
             )
+
+            BottomSheet(
+                sheetContent = {
+                    SearchSheet(
+                        placeDeparture = uiState.placeDeparture?.name,
+                        onNavigationEvent = onNavigationEvent,
+                        onHide = { onEvent(AirticketsUserEvent.OnBottomSheetStateChange(false)) },
+                    )
+                },
+                outsideManagement = uiState.stateBottomSheet,
+                resetOutsideState = { onEvent(AirticketsUserEvent.OnBottomSheetStateChange(null)) },
+            )
+
         }
     }
 }
@@ -190,7 +188,7 @@ private fun SearchSection(
                 .padding(start = 49.dp, top = 53.dp, end = 16.dp)
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .clickable(onClick = { onNavigationEvent(NavigationEvent.ToSearch(uiState.placeDeparture?.name)) }),
+                .clickable(onClick = { onEvent(AirticketsUserEvent.OnBottomSheetStateChange(true)) }),
             text = stringResource(R.string.action_place_arrival),
             maxLines = 1,
             style = TextStyle(
@@ -199,6 +197,48 @@ private fun SearchSection(
             ),
         )
     }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+private fun BottomSheet(
+    sheetContent: @Composable() (ColumnScope.() -> Unit),
+    outsideManagement: Boolean?,
+    resetOutsideState: () -> Unit = {},
+) {
+    val sheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = true,
+    )
+    val scope = rememberCoroutineScope()
+
+    ModalBottomSheetLayout(
+        sheetState = sheetState,
+        sheetContent = sheetContent,
+        content = {},
+    )
+
+    // Outside management
+    outsideManagement?.let { isShow ->
+        scope.launch {
+            if (isShow && !sheetState.isVisible) {
+                sheetState.show()
+                resetOutsideState()
+            }
+            if (!isShow && sheetState.isVisible) {
+                sheetState.hide()
+                resetOutsideState()
+            }
+        }
+    }
+
+    // Listener for system back button
+    BackHandler(sheetState.isVisible) {
+        scope.launch {
+            sheetState.hide()
+        }
+    }
+
 }
 
 @Preview(showSystemUi = true)

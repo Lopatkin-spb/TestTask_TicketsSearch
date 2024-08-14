@@ -33,9 +33,9 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.example.testtask_ticketssearch.R
 import com.example.testtask_ticketssearch.domain.model.TicketOfferUi
 import com.example.testtask_ticketssearch.presentation.AppActivity
+import com.example.testtask_ticketssearch.presentation.NavigationEvent
 import com.example.testtask_ticketssearch.presentation.ViewModelFactory
 import com.example.testtask_ticketssearch.presentation.airtickets.SearchField
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 //class SearchDialog : BottomSheetDialogFragment() {
@@ -138,7 +138,7 @@ class SearchDaggerContainer {
 }
 
 @Composable
-internal fun SearchScreen(
+internal fun SearchSheet(
     placeDeparture: String? = "",
     context: Context = LocalContext.current,
     container: SearchDaggerContainer = remember {
@@ -147,8 +147,9 @@ internal fun SearchScreen(
         }
     },
     viewModel: SearchViewModel = viewModel(factory = container.viewModelFactory),
-    navigateToTicketListScreen: (String) -> Unit,
-    onNavigationBack: () -> Unit,
+    navigateToTicketListScreen: (String) -> Unit = {},
+    onHide: () -> Unit,
+    onNavigationEvent: (app: NavigationEvent) -> Unit,
 ) {
     viewModel.handle(SearchUserEvent.OnSearchDepartureChange(placeDeparture))
     viewModel.getTicketsOffers()
@@ -161,12 +162,13 @@ internal fun SearchScreen(
         )
         if (state.navigateBack) {
 //                dismiss()
-            onNavigationBack()
+            onHide()
             viewModel.handle(SearchUserEvent.NavigationFinished)
         } else if (state.navigateTo) {
 //                dismiss()
             val places = "${state.searchDeparture}-${state.searchArrival}"
-            navigateToTicketListScreen(places)
+//            navigateToTicketListScreen(places)
+            onNavigationEvent(NavigationEvent.ToTicketList(places))
             viewModel.handle(SearchUserEvent.NavigationFinished)
         }
     }

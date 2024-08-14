@@ -60,20 +60,6 @@ internal data object Profile : BottomNavDestination {
 /**
  * Other destinations
  */
-internal data object Search : AppDestination {
-    override val uniqueTag: String = "Search"
-    override val titleId: Int = R.string.title_search
-    const val PLACE_DEPARTURE_ARG = "com.example.testtask_ticketssearch.PLACE_DEPARTURE_ARG"
-    val uniqueTagWithArgs: String = "$uniqueTag/{$PLACE_DEPARTURE_ARG}"
-    val uniqueTagWithOptionalArgs: String = "$uniqueTag?$PLACE_DEPARTURE_ARG={$PLACE_DEPARTURE_ARG}"
-    val arguments = listOf(
-        navArgument(PLACE_DEPARTURE_ARG) {
-            type = NavType.StringType
-            defaultValue = ""
-        },
-    )
-}
-
 internal data object TicketList : AppDestination {
     override val uniqueTag: String = "TicketList"
     override val titleId: Int = R.string.title_ticket_list

@@ -40,6 +40,7 @@ internal class AirticketsViewModel(
 
             is AirticketsUserEvent.OnSearchDepartureChange -> setNewPlaceDeparture(new.text)
             is AirticketsUserEvent.OnScreenClose -> savePlaceDeparture()
+            is AirticketsUserEvent.OnBottomSheetStateChange -> setBottomSheetVisibility(new.isVisible)
         }
     }
 
@@ -101,6 +102,11 @@ internal class AirticketsViewModel(
                 throw cause
             }
         }
+    }
+
+    private fun setBottomSheetVisibility(isVisible: Boolean?) {
+        val newUiState = _uiState.value?.copy(stateBottomSheet = isVisible)
+        _uiState.value = newUiState
     }
 
 }
