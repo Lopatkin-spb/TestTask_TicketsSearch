@@ -39,7 +39,7 @@ internal class SearchViewModel(
         _uiState.value = newUiState
     }
 
-    fun getTicketsOffers() {
+    private fun getTicketsOffers() {
         if (jobTicketOffers != null) return
         jobTicketOffers = viewModelScope.launch(dispatchers.main() + CoroutineName(LOAD_TICKETS_OFFERS)) {
 
@@ -67,15 +67,13 @@ internal class SearchViewModel(
 
     fun handle(new: SearchUserEvent) {
         when (new) {
+            is SearchUserEvent.OnScreenOpen -> getTicketsOffers()
             is SearchUserEvent.OnSearchDepartureChange -> setSearchDeparture(new.text)
             is SearchUserEvent.OnSearchArrivalChange -> setSearchArrival(new.text, new.done)
-            is SearchUserEvent.OnSearchPlaceChange -> swapSearchPlaces()
+            is SearchUserEvent.OnSearchPlacesChange -> swapSearchPlaces()
             is SearchUserEvent.OnSearchDone -> searchFieldCompleted()
             is SearchUserEvent.CreateSnackbar -> createMessage(new.text, new.action)
             is SearchUserEvent.MessageShowed -> resetMessage()
-            is SearchUserEvent.NavigateBack -> navigateBack()
-            is SearchUserEvent.NavigationFinished -> resetNavigation()
-            is SearchUserEvent.NavigateTo -> navigateTo()
         }
     }
 
@@ -90,6 +88,7 @@ internal class SearchViewModel(
     }
 
     private fun setSearchDeparture(text: String?) {
+        Log.d("myTAG", "setSearchDeparture: text = $text")
         if (!text.isNullOrEmpty()) {
             val newUiState = _uiState.value?.copy(searchDeparture = text)
             _uiState.value = newUiState
@@ -112,21 +111,6 @@ internal class SearchViewModel(
 
     private fun resetMessage() {
         val newUiState = _uiState.value?.copy(message = null, messageAction = null)
-        _uiState.value = newUiState
-    }
-
-    private fun navigateBack() {
-        val newUiState = _uiState.value?.copy(navigateBack = true)
-        _uiState.value = newUiState
-    }
-
-    private fun navigateTo() {
-        val newUiState = _uiState.value?.copy(navigateTo = true)
-        _uiState.value = newUiState
-    }
-
-    private fun resetNavigation() {
-        val newUiState = _uiState.value?.copy(navigateBack = false, navigateTo = false)
         _uiState.value = newUiState
     }
 

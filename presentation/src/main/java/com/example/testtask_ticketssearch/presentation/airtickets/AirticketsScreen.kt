@@ -114,18 +114,19 @@ private fun Screen(
                 new = uiState.eventsOffers,
             )
 
-            BottomSheet(
-                sheetContent = {
-                    SearchSheet(
-                        placeDeparture = uiState.placeDeparture?.name,
-                        onNavigationEvent = onNavigationEvent,
-                        onHide = { onEvent(AirticketsUserEvent.OnBottomSheetStateChange(false)) },
-                    )
-                },
-                outsideManagement = uiState.stateBottomSheet,
-                resetOutsideState = { onEvent(AirticketsUserEvent.OnBottomSheetStateChange(null)) },
-            )
-
+            if (uiState.stateBottomSheet != null) {
+                BottomSheet(
+                    sheetContent = {
+                        SearchSheet(
+                            placeDeparture = uiState.placeDeparture?.name,
+                            onNavigationEvent = onNavigationEvent,
+                            onHide = { onEvent(AirticketsUserEvent.OnBottomSheetStateChange(false)) },
+                        )
+                    },
+                    outsideManagement = uiState.stateBottomSheet,
+                    resetOutsideState = { onEvent(AirticketsUserEvent.OnBottomSheetStateChange(null)) },
+                )
+            }
         }
     }
 }
@@ -223,10 +224,18 @@ private fun BottomSheet(
         scope.launch {
             if (isShow && !sheetState.isVisible) {
                 sheetState.show()
-                resetOutsideState()
             }
             if (!isShow && sheetState.isVisible) {
                 sheetState.hide()
+                resetOutsideState()
+            }
+        }
+    }
+
+    // Listener for swipe close
+    if (sheetState.isVisible) {
+        DisposableEffect(Unit) {
+            onDispose {
                 resetOutsideState()
             }
         }
@@ -236,6 +245,7 @@ private fun BottomSheet(
     BackHandler(sheetState.isVisible) {
         scope.launch {
             sheetState.hide()
+            resetOutsideState()
         }
     }
 

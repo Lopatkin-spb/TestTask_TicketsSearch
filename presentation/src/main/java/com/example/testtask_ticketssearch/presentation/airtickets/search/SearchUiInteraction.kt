@@ -9,19 +9,14 @@ internal data class SearchUiState(
     val searchArrival: String = "",
     val message: String? = null,
     val messageAction: String? = null,
-    val navigateBack: Boolean = false,
-    val navigateTo: Boolean = false,
 )
 
 internal sealed interface SearchUserEvent {
+    data object OnScreenOpen : SearchUserEvent
     data class OnSearchDepartureChange(val text: String?) : SearchUserEvent
     data class OnSearchArrivalChange(val text: String, val done: Boolean = false) : SearchUserEvent
-    data object OnSearchPlaceChange : SearchUserEvent
+    data object OnSearchPlacesChange : SearchUserEvent
     data object OnSearchDone : SearchUserEvent
     data class CreateSnackbar(val text: String, val action: String? = null) : SearchUserEvent
     data object MessageShowed : SearchUserEvent
-    data object NavigateBack : SearchUserEvent
-    data object NavigationFinished : SearchUserEvent
-    data object NavigateTo : SearchUserEvent
-
 }

@@ -34,101 +34,10 @@ import com.example.testtask_ticketssearch.R
 import com.example.testtask_ticketssearch.domain.model.TicketOfferUi
 import com.example.testtask_ticketssearch.presentation.AppActivity
 import com.example.testtask_ticketssearch.presentation.NavigationEvent
+import com.example.testtask_ticketssearch.presentation.OnLifecycleScreen
 import com.example.testtask_ticketssearch.presentation.ViewModelFactory
 import com.example.testtask_ticketssearch.presentation.airtickets.SearchField
 import javax.inject.Inject
-
-//class SearchDialog : BottomSheetDialogFragment() {
-//
-//    companion object {
-//        const val TAG = "com.example.testtask_ticketssearch.SearchDialog"
-//        private const val EXTRA_PLACE_DEPARTURE = "com.example.testtask_ticketssearch.EXTRA_PLACE_DEPARTURE"
-//        fun newInstance(placeDeparture: String? = null): SearchDialog {
-//            val dialog = SearchDialog()
-//            val args = Bundle().apply {
-//                placeDeparture?.let { data -> putString(EXTRA_PLACE_DEPARTURE, data) }
-//            }
-//            dialog.arguments = args
-//            return dialog
-//        }
-//    }
-//
-//    @Inject
-//    lateinit var viewModelFactory: ViewModelFactory
-//    private lateinit var viewModel: SearchViewModel
-//
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        (activity as AppActivity).presentationComponent.inject(this)
-//    }
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        viewModel = ViewModelProvider(this, viewModelFactory).get(SearchViewModel::class.java)
-//
-//        viewModel.handle(SearchUserEvent.OnSearchDepartureChange(arguments?.getString(EXTRA_PLACE_DEPARTURE)))
-//
-//        return ComposeView(requireContext()).apply {
-//            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-//            setContent {
-//                val uiState by viewModel.uiState.observeAsState()
-//
-//                uiState?.let { state ->
-//                    Screen(
-//                        uiState = state,
-//                        onEvent = { event -> viewModel.handle(event) },
-//                    )
-//                }
-//            }
-//        }
-//    }
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        // This all shit - setup full screen
-//        val defaultBottomSheetLayout: FrameLayout? =
-//            dialog?.findViewById(com.google.android.material.R.id.design_bottom_sheet)
-//
-//        defaultBottomSheetLayout?.let { layout ->
-//            layout.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
-//
-//            val bottomSheetBehavior = BottomSheetBehavior.from(layout)
-//            bottomSheetBehavior.also { behavior ->
-//                behavior.peekHeight = resources.displayMetrics.heightPixels
-//                behavior.state = BottomSheetBehavior.STATE_EXPANDED
-//            }
-//        }
-//
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        uiStateListener()
-//        viewModel.getTicketsOffers()
-//    }
-//
-//    private fun uiStateListener() {
-//        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
-//            if (uiState.navigateBack) {
-//                dismiss()
-//                viewModel.handle(SearchUserEvent.NavigationFinished)
-//            } else if (uiState.navigateTo) {
-//                dismiss()
-//                val places = "${uiState.searchDeparture}-${uiState.searchArrival}"
-////                findNavController().navigate(
-////                    R.id.action_navigate_from_airtickets_to_ticket_list,
-////                    bundleOf(Pair(TicketListFragment.SEARCH_PLACES_KEY, places))
-////                )
-//                viewModel.handle(SearchUserEvent.NavigationFinished)
-//            }
-//        }
-//    }
-//
-//}
 
 
 @Stable
@@ -139,6 +48,8 @@ class SearchDaggerContainer {
 
 @Composable
 internal fun SearchSheet(
+    onNavigationEvent: (app: NavigationEvent) -> Unit,
+    onHide: () -> Unit,
     placeDeparture: String? = "",
     context: Context = LocalContext.current,
     container: SearchDaggerContainer = remember {
@@ -147,42 +58,37 @@ internal fun SearchSheet(
         }
     },
     viewModel: SearchViewModel = viewModel(factory = container.viewModelFactory),
-    navigateToTicketListScreen: (String) -> Unit = {},
-    onHide: () -> Unit,
-    onNavigationEvent: (app: NavigationEvent) -> Unit,
 ) {
-    viewModel.handle(SearchUserEvent.OnSearchDepartureChange(placeDeparture))
-    viewModel.getTicketsOffers()
     val uiState by viewModel.uiState.observeAsState()
+
+    OnLifecycleScreen(
+        onStart = {
+            viewModel.handle(SearchUserEvent.OnSearchDepartureChange(placeDeparture))
+            viewModel.handle(SearchUserEvent.OnScreenOpen)
+        }
+    )
 
     uiState?.let { state ->
         Screen(
             uiState = state,
             onEvent = { event -> viewModel.handle(event) },
+            onNavigationEvent = onNavigationEvent,
+            onHide = onHide,
         )
-        if (state.navigateBack) {
-//                dismiss()
-            onHide()
-            viewModel.handle(SearchUserEvent.NavigationFinished)
-        } else if (state.navigateTo) {
-//                dismiss()
-            val places = "${state.searchDeparture}-${state.searchArrival}"
-//            navigateToTicketListScreen(places)
-            onNavigationEvent(NavigationEvent.ToTicketList(places))
-            viewModel.handle(SearchUserEvent.NavigationFinished)
-        }
     }
 }
 
 
 @Composable
 private fun Screen(
-    modifier: Modifier = Modifier,
     uiState: SearchUiState,
-    onEvent: (new: SearchUserEvent) -> Unit,
+    onEvent: (screen: SearchUserEvent) -> Unit,
+    onNavigationEvent: (app: NavigationEvent) -> Unit,
+    onHide: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    MaterialTheme {
 
+    MaterialTheme {
         Box(
             modifier = modifier
                 .fillMaxSize()
@@ -233,6 +139,7 @@ private fun Screen(
                     .padding(start = 16.dp, top = 544.dp, end = 16.dp),
                 uiState = uiState,
                 onEvent = onEvent,
+                onNavigationEvent = onNavigationEvent,
             )
             ButtonSubscriptionToPrice(
                 modifier = Modifier
@@ -246,7 +153,7 @@ private fun Screen(
                 text = uiState.message,
                 textAction = uiState.messageAction,
                 onShowed = { onEvent(SearchUserEvent.MessageShowed) },
-                onAction = { onEvent(SearchUserEvent.NavigateBack) },
+                onAction = onHide,
             )
         }
 
@@ -255,14 +162,15 @@ private fun Screen(
 
 @Composable
 private fun SearchSection(
-    modifier: Modifier = Modifier,
     uiState: SearchUiState,
-    onEvent: (new: SearchUserEvent) -> Unit,
+    onEvent: (screen: SearchUserEvent) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val textDeparture = when (uiState.searchDeparture.isNotEmpty()) {
         true -> uiState.searchDeparture
         false -> stringResource(R.string.text_stub)
     }
+
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -297,7 +205,7 @@ private fun SearchSection(
                 .padding(top = 18.dp, end = 16.dp)
                 .align(Alignment.TopEnd)
                 .padding(end = 16.dp)
-                .clickable(onClick = { onEvent(SearchUserEvent.OnSearchPlaceChange) }),
+                .clickable(onClick = { onEvent(SearchUserEvent.OnSearchPlacesChange) }),
             visible = uiState.isArrivalCompleted,
             painter = painterResource(R.drawable.ic_change_24dp),
             contentDescription = null,
@@ -352,9 +260,9 @@ private fun SearchSection(
 
 @Composable
 private fun ChipsSection(
-    modifier: Modifier = Modifier,
     uiState: SearchUiState,
-    onEvent: (new: SearchUserEvent) -> Unit,
+    onEvent: (screen: SearchUserEvent) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val visibleState = remember { mutableStateOf(false) }
     visibleState.value = uiState.isArrivalCompleted
@@ -475,10 +383,10 @@ private fun ChipsSection(
 
 @Composable
 private fun AnimatedVisibilityIcon(
-    modifier: Modifier = Modifier,
     visible: Boolean,
     painter: Painter,
     contentDescription: String?,
+    modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
 ) {
     val visibleState = remember { mutableStateOf(visible) }
@@ -500,9 +408,9 @@ private fun AnimatedVisibilityIcon(
 
 @Composable
 private fun HintsSection(
-    modifier: Modifier = Modifier,
     uiState: SearchUiState,
-    onEvent: (new: SearchUserEvent) -> Unit,
+    onEvent: (screen: SearchUserEvent) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val textAnywhere = stringResource(R.string.text_anywhere)
     val visibleState = remember { mutableStateOf(true) }
@@ -551,10 +459,10 @@ private fun HintsSection(
 
 @Composable
 private fun HintView(
-    modifier: Modifier = Modifier,
     color: Color,
     painter: Painter,
     text: String,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
 ) {
 
@@ -593,9 +501,9 @@ private fun HintView(
 
 @Composable
 private fun RecommendationPlacesSection(
-    modifier: Modifier = Modifier,
     uiState: SearchUiState,
-    onEvent: (new: SearchUserEvent) -> Unit,
+    onEvent: (screen: SearchUserEvent) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val town1 = stringResource(R.string.text_town_1)
     val town2 = stringResource(R.string.text_town_2)
@@ -640,9 +548,9 @@ private fun RecommendationPlacesSection(
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 private fun RecommendationPlaceView(
-    modifier: Modifier = Modifier,
     text: String,
     url: String?,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
 ) {
 
@@ -705,9 +613,9 @@ private fun RecommendationPlaceView(
 
 @Composable
 private fun TicketsOffersSection(
-    modifier: Modifier = Modifier,
     uiState: SearchUiState,
-    onEvent: (new: SearchUserEvent) -> Unit,
+    onEvent: (screen: SearchUserEvent) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val visibleState = remember { mutableStateOf(false) }
     visibleState.value = uiState.isArrivalCompleted
@@ -760,8 +668,8 @@ private fun TicketsOffersSection(
 
 @Composable
 private fun TicketOfferView(
-    modifier: Modifier = Modifier,
     color: Color,
+    modifier: Modifier = Modifier,
     new: TicketOfferUi? = null,
 ) {
     val stubText = stringResource(R.string.text_stub)
@@ -848,9 +756,10 @@ private fun TicketOfferView(
 
 @Composable
 private fun ButtonNavigateToShowAllTickets(
-    modifier: Modifier = Modifier,
     uiState: SearchUiState,
-    onEvent: (new: SearchUserEvent) -> Unit,
+    onEvent: (screen: SearchUserEvent) -> Unit,
+    onNavigationEvent: (app: NavigationEvent) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val visibleState = remember { mutableStateOf(false) }
     visibleState.value = uiState.isArrivalCompleted
@@ -866,7 +775,10 @@ private fun ButtonNavigateToShowAllTickets(
                 .fillMaxWidth()
                 .height(48.dp)
                 .background(color = colorResource(R.color.blue), shape = RoundedCornerShape(8.dp))
-                .clickable(onClick = { onEvent(SearchUserEvent.NavigateTo) })
+                .clickable(onClick = {
+                    val places = "${uiState.searchDeparture}-${uiState.searchArrival}"
+                    onNavigationEvent(NavigationEvent.ToTicketList(places))
+                })
                 .wrapContentHeight(),
             text = stringResource(R.string.action_navigate_to_show_all_tickets),
             maxLines = 1,
@@ -881,9 +793,9 @@ private fun ButtonNavigateToShowAllTickets(
 
 @Composable
 private fun ButtonSubscriptionToPrice(
-    modifier: Modifier = Modifier,
     uiState: SearchUiState,
-    onEvent: (new: SearchUserEvent) -> Unit,
+    onEvent: (screen: SearchUserEvent) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val visibleState = remember { mutableStateOf(false) }
     visibleState.value = uiState.isArrivalCompleted
@@ -954,5 +866,7 @@ private fun ScreenPreview() {
             ),
         ),
         onEvent = {},
+        onNavigationEvent = {},
+        onHide = {},
     )
 }
