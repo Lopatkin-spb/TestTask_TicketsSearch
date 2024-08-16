@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -21,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.testtask_ticketssearch.presentation.AppActivity
+import com.example.testtask_ticketssearch.presentation.TestTask_TicketsSearch_Theme
 import com.example.testtask_ticketssearch.presentation.ViewModelFactory
 import javax.inject.Inject
 
@@ -47,17 +49,15 @@ internal fun ProfileScreen(
 
 @Composable
 private fun Screen(text: String?, modifier: Modifier = Modifier) {
-    MaterialTheme {
-        text?.let { text ->
-            Box(modifier.fillMaxSize()) {
-                Text(
-                    text = text,
-                    modifier = modifier.fillMaxWidth().wrapContentHeight().align(Alignment.Center),
-                    textAlign = TextAlign.Center,
-                    color = Color.White, //TODO: set from theme
-                    fontSize = 20.sp,
-                )
-            }
+    text?.let { text ->
+        Box(modifier.fillMaxSize()) {
+            Text(
+                text = text,
+                modifier = modifier.fillMaxWidth().wrapContentHeight().align(Alignment.Center),
+                textAlign = TextAlign.Center,
+                color = Color.White, //TODO: set from theme
+                fontSize = 20.sp,
+            )
         }
     }
 }
@@ -65,5 +65,9 @@ private fun Screen(text: String?, modifier: Modifier = Modifier) {
 @Preview(showSystemUi = true)
 @Composable
 private fun ScreenPreview() {
-    Screen(text = "ProfileFragment")
+    TestTask_TicketsSearch_Theme {
+        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
+            Screen(text = "ProfileFragment")
+        }
+    }
 }

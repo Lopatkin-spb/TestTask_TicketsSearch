@@ -88,7 +88,6 @@ internal class SearchViewModel(
     }
 
     private fun setSearchDeparture(text: String?) {
-        Log.d("myTAG", "setSearchDeparture: text = $text")
         if (!text.isNullOrEmpty()) {
             val newUiState = _uiState.value?.copy(searchDeparture = text)
             _uiState.value = newUiState

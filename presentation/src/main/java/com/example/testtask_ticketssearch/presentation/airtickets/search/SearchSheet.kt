@@ -32,10 +32,9 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.testtask_ticketssearch.R
 import com.example.testtask_ticketssearch.domain.model.TicketOfferUi
-import com.example.testtask_ticketssearch.presentation.AppActivity
+import com.example.testtask_ticketssearch.presentation.*
 import com.example.testtask_ticketssearch.presentation.NavigationEvent
 import com.example.testtask_ticketssearch.presentation.OnLifecycleScreen
-import com.example.testtask_ticketssearch.presentation.ViewModelFactory
 import com.example.testtask_ticketssearch.presentation.airtickets.SearchField
 import javax.inject.Inject
 
@@ -87,76 +86,72 @@ private fun Screen(
     onHide: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-
-    MaterialTheme {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(
+                color = colorResource(R.color.gray_2),
+                shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
+            ),
+    ) {
         Box(
-            modifier = modifier
-                .fillMaxSize()
-                .background(
-                    color = colorResource(R.color.gray_2),
-                    shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
-                ),
-        ) {
-            Box(
-                modifier = Modifier
-                    .padding(top = 16.dp)
-                    .size(width = 38.dp, height = 5.dp)
-                    .background(color = colorResource(R.color.gray_5), shape = RoundedCornerShape(10.dp))
-                    .align(Alignment.TopCenter),
-            )
-            SearchSection(
-                modifier = Modifier
-                    .padding(start = 16.dp, top = 45.dp, end = 16.dp),
-                uiState = uiState,
-                onEvent = onEvent,
-            )
-            ChipsSection(
-                modifier = Modifier
-                    .padding(top = 188.dp),
-                uiState = uiState,
-                onEvent = onEvent,
-            )
-            HintsSection(
-                modifier = Modifier
-                    .padding(top = 165.dp),
-                uiState = uiState,
-                onEvent = onEvent,
-            )
-            RecommendationPlacesSection(
-                modifier = Modifier
-                    .padding(start = 16.dp, top = 285.dp, end = 16.dp),
-                uiState = uiState,
-                onEvent = onEvent,
-            )
-            TicketsOffersSection(
-                modifier = Modifier
-                    .padding(start = 16.dp, top = 233.dp, end = 16.dp),
-                uiState = uiState,
-                onEvent = onEvent,
-            )
-            ButtonNavigateToShowAllTickets(
-                modifier = Modifier
-                    .padding(start = 16.dp, top = 544.dp, end = 16.dp),
-                uiState = uiState,
-                onEvent = onEvent,
-                onNavigationEvent = onNavigationEvent,
-            )
-            ButtonSubscriptionToPrice(
-                modifier = Modifier
-                    .padding(start = 16.dp, top = 610.dp, end = 16.dp),
-                uiState = uiState,
-                onEvent = onEvent,
-            )
-            Snackbar(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter),
-                text = uiState.message,
-                textAction = uiState.messageAction,
-                onShowed = { onEvent(SearchUserEvent.MessageShowed) },
-                onAction = onHide,
-            )
-        }
-
+            modifier = Modifier
+                .padding(top = 16.dp)
+                .size(width = 38.dp, height = 5.dp)
+                .background(color = colorResource(R.color.gray_5), shape = RoundedCornerShape(10.dp))
+                .align(Alignment.TopCenter),
+        )
+        SearchSection(
+            modifier = Modifier
+                .padding(start = 16.dp, top = 45.dp, end = 16.dp),
+            uiState = uiState,
+            onEvent = onEvent,
+        )
+        ChipsSection(
+            modifier = Modifier
+                .padding(top = 188.dp),
+            uiState = uiState,
+            onEvent = onEvent,
+        )
+        HintsSection(
+            modifier = Modifier
+                .padding(top = 165.dp),
+            uiState = uiState,
+            onEvent = onEvent,
+        )
+        RecommendationPlacesSection(
+            modifier = Modifier
+                .padding(start = 16.dp, top = 285.dp, end = 16.dp),
+            uiState = uiState,
+            onEvent = onEvent,
+        )
+        TicketsOffersSection(
+            modifier = Modifier
+                .padding(start = 16.dp, top = 233.dp, end = 16.dp),
+            uiState = uiState,
+            onEvent = onEvent,
+        )
+        ButtonNavigateToShowAllTickets(
+            modifier = Modifier
+                .padding(start = 16.dp, top = 544.dp, end = 16.dp),
+            uiState = uiState,
+            onEvent = onEvent,
+            onNavigationEvent = onNavigationEvent,
+        )
+        ButtonSubscriptionToPrice(
+            modifier = Modifier
+                .padding(start = 16.dp, top = 610.dp, end = 16.dp),
+            uiState = uiState,
+            onEvent = onEvent,
+        )
+        Snackbar(
+            modifier = Modifier
+                .align(Alignment.BottomCenter),
+            text = uiState.message,
+            textAction = uiState.messageAction,
+            onShowed = { onEvent(SearchUserEvent.MessageShowed) },
+            onAction = onHide,
+        )
     }
 }
 
@@ -840,33 +835,37 @@ private fun ButtonSubscriptionToPrice(
 @Preview(showSystemUi = true)
 @Composable
 private fun ScreenPreview() {
-    Screen(
-        uiState = SearchUiState(
-            isArrivalCompleted = true,
-            searchDeparture = "hrhgfhgfht",
-            ticketsOffers = listOf(
-                TicketOfferUi(
-                    id = 1,
-                    title = "Уральские пельмени",
-                    timeFlights = "07:00 09:10 10:00 11:00 12:00 13:00 12:00",
-                    price = "34.666",
+    TestTask_TicketsSearch_Theme {
+        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
+            Screen(
+                uiState = SearchUiState(
+                    isArrivalCompleted = true,
+                    searchDeparture = "hrhgfhgfht",
+                    ticketsOffers = listOf(
+                        TicketOfferUi(
+                            id = 1,
+                            title = "Уральские пельмени",
+                            timeFlights = "07:00 09:10 10:00 11:00 12:00 13:00 12:00",
+                            price = "34.666",
+                        ),
+                        TicketOfferUi(
+                            id = 2,
+                            title = "Уральские пельмени",
+                            timeFlights = "07:00 09:10 10:00 11:00 12:00 13:00 12:00",
+                            price = "",
+                        ),
+                        TicketOfferUi(
+                            id = 3,
+                            title = "",
+                            timeFlights = "",
+                            price = "34.666",
+                        ),
+                    ),
                 ),
-                TicketOfferUi(
-                    id = 2,
-                    title = "Уральские пельмени",
-                    timeFlights = "07:00 09:10 10:00 11:00 12:00 13:00 12:00",
-                    price = "",
-                ),
-                TicketOfferUi(
-                    id = 3,
-                    title = "",
-                    timeFlights = "",
-                    price = "34.666",
-                ),
-            ),
-        ),
-        onEvent = {},
-        onNavigationEvent = {},
-        onHide = {},
-    )
+                onEvent = {},
+                onNavigationEvent = {},
+                onHide = {},
+            )
+        }
+    }
 }

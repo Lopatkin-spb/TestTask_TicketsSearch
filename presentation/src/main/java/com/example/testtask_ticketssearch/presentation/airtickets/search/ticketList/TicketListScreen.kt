@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -26,10 +27,9 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.testtask_ticketssearch.R
 import com.example.testtask_ticketssearch.domain.model.TicketUi
-import com.example.testtask_ticketssearch.presentation.AppActivity
+import com.example.testtask_ticketssearch.presentation.*
 import com.example.testtask_ticketssearch.presentation.NavigationEvent
 import com.example.testtask_ticketssearch.presentation.OnLifecycleScreen
-import com.example.testtask_ticketssearch.presentation.ViewModelFactory
 import com.example.testtask_ticketssearch.presentation.airtickets.search.Snackbar
 import javax.inject.Inject
 
@@ -77,50 +77,47 @@ private fun Screen(
     onEvent: (screen: TicketListUserEvent) -> Unit,
     onNavigationEvent: (app: NavigationEvent) -> Unit,
 ) {
-    MaterialTheme {
-
+    Box(
+        modifier = modifier
+            .fillMaxSize(),
+    ) {
+        SearchDetails(
+            modifier = Modifier
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp),
+            uiState = uiState,
+            onNavigationEvent = onNavigationEvent,
+        )
+        TicketsList(
+            modifier = Modifier
+                .padding(start = 16.dp, top = 106.dp, end = 16.dp),
+            new = uiState.tickets,
+            onEvent = onEvent,
+        )
         Box(
-            modifier = modifier
-                .fillMaxSize(),
+            modifier = Modifier
+                .background(color = colorResource(R.color.blue), shape = RoundedCornerShape(50.dp))
+                .height(37.dp)
+                .wrapContentWidth()
+                .clickable(onClick = {})
+                .padding(horizontal = 16.dp)
+                .align(Alignment.BottomCenter),
         ) {
-            SearchDetails(
+            Text(
                 modifier = Modifier
-                    .padding(start = 16.dp, top = 16.dp, end = 16.dp),
-                uiState = uiState,
-                onNavigationEvent = onNavigationEvent,
-            )
-            TicketsList(
-                modifier = Modifier
-                    .padding(start = 16.dp, top = 106.dp, end = 16.dp),
-                new = uiState.tickets,
-                onEvent = onEvent,
-            )
-            Box(
-                modifier = Modifier
-                    .background(color = colorResource(R.color.blue), shape = RoundedCornerShape(50.dp))
-                    .height(37.dp)
-                    .wrapContentWidth()
-                    .clickable(onClick = {})
-                    .padding(horizontal = 16.dp)
-                    .align(Alignment.BottomCenter),
-            ) {
-                Text(
-                    modifier = Modifier
-                        .align(Alignment.Center),
-                    text = stringResource(R.string.text_bottom_stub),
-                    style = TextStyle(
-                        color = colorResource(R.color.white),
-                        fontSize = 14.sp,
-                    ),
-                )
-            }
-            Snackbar(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter),
-                text = uiState.message,
-                onShowed = { onEvent(TicketListUserEvent.MessageShowed) },
+                    .align(Alignment.Center),
+                text = stringResource(R.string.text_bottom_stub),
+                style = TextStyle(
+                    color = colorResource(R.color.white),
+                    fontSize = 14.sp,
+                ),
             )
         }
+        Snackbar(
+            modifier = Modifier
+                .align(Alignment.BottomCenter),
+            text = uiState.message,
+            onShowed = { onEvent(TicketListUserEvent.MessageShowed) },
+        )
     }
 }
 
@@ -182,46 +179,50 @@ private fun SearchDetails(
 @Preview(showSystemUi = true)
 @Composable
 private fun ScreenPreview() {
-    Screen(
-        onEvent = {},
-        onNavigationEvent = {},
-        uiState = TicketListUiState(
-            searchPlaces = "Moskow-CPb",
-            tickets = listOf(
-                TicketUi(
-                    id = 1,
-                    isBadgeVisible = false,
-                    badgeText = "String",
-                    price = "0099",
-                    departureTime = "12:55",
-                    departureAirport = "RTY",
-                    arrivalTime = "56:11",
-                    arrivalAirport = "CV",
-                    hasTransfer = false,
-                ),
-                TicketUi(
-                    id = 2,
-                    isBadgeVisible = true,
-                    badgeText = "String",
-                    price = "0099",
-                    departureTime = "12:55",
-                    departureAirport = "RTY",
-                    arrivalTime = "56:11",
-                    arrivalAirport = "CV",
-                    hasTransfer = true,
-                ),
-                TicketUi(
-                    id = 3,
-                    isBadgeVisible = false,
-                    badgeText = "",
-                    price = "",
-                    departureTime = "",
-                    departureAirport = "",
-                    arrivalTime = "",
-                    arrivalAirport = "",
-                    hasTransfer = false,
+    TestTask_TicketsSearch_Theme {
+        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
+            Screen(
+                onEvent = {},
+                onNavigationEvent = {},
+                uiState = TicketListUiState(
+                    searchPlaces = "Moskow-CPb",
+                    tickets = listOf(
+                        TicketUi(
+                            id = 1,
+                            isBadgeVisible = false,
+                            badgeText = "String",
+                            price = "0099",
+                            departureTime = "12:55",
+                            departureAirport = "RTY",
+                            arrivalTime = "56:11",
+                            arrivalAirport = "CV",
+                            hasTransfer = false,
+                        ),
+                        TicketUi(
+                            id = 2,
+                            isBadgeVisible = true,
+                            badgeText = "String",
+                            price = "0099",
+                            departureTime = "12:55",
+                            departureAirport = "RTY",
+                            arrivalTime = "56:11",
+                            arrivalAirport = "CV",
+                            hasTransfer = true,
+                        ),
+                        TicketUi(
+                            id = 3,
+                            isBadgeVisible = false,
+                            badgeText = "",
+                            price = "",
+                            departureTime = "",
+                            departureAirport = "",
+                            arrivalTime = "",
+                            arrivalAirport = "",
+                            hasTransfer = false,
+                        ),
+                    )
                 ),
             )
-        ),
-    )
+        }
+    }
 }

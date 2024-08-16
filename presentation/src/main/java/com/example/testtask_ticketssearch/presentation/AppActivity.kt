@@ -3,6 +3,7 @@ package com.example.testtask_ticketssearch.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -30,7 +31,11 @@ class AppActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            Screen()
+            TestTask_TicketsSearch_Theme {
+                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
+                    Screen()
+                }
+            }
         }
     }
 }
@@ -39,22 +44,16 @@ class AppActivity : ComponentActivity() {
 private fun Screen(
     modifier: Modifier = Modifier,
 ) {
-    MaterialTheme(
-        colors = darkColors(
-            background = colorResource(R.color.black),
-        ),
-    ) {
-        val navController = rememberNavController()
+    val navController = rememberNavController()
 
-        Scaffold(
-            bottomBar = { BottomNavBar(navController) },
-        ) { innerPadding ->
-            BottomNavHost(
-                modifier = modifier
-                    .padding(innerPadding),
-                navController = navController,
-            )
-        }
+    Scaffold(
+        bottomBar = { BottomNavBar(navController) },
+    ) { innerPadding ->
+        BottomNavHost(
+            modifier = modifier
+                .padding(innerPadding),
+            navController = navController,
+        )
     }
 }
 
@@ -95,5 +94,9 @@ private fun BottomNavBar(
 @Preview(showSystemUi = true)
 @Composable
 private fun ScreenPreview() {
-    Screen()
+    TestTask_TicketsSearch_Theme {
+        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
+            Screen()
+        }
+    }
 }

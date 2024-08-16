@@ -71,62 +71,59 @@ private fun Screen(
     onNavigationEvent: (app: NavigationEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    Box(
+        modifier = modifier
+            .fillMaxSize(),
+    ) {
+        Text(
+            modifier = Modifier
+                .padding(start = 94.dp, top = 60.dp, end = 94.dp)
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            text = stringResource(R.string.title_search),
+            textAlign = TextAlign.Center,
+            style = TextStyle(
+                color = colorResource(R.color.gray_8), //TODO: set from theme
+                fontSize = 22.sp,
+            ),
+        )
+        SearchSection(
+            modifier = Modifier
+                .padding(start = 15.dp, top = 148.dp, end = 15.dp),
+            uiState = uiState,
+            onEvent = onEvent,
+            onNavigationEvent = onNavigationEvent,
+        )
+        Text(
+            modifier = Modifier
+                .padding(start = 15.dp, top = 305.dp, end = 15.dp)
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            text = stringResource(R.string.header_offers),
+            maxLines = 1,
+            style = TextStyle(
+                color = colorResource(R.color.white), //TODO: set from theme
+                fontSize = 22.sp,
+            ),
+        )
+        EventsOffersSection(
+            modifier = Modifier
+                .padding(start = 16.dp, top = 350.dp, end = 16.dp),
+            new = uiState.eventsOffers,
+        )
 
-    MaterialTheme {
-        Box(
-            modifier = modifier
-                .fillMaxSize(),
-        ) {
-            Text(
-                modifier = Modifier
-                    .padding(start = 94.dp, top = 60.dp, end = 94.dp)
-                    .fillMaxWidth()
-                    .wrapContentHeight(),
-                text = stringResource(R.string.title_search),
-                textAlign = TextAlign.Center,
-                style = TextStyle(
-                    color = colorResource(R.color.gray_8), //TODO: set from theme
-                    fontSize = 22.sp,
-                ),
+        if (uiState.stateBottomSheet != null) {
+            BottomSheet(
+                sheetContent = {
+                    SearchSheet(
+                        placeDeparture = uiState.placeDeparture?.name,
+                        onNavigationEvent = onNavigationEvent,
+                        onHide = { onEvent(AirticketsUserEvent.OnBottomSheetStateChange(false)) },
+                    )
+                },
+                outsideManagement = uiState.stateBottomSheet,
+                resetOutsideState = { onEvent(AirticketsUserEvent.OnBottomSheetStateChange(null)) },
             )
-            SearchSection(
-                modifier = Modifier
-                    .padding(start = 15.dp, top = 148.dp, end = 15.dp),
-                uiState = uiState,
-                onEvent = onEvent,
-                onNavigationEvent = onNavigationEvent,
-            )
-            Text(
-                modifier = Modifier
-                    .padding(start = 15.dp, top = 305.dp, end = 15.dp)
-                    .fillMaxWidth()
-                    .wrapContentHeight(),
-                text = stringResource(R.string.header_offers),
-                maxLines = 1,
-                style = TextStyle(
-                    color = colorResource(R.color.white), //TODO: set from theme
-                    fontSize = 22.sp,
-                ),
-            )
-            EventsOffersSection(
-                modifier = Modifier
-                    .padding(start = 16.dp, top = 350.dp, end = 16.dp),
-                new = uiState.eventsOffers,
-            )
-
-            if (uiState.stateBottomSheet != null) {
-                BottomSheet(
-                    sheetContent = {
-                        SearchSheet(
-                            placeDeparture = uiState.placeDeparture?.name,
-                            onNavigationEvent = onNavigationEvent,
-                            onHide = { onEvent(AirticketsUserEvent.OnBottomSheetStateChange(false)) },
-                        )
-                    },
-                    outsideManagement = uiState.stateBottomSheet,
-                    resetOutsideState = { onEvent(AirticketsUserEvent.OnBottomSheetStateChange(null)) },
-                )
-            }
         }
     }
 }
@@ -254,34 +251,38 @@ private fun BottomSheet(
 @Preview(showSystemUi = true)
 @Composable
 private fun ScreenPreview() {
-    Screen(
-        onEvent = {},
-        onNavigationEvent = {},
-        uiState = AirticketsUiState(
-            eventsOffers = listOf(
-                EventOfferUi(
-                    id = 1,
-                    title = "title",
-                    town = "town",
-                    price = "",
-                    url = null,
-                ),
-                EventOfferUi(
-                    id = 2,
-                    title = "title",
-                    town = "",
-                    price = "00999",
-                    url = null,
-                ),
-                EventOfferUi(
-                    id = 3,
-                    title = "",
-                    town = "",
-                    price = "",
-                    url = null,
+    TestTask_TicketsSearch_Theme {
+        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
+            Screen(
+                onEvent = {},
+                onNavigationEvent = {},
+                uiState = AirticketsUiState(
+                    eventsOffers = listOf(
+                        EventOfferUi(
+                            id = 1,
+                            title = "title",
+                            town = "town",
+                            price = "",
+                            url = null,
+                        ),
+                        EventOfferUi(
+                            id = 2,
+                            title = "title",
+                            town = "",
+                            price = "00999",
+                            url = null,
+                        ),
+                        EventOfferUi(
+                            id = 3,
+                            title = "",
+                            town = "",
+                            price = "",
+                            url = null,
+                        ),
+                    )
                 ),
             )
-        ),
-    )
+        }
+    }
 }
 
