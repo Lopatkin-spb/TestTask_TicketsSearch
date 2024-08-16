@@ -28,6 +28,7 @@ import com.example.testtask_ticketssearch.R
 import com.example.testtask_ticketssearch.domain.model.TicketUi
 import com.example.testtask_ticketssearch.presentation.AppActivity
 import com.example.testtask_ticketssearch.presentation.NavigationEvent
+import com.example.testtask_ticketssearch.presentation.OnLifecycleScreen
 import com.example.testtask_ticketssearch.presentation.ViewModelFactory
 import com.example.testtask_ticketssearch.presentation.airtickets.search.Snackbar
 import javax.inject.Inject
@@ -53,8 +54,12 @@ internal fun TicketListScreen(
 ) {
     val uiState by viewModel.uiState.observeAsState()
 
-    viewModel.handle(TicketListUserEvent.OnScreenOpen)
-    viewModel.handle(TicketListUserEvent.OnSearchPlacesChange(searchPlaces))
+    OnLifecycleScreen(
+        onStart = {
+            viewModel.handle(TicketListUserEvent.OnScreenOpen)
+            viewModel.handle(TicketListUserEvent.OnSearchPlacesChange(searchPlaces))
+        }
+    )
 
     uiState?.let { state ->
         Screen(

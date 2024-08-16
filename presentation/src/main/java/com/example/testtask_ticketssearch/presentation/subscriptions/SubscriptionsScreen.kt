@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.presentation.profile
+package com.example.testtask_ticketssearch.presentation.subscriptions
 
 import android.content.Context
 import androidx.compose.foundation.layout.Box
@@ -26,20 +26,20 @@ import javax.inject.Inject
 
 
 @Stable
-class ProfileDaggerContainer {
+class SubscriptionsDaggerContainer {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 }
 
 @Composable
-internal fun ProfileScreen(
+internal fun SubscriptionsScreen(
     context: Context = LocalContext.current,
-    container: ProfileDaggerContainer = remember {
-        ProfileDaggerContainer().also { container ->
+    container: SubscriptionsDaggerContainer = remember {
+        SubscriptionsDaggerContainer().also { container ->
             (context as AppActivity).presentationComponent.inject(container)
         }
     },
-    viewModel: ProfileViewModel = viewModel(factory = container.viewModelFactory),
+    viewModel: SubscriptionsViewModel = viewModel(factory = container.viewModelFactory),
 ) {
     val text by viewModel.text.observeAsState()
     Screen(text)
@@ -65,6 +65,5 @@ private fun Screen(text: String?, modifier: Modifier = Modifier) {
 @Preview(showSystemUi = true)
 @Composable
 private fun ScreenPreview() {
-    val text = "ProfileFragment"
-    Screen(text)
+    Screen(text = "some text")
 }

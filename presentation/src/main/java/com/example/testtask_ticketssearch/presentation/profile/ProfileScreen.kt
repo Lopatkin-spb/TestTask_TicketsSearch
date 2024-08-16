@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.presentation.hotels
+package com.example.testtask_ticketssearch.presentation.profile
 
 import android.content.Context
 import androidx.compose.foundation.layout.Box
@@ -26,20 +26,20 @@ import javax.inject.Inject
 
 
 @Stable
-class HotelsDaggerContainer {
+class ProfileDaggerContainer {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 }
 
 @Composable
-internal fun HotelsScreen(
+internal fun ProfileScreen(
     context: Context = LocalContext.current,
-    container: HotelsDaggerContainer = remember {
-        HotelsDaggerContainer().also { container ->
+    container: ProfileDaggerContainer = remember {
+        ProfileDaggerContainer().also { container ->
             (context as AppActivity).presentationComponent.inject(container)
         }
     },
-    viewModel: HotelsViewModel = viewModel(factory = container.viewModelFactory),
+    viewModel: ProfileViewModel = viewModel(factory = container.viewModelFactory),
 ) {
     val text by viewModel.text.observeAsState()
     Screen(text)
@@ -65,6 +65,5 @@ private fun Screen(text: String?, modifier: Modifier = Modifier) {
 @Preview(showSystemUi = true)
 @Composable
 private fun ScreenPreview() {
-    val text = "HotelsFragment"
-    Screen(text)
+    Screen(text = "ProfileFragment")
 }

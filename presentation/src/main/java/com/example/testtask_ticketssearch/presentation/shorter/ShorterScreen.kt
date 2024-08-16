@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.presentation.subscriptions
+package com.example.testtask_ticketssearch.presentation.shorter
 
 import android.content.Context
 import androidx.compose.foundation.layout.Box
@@ -26,27 +26,27 @@ import javax.inject.Inject
 
 
 @Stable
-class SubscriptionsDaggerContainer {
+class ShorterDaggerContainer {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 }
 
 @Composable
-internal fun SubscriptionsScreen(
+internal fun ShorterScreen(
     context: Context = LocalContext.current,
-    container: SubscriptionsDaggerContainer = remember {
-        SubscriptionsDaggerContainer().also { container ->
+    container: ShorterDaggerContainer = remember {
+        ShorterDaggerContainer().also { container ->
             (context as AppActivity).presentationComponent.inject(container)
         }
     },
-    viewModel: SubscriptionsViewModel = viewModel(factory = container.viewModelFactory),
+    viewModel: ShorterViewModel = viewModel(factory = container.viewModelFactory),
 ) {
     val text by viewModel.text.observeAsState()
-    SubscriptionsScreen(text)
+    Screen(text)
 }
 
 @Composable
-private fun SubscriptionsScreen(text: String?, modifier: Modifier = Modifier) {
+private fun Screen(text: String?, modifier: Modifier = Modifier) {
     MaterialTheme {
         text?.let { text ->
             Box(modifier.fillMaxSize()) {
@@ -64,7 +64,6 @@ private fun SubscriptionsScreen(text: String?, modifier: Modifier = Modifier) {
 
 @Preview(showSystemUi = true)
 @Composable
-private fun SubscriptionsScreenPreview() {
-    val text = "some text"
-    SubscriptionsScreen(text)
+private fun ScreenPreview() {
+    Screen(text = "ShorterFragment")
 }

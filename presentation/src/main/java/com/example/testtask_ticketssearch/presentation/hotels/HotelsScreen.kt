@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.presentation.shorter
+package com.example.testtask_ticketssearch.presentation.hotels
 
 import android.content.Context
 import androidx.compose.foundation.layout.Box
@@ -26,20 +26,20 @@ import javax.inject.Inject
 
 
 @Stable
-class ShorterDaggerContainer {
+class HotelsDaggerContainer {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 }
 
 @Composable
-internal fun ShorterScreen(
+internal fun HotelsScreen(
     context: Context = LocalContext.current,
-    container: ShorterDaggerContainer = remember {
-        ShorterDaggerContainer().also { container ->
+    container: HotelsDaggerContainer = remember {
+        HotelsDaggerContainer().also { container ->
             (context as AppActivity).presentationComponent.inject(container)
         }
     },
-    viewModel: ShorterViewModel = viewModel(factory = container.viewModelFactory),
+    viewModel: HotelsViewModel = viewModel(factory = container.viewModelFactory),
 ) {
     val text by viewModel.text.observeAsState()
     Screen(text)
@@ -65,6 +65,5 @@ private fun Screen(text: String?, modifier: Modifier = Modifier) {
 @Preview(showSystemUi = true)
 @Composable
 private fun ScreenPreview() {
-    val text = "ShorterFragment"
-    Screen(text)
+    Screen(text = "HotelsFragment")
 }
