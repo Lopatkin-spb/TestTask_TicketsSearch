@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testtask_ticketssearch._interface.CoroutineDispatchers
+import com.example.testtask_ticketssearch.domain.toUi
 import com.example.testtask_ticketssearch.domain.usecase.GetTicketListBySearchPlacesUseCase
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.Job
@@ -32,7 +33,7 @@ internal class TicketListViewModel(
             getTicketListBySearchPlacesUseCase.execute()
                 .cancellable()
                 .onEach { list ->
-                    val newUiState = _uiState.value?.copy(tickets = list)
+                    val newUiState = _uiState.value?.copy(tickets = list.map { it.toUi() })
                     _uiState.value = newUiState
                 }
                 .catch { cause -> handleThrowable(cause) }
