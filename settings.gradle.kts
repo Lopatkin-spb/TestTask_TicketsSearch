@@ -22,3 +22,4 @@ include(":interface")
 // Feature
 include(":feature:profile")
 include(":feature:subscriptions")
+include(":feature:ticketList")

@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.presentation.airtickets.search.ticketList
+package com.example.ticketlist.presentation
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testtask_ticketssearch._interface.CoroutineDispatchers
-import com.example.testtask_ticketssearch.domain.toUi
-import com.example.testtask_ticketssearch.domain.usecase.GetTicketListBySearchPlacesUseCase
+import com.example.ticketlist.domain.toUi
+import com.example.ticketlist.domain.usecase.GetTicketListBySearchPlacesUseCase
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*

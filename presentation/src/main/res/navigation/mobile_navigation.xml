@@ -40,7 +40,7 @@
 
     <fragment
             android:id="@+id/navigation_ticket_list"
-            android:name="com.example.testtask_ticketssearch.presentation.airtickets.search.ticketList.TicketListFragment"
+            android:name="com.example.ticketlist.presentation.TicketListFragment"
             android:label="@string/title_ticket_list"
             tools:layout="@layout/fragment_ticket_list"/>
 

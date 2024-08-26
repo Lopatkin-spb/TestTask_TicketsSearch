@@ -16,7 +16,7 @@ import com.example.testtask_ticketssearch.databinding.DialogSearchBinding
 import com.example.testtask_ticketssearch.domain.model.TicketOfferUi
 import com.example.testtask_ticketssearch.presentation.AppActivity
 import com.example.testtask_ticketssearch.presentation.ViewModelFactory
-import com.example.testtask_ticketssearch.presentation.airtickets.search.ticketList.TicketListFragment
+import com.example.ticketlist.presentation.TicketListFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar

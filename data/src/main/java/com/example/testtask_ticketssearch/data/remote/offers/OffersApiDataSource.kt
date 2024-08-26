@@ -45,36 +45,4 @@ internal class OffersApiDataSource(
             .flowOn(dispatchers.io())
     }
 
-    override fun getTickets(): Flow<List<Ticket>> {
-        return flow { emit(api.getTickets()) }
-            .map { response -> response.tickets }
-            .map { dtos ->
-                dtos.map { dto ->
-                    val departure = dto.departure?.let {
-                        Departure(
-                            town = it.town,
-                            date = it.date,
-                            airport = it.airport,
-                        )
-                    }
-                    val arrival = dto.arrival?.let {
-                        Arrival(
-                            town = it.town,
-                            date = it.date,
-                            airport = it.airport,
-                        )
-                    }
-                    Ticket(
-                        id = dto.id,
-                        badge = dto.badge,
-                        price = dto.price?.value,
-                        departure = departure,
-                        arrival = arrival,
-                        hasTransfer = dto.hasTransfer,
-                    )
-                }
-            }
-            .flowOn(dispatchers.io())
-    }
-
 }

@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.domain.model
+package com.example.ticketlist.domain.model
 
 
 data class Ticket(

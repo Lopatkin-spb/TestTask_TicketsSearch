@@ -1,7 +1,7 @@
-package com.example.testtask_ticketssearch.domain.usecase
+package com.example.ticketlist.domain.usecase
 
-import com.example.testtask_ticketssearch.domain.model.Ticket
-import com.example.testtask_ticketssearch.domain.repository.OffersRepository
+import com.example.ticketlist.domain.model.Ticket
+import com.example.ticketlist.domain.repository.OffersRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetTicketListBySearchPlacesUseCase(private val repository: OffersRepository) {

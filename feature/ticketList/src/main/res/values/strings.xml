@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_ticket_list">Просмотр билетов</string>
+
+    <string name="text_ticket_price">%s ₽</string>
+    <string name="text_travel_time">0.00ч в пути</string>
+    <string name="text_travel_time_without_transfer">0.00ч в пути / Без пересадок</string>
+    <string name="text_stub">--</string>
+    <string name="text_bottom_stub">Фильтр      График цен</string>
+</resources>

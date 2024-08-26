@@ -9,9 +9,12 @@ import com.example.testtask_ticketssearch.di.PresentationComponent
 import com.example.testtask_ticketssearch.di.PresentationComponentProvider
 import com.example.testtask_ticketssearch.di.AppComponent
 import com.example.testtask_ticketssearch.di.DaggerAppComponent
+import com.example.ticketlist.di.TicketListComponent
+import com.example.ticketlist.di.TicketListComponentProvider
 
 internal class TTTSApp : Application(),
-    PresentationComponentProvider, ProfileComponentProvider, SubscriptionsComponentProvider {
+    PresentationComponentProvider, ProfileComponentProvider, SubscriptionsComponentProvider,
+    TicketListComponentProvider {
 
     lateinit var appComponent: AppComponent
 
@@ -36,6 +39,10 @@ internal class TTTSApp : Application(),
 
     override fun provideSubscriptionsComponent(): SubscriptionsComponent {
         return appComponent.subscriptionsComponent().create()
+    }
+
+    override fun provideTicketListComponent(): TicketListComponent {
+        return appComponent.ticketListComponent().create()
     }
 
 }

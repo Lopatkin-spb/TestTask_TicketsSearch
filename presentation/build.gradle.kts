@@ -42,6 +42,7 @@ dependencies {
     // Feature
     implementation(project(":feature:profile"))
     implementation(project(":feature:subscriptions"))
+    implementation(project(":feature:ticketList"))
 
     /**
      * Core

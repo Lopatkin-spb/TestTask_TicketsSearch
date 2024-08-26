@@ -5,6 +5,8 @@ import com.example.profile.di.ProfileComponent
 import com.example.profile.di.ProfileModule
 import com.example.subscriptions.di.SubscriptionsComponent
 import com.example.subscriptions.di.SubscriptionsModule
+import com.example.ticketlist.di.TicketListComponent
+import com.example.ticketlist.di.TicketListModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -19,6 +21,7 @@ import javax.inject.Singleton
         InterfaceModule::class,
         ProfileModule::class,
         SubscriptionsModule::class,
+        TicketListModule::class,
     ]
 )
 interface AppComponent {
@@ -38,5 +41,7 @@ interface AppComponent {
     fun profileComponent(): ProfileComponent.Factory
 
     fun subscriptionsComponent(): SubscriptionsComponent.Factory
+
+    fun ticketListComponent(): TicketListComponent.Factory
 
 }

@@ -4,7 +4,6 @@ import android.util.Log
 import com.example.testtask_ticketssearch.data.local.dataSource.OffersLocalDataSource
 import com.example.testtask_ticketssearch.data.remote.dataSource.OffersRemoteDataSource
 import com.example.testtask_ticketssearch.domain.model.EventOffer
-import com.example.testtask_ticketssearch.domain.model.Ticket
 import com.example.testtask_ticketssearch.domain.model.TicketOffer
 import com.example.testtask_ticketssearch.domain.repository.OffersRepository
 import kotlinx.coroutines.flow.Flow
@@ -34,18 +33,6 @@ internal class OffersRepositoryImpl(
                 if (cause is Exception) {
                     Log.w("TAG", "OffersRepositoryImpl getTicketsOffers: ${cause.message}", cause)
                     emit(offersLocalDataSource.getTicketsOffers().first())
-                } else {
-                    throw cause
-                }
-            }
-    }
-
-    override fun getTickets(): Flow<List<Ticket>> {
-        return offersRemoteDataSource.getTickets()
-            .catch { cause ->
-                if (cause is Exception) {
-                    Log.w("TAG", "OffersRepositoryImpl getTickets: ${cause.message}", cause)
-                    emit(offersLocalDataSource.getTickets().first())
                 } else {
                     throw cause
                 }

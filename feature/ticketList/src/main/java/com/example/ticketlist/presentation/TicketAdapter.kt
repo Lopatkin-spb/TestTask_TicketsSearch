@@ -1,11 +1,11 @@
-package com.example.testtask_ticketssearch.presentation.airtickets.search.ticketList
+package com.example.ticketlist.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.testtask_ticketssearch.databinding.ItemTicketBinding
-import com.example.testtask_ticketssearch.domain.model.TicketUi
+import com.example.ticketlist.databinding.ItemTicketBinding
+import com.example.ticketlist.domain.model.TicketUi
 
 internal class TicketAdapter(
     private val onItemClickTest: (model: TicketUi) -> Unit,

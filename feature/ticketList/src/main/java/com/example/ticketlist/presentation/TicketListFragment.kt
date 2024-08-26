@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.presentation.airtickets.search.ticketList
+package com.example.ticketlist.presentation
 
 import android.content.Context
 import android.os.Bundle
@@ -9,10 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.testtask_ticketssearch.databinding.FragmentTicketListBinding
-import com.example.testtask_ticketssearch.domain.model.TicketUi
-import com.example.testtask_ticketssearch.presentation.AppActivity
-import com.example.testtask_ticketssearch.presentation.ViewModelFactory
+import com.example.ticketlist.databinding.FragmentTicketListBinding
+import com.example.ticketlist.di.TicketListComponentProvider
+import com.example.ticketlist.domain.model.TicketUi
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
@@ -37,7 +36,7 @@ class TicketListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as AppActivity).presentationComponent.inject(this)
+        (context.applicationContext as TicketListComponentProvider).provideTicketListComponent().inject(this)
     }
 
     override fun onCreateView(

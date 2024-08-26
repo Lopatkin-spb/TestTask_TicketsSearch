@@ -47,6 +47,7 @@ dependencies {
     // Feature
     implementation(project(":feature:profile"))
     implementation(project(":feature:subscriptions"))
+    implementation(project(":feature:ticketList"))
 
     /**
      * Core: for resolve dagger dependencies
@@ -57,6 +58,7 @@ dependencies {
      * DI: Dagger 2
      */
     implementation(libs.dagger)
+    implementation(project(mapOf("path" to ":feature:ticketList")))
     kapt(libs.dagger.compiler)
     implementation(libs.javax.inject)
 
