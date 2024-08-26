@@ -39,6 +39,8 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":interface"))
+    // Feature
+    implementation(project(":feature:profile"))
 
     /**
      * Core

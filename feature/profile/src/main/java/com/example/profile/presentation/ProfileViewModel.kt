@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.presentation.profile
+package com.example.profile.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

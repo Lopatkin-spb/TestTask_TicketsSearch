@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.presentation.profile
+package com.example.profile.presentation
 
 import android.content.Context
 import android.os.Bundle
@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.testtask_ticketssearch.databinding.FragmentProfileBinding
-import com.example.testtask_ticketssearch.presentation.AppActivity
-import com.example.testtask_ticketssearch.presentation.ViewModelFactory
+import com.example.profile.databinding.FragmentProfileBinding
+import com.example.profile.di.ProfileComponentProvider
 import javax.inject.Inject
 
 class ProfileFragment : Fragment() {
@@ -25,7 +24,7 @@ class ProfileFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as AppActivity).presentationComponent.inject(this)
+        (context.applicationContext as ProfileComponentProvider).provideProfileComponent().inject(this)
     }
 
     override fun onCreateView(

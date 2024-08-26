@@ -1,21 +1,19 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
 }
 
 android {
-    namespace = "com.example.testtask_ticketssearch"
+    namespace = "com.example.profile"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.testtask_ticketssearch"
         minSdk = 33
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -31,26 +29,28 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
     buildFeatures {
-        viewBinding = false
+        viewBinding = true
         dataBinding = false
     }
-
 }
 
 dependencies {
-    implementation(project(":domain"))
-    implementation(project(":data"))
-    implementation(project(":presentation"))
-    implementation(project(":interface"))
-    // Feature
-    implementation(project(":feature:profile"))
 
     /**
-     * Core: for resolve dagger dependencies
+     * Core
      */
+    implementation(libs.ktx.core)
+    implementation(libs.appcompat)
     implementation(libs.android.material)
+    implementation(libs.constraintlayout)
+
+    /**
+     * Android Jetpack: ViewModel & Lifecycle
+     */
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    kapt(libs.lifecycle.compiler)
 
     /**
      * DI: Dagger 2

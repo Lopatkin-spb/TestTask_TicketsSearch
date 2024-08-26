@@ -18,3 +18,6 @@ include(":domain")
 include(":data")
 include(":presentation")
 include(":interface")
+
+// Feature
+include(":feature:profile")

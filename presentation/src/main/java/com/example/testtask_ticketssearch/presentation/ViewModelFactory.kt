@@ -8,7 +8,6 @@ import com.example.testtask_ticketssearch.presentation.airtickets.AirticketsView
 import com.example.testtask_ticketssearch.presentation.airtickets.search.SearchViewModel
 import com.example.testtask_ticketssearch.presentation.airtickets.search.ticketList.TicketListViewModel
 import com.example.testtask_ticketssearch.presentation.hotels.HotelsViewModel
-import com.example.testtask_ticketssearch.presentation.profile.ProfileViewModel
 import com.example.testtask_ticketssearch.presentation.shorter.ShorterViewModel
 import com.example.testtask_ticketssearch.presentation.subscriptions.SubscriptionsViewModel
 
@@ -46,8 +45,6 @@ class ViewModelFactory(
             ) as T
         } else if (modelClass.isAssignableFrom(HotelsViewModel::class.java)) {
             return HotelsViewModel() as T
-        } else if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
-            return ProfileViewModel() as T
         } else if (modelClass.isAssignableFrom(ShorterViewModel::class.java)) {
             return ShorterViewModel() as T
         } else if (modelClass.isAssignableFrom(SubscriptionsViewModel::class.java)) {

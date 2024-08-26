@@ -1,6 +1,8 @@
 package com.example.testtask_ticketssearch.di
 
 import android.content.Context
+import com.example.profile.di.ProfileComponent
+import com.example.profile.di.ProfileModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -13,6 +15,7 @@ import javax.inject.Singleton
         DomainModule::class,
         PresentationModule::class,
         InterfaceModule::class,
+        ProfileModule::class,
     ]
 )
 interface AppComponent {
@@ -28,5 +31,7 @@ interface AppComponent {
         fun build(): AppComponent
 
     }
+
+    fun profileComponent(): ProfileComponent.Factory
 
 }
