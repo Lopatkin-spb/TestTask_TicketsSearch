@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.presentation.subscriptions
+package com.example.subscriptions.presentation
 
 import android.content.Context
 import android.os.Bundle
@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.testtask_ticketssearch.databinding.FragmentSubscriptionsBinding
-import com.example.testtask_ticketssearch.presentation.AppActivity
-import com.example.testtask_ticketssearch.presentation.ViewModelFactory
+import com.example.subscriptions.databinding.FragmentSubscriptionsBinding
+import com.example.subscriptions.di.SubscriptionsComponentProvider
 import javax.inject.Inject
 
 class SubscriptionsFragment : Fragment() {
@@ -25,7 +24,7 @@ class SubscriptionsFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as AppActivity).presentationComponent.inject(this)
+        (context.applicationContext as SubscriptionsComponentProvider).provideSubscriptionsComponent().inject(this)
     }
 
     override fun onCreateView(

@@ -3,6 +3,8 @@ package com.example.testtask_ticketssearch.di
 import android.content.Context
 import com.example.profile.di.ProfileComponent
 import com.example.profile.di.ProfileModule
+import com.example.subscriptions.di.SubscriptionsComponent
+import com.example.subscriptions.di.SubscriptionsModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -16,6 +18,7 @@ import javax.inject.Singleton
         PresentationModule::class,
         InterfaceModule::class,
         ProfileModule::class,
+        SubscriptionsModule::class,
     ]
 )
 interface AppComponent {
@@ -33,5 +36,7 @@ interface AppComponent {
     }
 
     fun profileComponent(): ProfileComponent.Factory
+
+    fun subscriptionsComponent(): SubscriptionsComponent.Factory
 
 }

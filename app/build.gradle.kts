@@ -46,6 +46,7 @@ dependencies {
     implementation(project(":interface"))
     // Feature
     implementation(project(":feature:profile"))
+    implementation(project(":feature:subscriptions"))
 
     /**
      * Core: for resolve dagger dependencies

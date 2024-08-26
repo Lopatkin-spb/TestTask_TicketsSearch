@@ -28,7 +28,7 @@
 
     <fragment
             android:id="@+id/navigation_subscriptions"
-            android:name="com.example.testtask_ticketssearch.presentation.subscriptions.SubscriptionsFragment"
+            android:name="com.example.subscriptions.presentation.SubscriptionsFragment"
             android:label="@string/title_subscriptions"
             tools:layout="@layout/fragment_subscriptions"/>
 

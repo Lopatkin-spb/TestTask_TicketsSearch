@@ -3,13 +3,15 @@ package com.example.testtask_ticketssearch.app
 import android.app.Application
 import com.example.profile.di.ProfileComponent
 import com.example.profile.di.ProfileComponentProvider
+import com.example.subscriptions.di.SubscriptionsComponent
+import com.example.subscriptions.di.SubscriptionsComponentProvider
 import com.example.testtask_ticketssearch.di.PresentationComponent
 import com.example.testtask_ticketssearch.di.PresentationComponentProvider
 import com.example.testtask_ticketssearch.di.AppComponent
 import com.example.testtask_ticketssearch.di.DaggerAppComponent
 
 internal class TTTSApp : Application(),
-    PresentationComponentProvider, ProfileComponentProvider {
+    PresentationComponentProvider, ProfileComponentProvider, SubscriptionsComponentProvider {
 
     lateinit var appComponent: AppComponent
 
@@ -30,6 +32,10 @@ internal class TTTSApp : Application(),
 
     override fun provideProfileComponent(): ProfileComponent {
         return appComponent.profileComponent().create()
+    }
+
+    override fun provideSubscriptionsComponent(): SubscriptionsComponent {
+        return appComponent.subscriptionsComponent().create()
     }
 
 }

@@ -6,7 +6,6 @@ import com.example.testtask_ticketssearch.presentation.airtickets.search.SearchD
 import com.example.testtask_ticketssearch.presentation.airtickets.search.ticketList.TicketListFragment
 import com.example.testtask_ticketssearch.presentation.hotels.HotelsFragment
 import com.example.testtask_ticketssearch.presentation.shorter.ShorterFragment
-import com.example.testtask_ticketssearch.presentation.subscriptions.SubscriptionsFragment
 import dagger.Subcomponent
 
 
@@ -29,7 +28,5 @@ interface PresentationComponent {
     fun inject(fragment: HotelsFragment)
 
     fun inject(fragment: ShorterFragment)
-
-    fun inject(fragment: SubscriptionsFragment)
 
 }
