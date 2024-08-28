@@ -1,4 +1,4 @@
-package com.example.testtask_ticketssearch.presentation.shorter
+package com.example.shorter.presentation
 
 import android.content.Context
 import android.os.Bundle
@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.testtask_ticketssearch.databinding.FragmentShorterBinding
-import com.example.testtask_ticketssearch.presentation.AppActivity
-import com.example.testtask_ticketssearch.presentation.ViewModelFactory
+import com.example.shorter.databinding.FragmentShorterBinding
+import com.example.shorter.di.ShorterComponentProvider
 import javax.inject.Inject
 
 class ShorterFragment : Fragment() {
@@ -25,7 +24,7 @@ class ShorterFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as AppActivity).presentationComponent.inject(this)
+        (context.applicationContext as ShorterComponentProvider).provideShorterComponent().inject(this)
     }
 
     override fun onCreateView(

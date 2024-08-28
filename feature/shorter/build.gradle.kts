@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.testtask_ticketssearch"
+    namespace = "com.example.shorter"
     compileSdk = 34
 
     defaultConfig {
@@ -29,7 +29,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
     buildFeatures {
         viewBinding = true
         dataBinding = false
@@ -37,13 +36,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
-    implementation(project(":interface"))
-    // Feature
-    implementation(project(":feature:profile"))
-    implementation(project(":feature:subscriptions"))
-    implementation(project(":feature:ticketList"))
-    implementation(project(":feature:shorter"))
 
     /**
      * Core
@@ -66,23 +58,6 @@ dependencies {
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
     implementation(libs.javax.inject)
-
-    /**
-     * Multithreading: Coroutines
-     */
-    implementation(libs.kotlinx.coroutines.android)
-    testImplementation(libs.kotlinx.coroutines.test)
-
-    /**
-     * Navigation
-     */
-    implementation(libs.navigation.fragment.ktx)
-    implementation(libs.navigation.ui.ktx)
-
-    /**
-     * Images
-     */
-    implementation(libs.glide)
 
     /**
      * Tests

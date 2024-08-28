@@ -22,7 +22,7 @@
 
     <fragment
             android:id="@+id/navigation_shorter"
-            android:name="com.example.testtask_ticketssearch.presentation.shorter.ShorterFragment"
+            android:name="com.example.shorter.presentation.ShorterFragment"
             android:label="@string/title_shorter"
             tools:layout="@layout/fragment_shorter"/>
 

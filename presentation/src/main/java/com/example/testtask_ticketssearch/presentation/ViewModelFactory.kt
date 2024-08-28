@@ -7,7 +7,6 @@ import com.example.testtask_ticketssearch.domain.usecase.*
 import com.example.testtask_ticketssearch.presentation.airtickets.AirticketsViewModel
 import com.example.testtask_ticketssearch.presentation.airtickets.search.SearchViewModel
 import com.example.testtask_ticketssearch.presentation.hotels.HotelsViewModel
-import com.example.testtask_ticketssearch.presentation.shorter.ShorterViewModel
 
 
 class ViewModelFactory(
@@ -37,8 +36,6 @@ class ViewModelFactory(
             ) as T
         } else if (modelClass.isAssignableFrom(HotelsViewModel::class.java)) {
             return HotelsViewModel() as T
-        } else if (modelClass.isAssignableFrom(ShorterViewModel::class.java)) {
-            return ShorterViewModel() as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: $modelClass")
     }

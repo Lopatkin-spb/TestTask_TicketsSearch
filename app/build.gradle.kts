@@ -48,6 +48,7 @@ dependencies {
     implementation(project(":feature:profile"))
     implementation(project(":feature:subscriptions"))
     implementation(project(":feature:ticketList"))
+    implementation(project(":feature:shorter"))
 
     /**
      * Core: for resolve dagger dependencies

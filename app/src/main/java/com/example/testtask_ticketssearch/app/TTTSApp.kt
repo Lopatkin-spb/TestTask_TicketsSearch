@@ -3,6 +3,8 @@ package com.example.testtask_ticketssearch.app
 import android.app.Application
 import com.example.profile.di.ProfileComponent
 import com.example.profile.di.ProfileComponentProvider
+import com.example.shorter.di.ShorterComponent
+import com.example.shorter.di.ShorterComponentProvider
 import com.example.subscriptions.di.SubscriptionsComponent
 import com.example.subscriptions.di.SubscriptionsComponentProvider
 import com.example.testtask_ticketssearch.di.PresentationComponent
@@ -14,7 +16,7 @@ import com.example.ticketlist.di.TicketListComponentProvider
 
 internal class TTTSApp : Application(),
     PresentationComponentProvider, ProfileComponentProvider, SubscriptionsComponentProvider,
-    TicketListComponentProvider {
+    TicketListComponentProvider, ShorterComponentProvider {
 
     lateinit var appComponent: AppComponent
 
@@ -43,6 +45,10 @@ internal class TTTSApp : Application(),
 
     override fun provideTicketListComponent(): TicketListComponent {
         return appComponent.ticketListComponent().create()
+    }
+
+    override fun provideShorterComponent(): ShorterComponent {
+        return appComponent.shorterComponent().create()
     }
 
 }
