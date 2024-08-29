@@ -38,7 +38,8 @@ android {
 
 dependencies {
     implementation(project(":domain"))
-    implementation(project(":interface"))
+    implementation(project(":common:core"))
+
     // Feature
     implementation(project(":feature:profile"))
     implementation(project(":feature:subscriptions"))

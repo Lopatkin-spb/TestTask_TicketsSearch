@@ -38,7 +38,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":interface"))
+    implementation(project(":common:core"))
 
     /**
      * Core

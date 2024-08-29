@@ -38,7 +38,7 @@ android {
 
 dependencies {
     implementation(project(":domain"))
-    implementation(project(":interface"))
+    implementation(project(":common:core"))
 
     /**
      * DI: Dagger 2

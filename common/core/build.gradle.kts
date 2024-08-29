@@ -2,10 +2,11 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("org.jetbrains.kotlin.plugin.serialization") // For kotlin serializations
 }
 
 android {
-    namespace = "com.example.testtask_ticketssearch._interface"
+    namespace = "com.example.testtask_ticketssearch.core"
     compileSdk = 34
 
     defaultConfig {
@@ -44,6 +45,20 @@ dependencies {
      * Multithreading: Coroutines
      */
     implementation(libs.kotlinx.coroutines.android)
+
+    /**
+     * Network
+     */
+    // Provider
+    implementation(libs.retrofit)
+    // For kotlin serializations
+    implementation(libs.kotlinx.serialization.json)
+    // Converter between provider and kotlin serialization
+    implementation(libs.retrofit.converter.kotlinx.serialization)
+    // For logging
+    implementation(platform(libs.okhttp3.bom))
+    implementation(libs.okhttp3.okhttp)
+    implementation(libs.okhttp3.logging.interceptor)
 
     /**
      * Tests

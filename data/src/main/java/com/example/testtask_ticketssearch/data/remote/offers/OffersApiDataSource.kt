@@ -1,6 +1,6 @@
 package com.example.testtask_ticketssearch.data.remote.offers
 
-import com.example.testtask_ticketssearch._interface.CoroutineDispatchers
+import com.example.testtask_ticketssearch.core.CoroutineDispatchers
 import com.example.testtask_ticketssearch.data.remote.dataSource.OffersRemoteDataSource
 import com.example.testtask_ticketssearch.domain.model.*
 import kotlinx.coroutines.flow.Flow

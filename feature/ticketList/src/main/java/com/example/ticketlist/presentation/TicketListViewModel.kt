@@ -1,11 +1,11 @@
 package com.example.ticketlist.presentation
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.testtask_ticketssearch._interface.CoroutineDispatchers
+import com.example.testtask_ticketssearch.core.CoroutineDispatchers
+import com.example.testtask_ticketssearch.core.Logger
 import com.example.ticketlist.domain.toUi
 import com.example.ticketlist.domain.usecase.GetTicketListBySearchPlacesUseCase
 import kotlinx.coroutines.CoroutineName
@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 
 internal class TicketListViewModel(
     private val dispatchers: CoroutineDispatchers,
+    private val logger: Logger,
     private val getTicketListBySearchPlacesUseCase: GetTicketListBySearchPlacesUseCase,
 ) : ViewModel() {
 
@@ -44,9 +45,9 @@ internal class TicketListViewModel(
 
     private fun handleThrowable(cause: Throwable) {
         when (cause) {
-            is Exception -> Log.w("TAG", "TicketListViewModel loadTicketsList: ${cause.message}", cause)
+            is Exception -> logger.w("TAG", "TicketListViewModel loadTicketsList: ${cause.message}", cause)
             else -> {
-                Log.e("TAG", "TicketListViewModel loadTicketsList: ${cause.message}", cause)
+                logger.e("TAG", "TicketListViewModel loadTicketsList: ${cause.message}", cause)
                 throw cause
             }
         }

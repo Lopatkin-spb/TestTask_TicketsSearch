@@ -17,7 +17,8 @@ include(":app")
 include(":domain")
 include(":data")
 include(":presentation")
-include(":interface")
+
+include(":common:core")
 
 // Feature
 include(":feature:profile")

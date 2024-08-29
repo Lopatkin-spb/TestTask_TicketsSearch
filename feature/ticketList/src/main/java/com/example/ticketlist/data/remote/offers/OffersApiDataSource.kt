@@ -1,6 +1,6 @@
 package com.example.ticketlist.data.remote.offers
 
-import com.example.testtask_ticketssearch._interface.CoroutineDispatchers
+import com.example.testtask_ticketssearch.core.CoroutineDispatchers
 import com.example.ticketlist.data.remote.dataSource.OffersRemoteDataSource
 import com.example.ticketlist.domain.model.Arrival
 import com.example.ticketlist.domain.model.Departure

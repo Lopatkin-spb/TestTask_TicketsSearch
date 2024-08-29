@@ -1,7 +1,7 @@
 package com.example.testtask_ticketssearch.data.local.offers
 
 import android.content.Context
-import com.example.testtask_ticketssearch._interface.CoroutineDispatchers
+import com.example.testtask_ticketssearch.core.CoroutineDispatchers
 import com.example.testtask_ticketssearch.data.local.dataSource.OffersLocalDataSource
 import com.example.testtask_ticketssearch.domain.model.*
 import kotlinx.coroutines.flow.Flow

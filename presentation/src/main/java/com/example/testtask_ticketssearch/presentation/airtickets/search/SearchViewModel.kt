@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.testtask_ticketssearch._interface.CoroutineDispatchers
+import com.example.testtask_ticketssearch.core.CoroutineDispatchers
 import com.example.testtask_ticketssearch.domain.toUi
 import com.example.testtask_ticketssearch.domain.usecase.GetTicketsOffersUseCase
 import kotlinx.coroutines.CoroutineName

@@ -20,7 +20,7 @@ import javax.inject.Singleton
         DataModule::class,
         DomainModule::class,
         PresentationModule::class,
-        InterfaceModule::class,
+        CoreModule::class,
         ProfileModule::class,
         SubscriptionsModule::class,
         TicketListModule::class,

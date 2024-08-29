@@ -1,7 +1,7 @@
 package com.example.ticketlist.data.local.offers
 
 import android.content.Context
-import com.example.testtask_ticketssearch._interface.CoroutineDispatchers
+import com.example.testtask_ticketssearch.core.CoroutineDispatchers
 import com.example.ticketlist.data.local.dataSource.OffersLocalDataSource
 import com.example.ticketlist.domain.model.Arrival
 import com.example.ticketlist.domain.model.Departure

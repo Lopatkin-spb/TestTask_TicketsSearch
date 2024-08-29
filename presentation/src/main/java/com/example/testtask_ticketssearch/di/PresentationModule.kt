@@ -1,6 +1,6 @@
 package com.example.testtask_ticketssearch.di
 
-import com.example.testtask_ticketssearch._interface.CoroutineDispatchers
+import com.example.testtask_ticketssearch.core.CoroutineDispatchers
 import com.example.testtask_ticketssearch.domain.usecase.*
 import com.example.testtask_ticketssearch.presentation.ViewModelFactory
 import dagger.Module
