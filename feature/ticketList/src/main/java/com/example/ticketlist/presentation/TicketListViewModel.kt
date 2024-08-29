@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.testtask_ticketssearch.core.CoroutineDispatchers
 import com.example.testtask_ticketssearch.core.Logger
 import com.example.ticketlist.domain.toUi
-import com.example.ticketlist.domain.usecase.GetTicketListBySearchPlacesUseCase
+import com.example.ticketlist.domain.GetTicketListBySearchPlacesUseCase
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*

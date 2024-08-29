@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.testtask_ticketssearch.core.CoroutineDispatchers
 import com.example.testtask_ticketssearch.core.Logger
-import com.example.ticketlist.domain.usecase.GetTicketListBySearchPlacesUseCase
+import com.example.ticketlist.domain.GetTicketListBySearchPlacesUseCase
 
 
 class ViewModelFactory(

@@ -11,7 +11,8 @@ import com.example.ticketlist.data.remote.dataSource.OffersRemoteDataSource
 import com.example.ticketlist.data.remote.offers.OffersApiDataSource
 import com.example.ticketlist.data.remote.offers.registerOffersApi
 import com.example.ticketlist.domain.repository.OffersRepository
-import com.example.ticketlist.domain.usecase.GetTicketListBySearchPlacesUseCase
+import com.example.ticketlist.domain.GetTicketListBySearchPlacesUseCase
+import com.example.ticketlist.domain.usecase.GetTicketListBySearchPlacesUseCaseImpl
 import com.example.ticketlist.presentation.ViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -62,7 +63,7 @@ class TicketListModule {
     fun provideGetTicketListBySearchPlacesUseCase(
         repository: OffersRepository
     ): GetTicketListBySearchPlacesUseCase {
-        return GetTicketListBySearchPlacesUseCase(repository = repository)
+        return GetTicketListBySearchPlacesUseCaseImpl(repository = repository)
     }
 
     @Singleton
